@@ -24,7 +24,8 @@
         invest: "M3 17l5-6 4 5 6-9 3 4-1 1-2-3-6 9-4-5-5 6z",
         game: "M5 8h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2l-2 2H9l-2-2H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2z",
         academy: "M3 8l9-4 9 4-9 4-9-4zm2 6v-4l7 3 7-3v4l-7 3-7-3z",
-        settings: "M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm9 4l-2 1 .3 2.3-2.1 1.2-1.7-1.3-2 .8-1 2h-2l-1-2-2-.8-1.7 1.3-2.1-1.2.3-2.3-2-1 .9-2.1 2.3-.3 1.2-2.1-1.3-1.7 1.2-2.1 2.3.3 1-2 2 .9.8 2 2.1-.3 1.2 2.1-1.3 1.7 1.2 2.1 2.3.3z",
+        settings: "M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.04.17-.01.36.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.58 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.04-.22.01-.41-.12-.61l-2.03-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6-3.6 3.6 3.6z",
+        network: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z",
         back: "M15 18l-6-6 6-6",
         plus: "M12 5v14M5 12h14",
         qr: "M3 3h8v8H3V3zm2 2v4h4V5H5zm10-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm8 0h2v2h-2v-2zm4 0h4v4h-4v-4z",
@@ -91,16 +92,17 @@
       )
     }
 
-    function Header({ title, onBack, onSettings, showBack, right }) {
+    function Header({ title, onBack, onSettings, onNetwork, showBack, right }) {
       return (
         <header className="header">
           <div className="left">
             {showBack && <button className="icon" onClick={onBack}><Icon name="back" /></button>}
             <h1>{title}</h1>
           </div>
-          <div className="right">
+          <div className="right" style={{display:'flex', alignItems:'center', gap:'12px'}}>
             {right}
-            <button className="icon" onClick={onSettings}><Icon name="settings" size={27} /></button>
+            <button className="icon" onClick={onNetwork}><Icon name="network" size={24} /></button>
+            <button className="icon" onClick={onSettings}><Icon name="settings" size={24} /></button>
           </div>
         </header>
       )
@@ -2137,6 +2139,37 @@
       )
     }
 
+    function NetworkModal({ current, onClose, onSelect }) {
+      const nets = [
+        { id:'main', name:'Ethereum Mainnet', icon:'M' },
+        { id:'bsc', name:'BNB Smart Chain', icon:'B' },
+        { id:'trx', name:'TRON Mainnet', icon:'T' },
+        { id:'sol', name:'Solana', icon:'S' },
+        { id:'test', name:'Sepolia Testnet', icon:'T' },
+      ]
+      return (
+        <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') onClose()}}>
+          <div className="modal-box">
+            <div className="modal-title">切换网络</div>
+            <div className="net-list" style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+              {nets.map(n=>(
+                <div key={n.id} 
+                     className={`chain-item ${current===n.id?'active':''}`} 
+                     onClick={()=>onSelect(n.id)}
+                     style={{display:'flex', alignItems:'center', padding:'12px', borderRadius:'12px', background:'var(--card)', border:current===n.id?'1px solid var(--primary)':'1px solid transparent'}}
+                >
+                   <div className="chain-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', marginRight:'12px', fontWeight:'bold'}}>{n.icon}</div>
+                   <div className="st-label" style={{flex:1}}>{n.name}</div>
+                   {current===n.id && <div style={{color:'var(--primary)'}}><Icon name="yes" size={16} /></div>}
+                </div>
+              ))}
+            </div>
+            <Button variant="ghost" style={{width:'100%', marginTop:'20px'}} onClick={onClose}>取消</Button>
+          </div>
+        </div>
+      )
+    }
+
     function App() {
       const [tab,setTab] = useState('home')
       const [view,setView] = useState('launch')
@@ -2146,6 +2179,8 @@
       const [lang,setLang] = useState(localStorage.getItem('lang')||'中文')
       const [backed,setBacked] = useState(true)
       const [mnemonic,setMnemonic] = useState(generateMnemonic())
+      const [showNetModal, setShowNetModal] = useState(false)
+      const [currentNet, setCurrentNet] = useState('main')
       function push(v){ setStack(s=>[...s,view]); setView(v) }
       function back(){ setView(stack[stack.length-1] || (tab==='home'?'home':tab)); setStack(s=>s.slice(0,-1)) }
       function gotoTab(t){ setTab(t); setView(t) }
@@ -2197,7 +2232,9 @@
 
       return (
         <div className="app">
-          <Header title={title} showBack={showBack} onBack={back} onSettings={()=>push('settings')} right={null} />
+          <Header title={title} showBack={showBack} onBack={back} onSettings={()=>push('settings')} onNetwork={()=>setShowNetModal(true)} right={null} />
+
+          {showNetModal && <NetworkModal current={currentNet} onClose={()=>setShowNetModal(false)} onSelect={(id)=>{ setCurrentNet(id); setShowNetModal(false); setToast('已切换网络'); }} />}
 
           {view==='launch' && (
             <LaunchSplash lang={lang} onLang={(l)=>{ setLang(l); localStorage.setItem('lang', l) }} onNext={()=>setView('init')} />
