@@ -20,29 +20,43 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="搜索代币、DApp" />
       </div>
 
-      <div className="card-white" style={{background:'#1f2937', color:'#fff'}}>
-        <div className="wallet-top">
-          <div className="wallet-info" onClick={onWallets} style={{color:'#fff'}}>
-            <span>{currentWallet.name}</span>
-            <Icon name="down" size={16} />
-            <div style={{width:'1px',height:'16px',background:'rgba(255,255,255,0.2)',margin:'0 8px'}}></div>
-            <Icon name="copy" size={16} onClick={(e)=>{e.stopPropagation(); onCopy && onCopy()}} />
+      <div className="card-white" style={{
+        background: '#fff', 
+        padding:'20px',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-sm)',
+        border: '1px solid var(--border)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '24px'
+      }}>
+        <div style={{flex:1}}>
+          <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
+             <div style={{fontSize:'14px', fontWeight:'600', color:'var(--text-main)'}}>{currentWallet.name}</div>
+             <Icon name="down" size={14} style={{color:'var(--text-muted)'}} />
+             <div style={{width:'1px', height:'14px', background:'#e5e7eb'}}></div>
+             <div onClick={(e)=>{e.stopPropagation(); onCopy()}} style={{color:'var(--text-muted)', cursor:'pointer'}}>
+               <Icon name="copy" size={16} />
+             </div>
           </div>
+          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>¥ 0.00</div>
         </div>
-        <div className="balance-label" style={{color:'rgba(255,255,255,0.6)'}}>总资产 (CNY)</div>
-        <div className="balance-row" style={{color:'#fff'}}>¥ 0.00</div>
 
-        <div className="big-actions-row">
-           <div className="big-action-card" onClick={onStake} style={{background:'rgba(255,255,255,0.1)', border:'none', height:'44px'}}>
-             <span style={{fontSize:'14px', color:'#fff'}}>存钱</span>
-           </div>
-           <div className="big-action-card" onClick={onInvest} style={{background:'rgba(255,255,255,0.1)', border:'none', height:'44px'}}>
-             <span style={{fontSize:'14px', color:'#fff'}}>投资</span>
-           </div>
+        <div>
+           <Button onClick={onReceive} style={{
+             height:'40px', 
+             padding:'0 24px', 
+             borderRadius:'20px', 
+             fontSize:'14px', 
+             fontWeight:'600',
+             background:'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+             boxShadow:'0 4px 12px rgba(99, 102, 241, 0.3)'
+           }}>接收</Button>
         </div>
       </div>
 
-      <div className="grid-menu-row" style={{marginTop:'24px'}}>
+      <div className="grid-menu-row" style={{marginTop:'0'}}>
          <button className="grid-btn" onClick={()=>onMini('signin')}>
            <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="calendar" /></div>
            <div className="grid-label">签到</div>
@@ -65,22 +79,58 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
          </button>
       </div>
 
+      <div className="big-actions-row" style={{gap:'16px', padding:'0 20px', marginBottom:'24px'}}>
+         <div className="big-action-card" onClick={onStake} style={{
+           background:'#fff', 
+           border:'1px solid var(--border)', 
+           height:'60px', 
+           borderRadius:'16px',
+           flexDirection:'row',
+           gap:'12px',
+           boxShadow:'var(--shadow-sm)'
+         }}>
+           <div style={{color:'var(--primary)', display:'flex', alignItems:'center'}}><Icon name="earn" size={24} /></div>
+           <span style={{fontSize:'16px', color:'var(--text-main)', fontWeight:'600'}}>存钱</span>
+         </div>
+         <div className="big-action-card" onClick={onInvest} style={{
+           background:'#fff', 
+           border:'1px solid var(--border)', 
+           height:'60px', 
+           borderRadius:'16px',
+           flexDirection:'row',
+           gap:'12px',
+           boxShadow:'var(--shadow-sm)'
+         }}>
+           <div style={{color:'#f97316', display:'flex', alignItems:'center'}}><Icon name="chart" size={24} /></div>
+           <span style={{fontSize:'16px', color:'var(--text-main)', fontWeight:'600'}}>投资</span>
+         </div>
+      </div>
+
       <div className="card-white" style={{padding:'0', overflow:'hidden', marginBottom:'120px'}}>
         <div className="market-tabs" style={{padding:'16px 20px 0'}}>
           {['自选','热门','最新'].map(t=> (
             <button key={t} className={`m-tab ${tab===t?'active':''}`} onClick={()=>setTab(t)}>{t}</button>
           ))}
         </div>
-        <div style={{maxHeight:'400px', overflowY:'auto', padding:'0 20px'}}>
+        <div className="no-scrollbar" style={{maxHeight:'400px', overflowY:'auto', padding:'0 20px'}}>
           {visible.map((c,i)=> (
             <div key={i} className="coin-row" onClick={()=>onAssetDetail({code:c.name})}>
               <div className="coin-left">
                 <div className="coin-icon"></div>
                 <div className="coin-name">{c.name}</div>
               </div>
-              <div className="coin-right">
-                <div className="coin-price">{c.price}</div>
-                <div className={`coin-chg ${c.chg.startsWith('+')?'up':'down'}`}>{c.chg}</div>
+              <div className="coin-right" style={{textAlign:'right'}}>
+                <div className="coin-price" style={{fontSize:'15px', fontWeight:'700', color:'var(--text-main)'}}>{c.price}</div>
+                <div style={{
+                  display: 'inline-block',
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  fontWeight: '600',
+                  marginTop: '4px',
+                  color: c.chg.startsWith('+') ? '#16a34a' : '#dc2626',
+                  background: c.chg.startsWith('+') ? '#dcfce7' : '#fee2e2'
+                }}>{c.chg}</div>
               </div>
             </div>
           ))}

@@ -10,12 +10,18 @@ function AssetDetail({ token, onBack, onSend, onReceive }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      {/* <div style={{display:'flex', alignItems:'center', marginBottom:'16px', padding:'0 4px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', marginRight:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>资产详情</div>
+      </div> */}
+      
+      <div className="token-info" style={{marginBottom:'20px', padding:'0 20px'}}>
+         <div className="token-code" style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)'}}>{token.code}</div>
+         <div className="token-change" style={{fontSize:'14px', color:'#10b981', marginTop:'4px'}}>24h +3.42%</div>
+      </div>
+
       <Card>
         <div className="asset-header" style={{padding:'10px 0'}}>
-          <div className="token-info" style={{marginBottom:'20px'}}>
-             <div className="token-code" style={{fontSize:'16px', fontWeight:'600', color:'var(--text-muted)'}}>{token.code}</div>
-             <div className="token-change" style={{fontSize:'14px', color:'#10b981', marginTop:'4px'}}>24h +3.42%</div>
-          </div>
           
           <div className="chart-area" style={{height:'120px', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'24px', position:'relative'}}>
              {/* Mock Chart Line */}
@@ -50,7 +56,7 @@ function AssetDetail({ token, onBack, onSend, onReceive }) {
                fontWeight:'600',
                fontSize:'16px',
                boxShadow:'0 4px 12px rgba(99, 102, 241, 0.3)'
-             }}>收款</button>
+             }}>接收</button>
              <button onClick={onSend} style={{
                flex:1, 
                background:'#f3f4f6', 

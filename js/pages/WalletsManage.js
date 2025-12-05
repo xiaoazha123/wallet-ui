@@ -1,59 +1,10 @@
-function WalletsManage({ onBack }) {
+function WalletsManage({ onBack, onAddWallet }) {
+  const [mode, setMode] = useState('view') // 'view' or 'manage'
+  const [showAddSheet, setShowAddSheet] = useState(false)
   const [items,setItems] = useState([
-    { name:'主钱包', addr:'0xA1...C8', assets:'$12,450.00', backed:true },
-    { name:'测试钱包', addr:'0x9F...11', assets:'$0.00', backed:false },
+    { name:'My Wallet', addr:'无私钥', assets:'¥0', backed:true, type:'无私钥', color:'#f59e0b', selected:true },
   ])
-  const [showModal, setShowModal] = useState(false)
-  const [step, setStep] = useState('auth') // auth, select, create, show-mnemonic, import, bind-invite
-  const [inputName, setInputName] = useState('')
-  const [inputSeed, setInputSeed] = useState('')
-  const [inputCode, setInputCode] = useState('')
-  const [newMnemonic, setNewMnemonic] = useState('')
 
-  function openAdd() {
-    setStep('auth')
-    setInputName('')
-    setInputSeed('')
-    setInputCode('')
-    setNewMnemonic('')
-    setShowModal(true)
-  }
-
-  function doAuth() {
-    // Mock authentication
-    setStep('select')
-  }
-
-  function doCreate() {
-    if(!inputName) return alert('请输入钱包名称')
-    setNewMnemonic(generateMnemonic()) // reusing global helper or need to define? Assuming global or mock
-    setStep('show-mnemonic')
-  }
-
-  function doBackedUp() {
-    setStep('bind-invite')
-  }
-
-  function doImport() {
-    if(!inputSeed) return alert('请输入助记词或私钥')
-    setStep('bind-invite')
-  }
-
-  function doBindAndFinish() {
-    if(!inputCode) return alert('请输入邀请码')
-    finishAdd()
-  }
-
-  function doSkipBind() {
-    finishAdd()
-  }
-
-  function finishAdd() {
-    const name = inputName || '导入钱包 ' + (items.length+1)
-    setItems([...items,{ name, addr:'0x'+Math.random().toString(16).slice(2,6)+'...', assets:'$0.00', backed: step==='show-mnemonic' || step==='bind-invite' }])
-    setShowModal(false)
-  }
-  
   function rename(i) { 
     const name = prompt('重命名钱包', items[i].name); 
     if(name){ const copy=[...items]; copy[i].name=name; setItems(copy) } 
@@ -65,138 +16,116 @@ function WalletsManage({ onBack }) {
     }
   }
 
+  if (mode === 'manage') {
+    return (
+      <div className="content-padded" style={{paddingTop:'12px', background:'#fff', minHeight:'100vh'}}>
+        <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px'}}>
+           <button onClick={()=>setMode('view')} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+           <div style={{fontSize:'18px', fontWeight:'700'}}>钱包管理</div>
+           <div style={{width:'40px'}}></div>
+        </div>
+
+        <div style={{display:'flex', flexDirection:'column'}}>
+           {items.map((w,i)=>(
+             <div key={i} style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px'}}>
+                <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
+                   <div style={{width:'40px', height:'40px', borderRadius:'10px', background:w.color, display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:'20px'}}><Icon name="wallet" /></div>
+                   <div>
+                     <div style={{fontSize:'16px', fontWeight:'600', display:'flex', alignItems:'center', gap:'6px'}}>
+                       {w.name} <span style={{fontSize:'10px', color:'#6b7280', border:'1px solid #e5e7eb', padding:'1px 4px', borderRadius:'4px'}}>{w.type}</span>
+                     </div>
+                     <div style={{fontSize:'13px', color:'var(--text-muted)'}}>{w.assets}</div>
+                   </div>
+                </div>
+                <div style={{display:'flex', gap:'16px', color:'#9ca3af'}}>
+                   <div onClick={()=>rename(i)} style={{cursor:'pointer'}}><Icon name="edit" size={20} /></div>
+                   <div style={{cursor:'pointer'}}><Icon name="menu" size={20} /></div>
+                </div>
+             </div>
+           ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
-    <div className="content">
-      <div className="list-head" style={{padding:'0 4px', marginBottom:'12px'}}>钱包列表</div>
-      <div className="wallets">
-        {items.map((w,i)=>(
-          <div key={i} className="wallet-card-lg">
-            <div className="wc-head">
-              <div className="wc-name">{w.name} <span className={`wc-tag ${w.backed?'backed':''}`}>{w.backed?'已备份':'未备份'}</span></div>
-              <div className="wc-addr">{w.addr}</div>
-            </div>
-            <div className="wc-assets">
-              <div className="wc-val">{w.assets}</div>
-              <div className="wc-actions">
-                <Button className="small" variant="secondary" onClick={()=>rename(i)}>重命名</Button>
-                <Button className="small" variant="ghost" onClick={()=>remove(i)}>删除</Button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="row" style={{marginTop:'24px'}}>
-        <Button onClick={openAdd}>新建 / 导入钱包</Button>
-        <Button variant="ghost" onClick={onBack}>返回</Button>
+    <div className="content-padded" style={{paddingTop:'12px', background:'#fff', minHeight:'100vh', display:'flex', flexDirection:'column'}}>
+      <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>我的钱包</div>
+         <button onClick={()=>setMode('manage')} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'#f59e0b', fontSize:'14px', fontWeight:'600'}}>管理</button>
       </div>
 
-      {showModal && (
-        <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setShowModal(false)}}>
+      <div style={{padding:'0 20px', marginBottom:'24px'}}>
+         <div style={{display:'flex', alignItems:'center', gap:'4px', fontSize:'14px', color:'var(--text-muted)', marginBottom:'4px'}}>
+           <Icon name="chart" size={14} /> 投资组合 <Icon name="right" size={12} />
+         </div>
+         <div style={{fontSize:'32px', fontWeight:'800'}}>¥0</div>
+      </div>
+
+      <div style={{flex:1, display:'flex', flexDirection:'column'}}>
+         {items.map((w,i)=>(
+           <div key={i} style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px', borderTop:'1px solid #f9fafb', cursor:'pointer'}}>
+              <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
+                 <div style={{width:'40px', height:'40px', borderRadius:'10px', background:w.color, display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:'20px'}}><Icon name="wallet" /></div>
+                 <div>
+                   <div style={{fontSize:'16px', fontWeight:'600', display:'flex', alignItems:'center', gap:'6px'}}>
+                     {w.name} <span style={{fontSize:'10px', color:'#6b7280', border:'1px solid #e5e7eb', padding:'1px 4px', borderRadius:'4px'}}>{w.type}</span>
+                   </div>
+                   <div style={{fontSize:'13px', color:'var(--text-muted)'}}>{w.assets}</div>
+                 </div>
+              </div>
+              {w.selected && <div style={{background:'#000', borderRadius:'50%', width:'20px', height:'20px', display:'flex', alignItems:'center', justifyContent:'center'}}><Icon name="check" size={12} style={{color:'#fff'}} /></div>}
+           </div>
+         ))}
+      </div>
+
+      <div style={{padding:'20px 20px 40px'}}>
+         <Button onClick={()=>setShowAddSheet(true)} style={{width:'100%', height:'50px', borderRadius:'12px', background:'#f59e0b', color:'#fff', fontSize:'16px', fontWeight:'600', border:'none'}}>添加钱包</Button>
+      </div>
+
+      {showAddSheet && (
+        <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setShowAddSheet(false)}}>
           <div className="modal-box">
-            {step==='auth' && (
-              <div style={{textAlign:'center', padding:'20px 10px'}}>
-                <div className="modal-title" style={{fontSize:'20px', marginBottom:'30px'}}>身份验证</div>
-                <div style={{marginBottom:'40px', color:'var(--muted)'}}>
-                  <div style={{fontSize:'15px'}}>请验证身份以继续</div>
-                </div>
-                <div style={{textAlign:'left', marginBottom:'20px'}}>
-                   <label style={{display:'block', fontSize:'12px', fontWeight:'600', marginBottom:'8px', color:'var(--muted)'}}>密码</label>
-                   <input type="password" style={{width:'100%', padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', fontSize:'16px', outline:'none'}} placeholder="输入密码" value={inputName} onChange={setInputName} />
-                </div>
-                <div className="row" style={{gap:'12px'}}>
-                  <Button style={{flex:1}} onClick={doAuth}>验证</Button>
-                  <Button variant="secondary" style={{flex:1}} onClick={doAuth}><Icon name="yes" /> 指纹验证</Button>
-                </div>
-                <div style={{marginTop:'20px'}}>
-                   <button style={{border:'none', background:'none', color:'var(--primary)', fontSize:'15px'}} onClick={()=>setShowModal(false)}>取消</button>
-                </div>
-              </div>
-            )}
+             <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'24px'}}>添加钱包</div>
+             <div style={{display:'flex', flexDirection:'column', gap:'12px'}}>
+               <button onClick={()=>{ setShowAddSheet(false); onAddWallet('create'); }} style={{
+                 padding:'16px', 
+                 borderRadius:'16px', 
+                 background:'#f3f4f6', 
+                 border:'none', 
+                 display:'flex', 
+                 alignItems:'center', 
+                 gap:'12px',
+                 cursor:'pointer'
+               }}>
+                 <div style={{width:'40px', height:'40px', borderRadius:'20px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#f59e0b'}}><Icon name="wallet" size={24}/></div>
+                 <div style={{textAlign:'left'}}>
+                   <div style={{fontSize:'16px', fontWeight:'600', color:'var(--text-main)'}}>创建新钱包</div>
+                   <div style={{fontSize:'12px', color:'var(--text-muted)'}}>生成新的助记词</div>
+                 </div>
+               </button>
 
-            {step==='select' && (
-              <>
-                <div className="modal-title">添加钱包</div>
-                <div className="modal-opts">
-                  <div className="modal-opt" onClick={()=>setStep('create')}>
-                    <div className="mo-icon"><Icon name="plus"/></div>
-                    <div className="mo-label">创建新钱包</div>
-                  </div>
-                  <div className="modal-opt" onClick={()=>setStep('import')}>
-                    <div className="mo-icon"><Icon name="download"/></div>
-                    <div className="mo-label">导入钱包</div>
-                  </div>
-                </div>
-                <Button variant="ghost" style={{width:'100%'}} onClick={()=>setShowModal(false)}>取消</Button>
-              </>
-            )}
-
-            {step==='create' && (
-              <>
-                <div className="modal-title">创建新钱包</div>
-                <Input label="钱包名称" value={inputName} onChange={setInputName} placeholder="例如: 主钱包 2" />
-                <div className="row">
-                  <Button onClick={doCreate}>下一步</Button>
-                  <Button variant="ghost" onClick={()=>setStep('select')}>返回</Button>
-                </div>
-              </>
-            )}
-
-            {step==='show-mnemonic' && (
-              <>
-                <div className="modal-title">备份助记词</div>
-                <div style={{fontSize:'12px', color:'var(--muted)', marginBottom:'12px'}}>请抄写下方助记词并妥善保管</div>
-                <div className="mnemonic-box" style={{background:'#f9fafb', padding:'12px', borderRadius:'12px', fontSize:'14px', fontFamily:'monospace', lineHeight:'1.6', marginBottom:'20px'}}>
-                   {newMnemonic || 'apple banana cat dog elephant ...'}
-                </div>
-                <div className="row">
-                  <Button onClick={doBackedUp}>我已备份</Button>
-                </div>
-              </>
-            )}
-
-            {step==='import' && (
-              <>
-                <div className="modal-title">导入钱包</div>
-                <Input label="钱包名称" value={inputName} onChange={setInputName} placeholder="例如: 导入的钱包" />
-                <div className="input">
-                  <label>助记词 / 私钥</label>
-                  <textarea 
-                    value={inputSeed} 
-                    onChange={e=>setInputSeed(e.target.value)}
-                    placeholder="输入12/24位助记词或私钥"
-                    style={{padding:'12px',borderRadius:'14px',border:'1px solid var(--border)',fontFamily:'monospace',resize:'none',height:'80px'}}
-                  />
-                </div>
-                <div className="row">
-                  <Button onClick={doImport}>下一步</Button>
-                  <Button variant="ghost" onClick={()=>setStep('select')}>返回</Button>
-                </div>
-              </>
-            )}
-
-            {step==='bind-invite' && (
-              <div style={{padding:'10px 0'}}>
-                <div className="list-head" style={{textAlign:'center', marginBottom:'20px'}}>
-                   <div style={{fontSize:'18px', fontWeight:'bold'}}>填写邀请码</div>
-                   <div style={{fontSize:'13px', color:'var(--muted)', marginTop:'8px'}}>填写好友邀请码，绑定关系</div>
-                </div>
-                
-                <Input label="邀请码" value={inputCode} onChange={setInputCode} placeholder="请输入邀请码" />
-                
-                <div style={{fontSize:'12px', color:'var(--muted)', marginTop:'16px', lineHeight:'1.6', background:'#f9fafb', padding:'12px', borderRadius:'8px'}}>
-                  <div style={{fontWeight:'600', marginBottom:'4px'}}>绑定规则：</div>
-                  <div>1. 首次绑定邀请码，关系永久有效</div>
-                  <div>2. 需在 30 天内累计充值 ≥ 100 USDT</div>
-                  <div>3. 持仓时间需 ≥ 7 天</div>
-                  <div style={{color:'var(--primary)', marginTop:'4px'}}>满足以上条件后视为有效绑定，双方可获得奖励。</div>
-                </div>
-
-                <div className="row" style={{marginTop:'32px'}}>
-                  <Button onClick={doBindAndFinish}>确认绑定</Button>
-                  <Button variant="ghost" onClick={doSkipBind}>跳过</Button>
-                </div>
-              </div>
-            )}
+               <button onClick={()=>{ setShowAddSheet(false); onAddWallet('import'); }} style={{
+                 padding:'16px', 
+                 borderRadius:'16px', 
+                 background:'#f3f4f6', 
+                 border:'none', 
+                 display:'flex', 
+                 alignItems:'center', 
+                 gap:'12px',
+                 cursor:'pointer'
+               }}>
+                 <div style={{width:'40px', height:'40px', borderRadius:'20px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#6366f1'}}><Icon name="import" size={24}/></div>
+                 <div style={{textAlign:'left'}}>
+                   <div style={{fontSize:'16px', fontWeight:'600', color:'var(--text-main)'}}>导入钱包</div>
+                   <div style={{fontSize:'12px', color:'var(--text-muted)'}}>使用助记词或私钥导入</div>
+                 </div>
+               </button>
+             </div>
+             <div style={{marginTop:'24px', textAlign:'center'}}>
+               <button onClick={()=>setShowAddSheet(false)} style={{background:'none', border:'none', color:'var(--text-muted)', fontSize:'14px', cursor:'pointer'}}>取消</button>
+             </div>
           </div>
         </div>
       )}

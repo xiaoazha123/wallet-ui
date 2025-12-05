@@ -20,51 +20,56 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
   
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
-      <div className="card-white" style={{background:'#1f2937', color:'#fff', padding:'24px'}}>
-        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'16px'}}>
-           <div style={{fontSize:'14px', color:'rgba(255,255,255,0.6)'}}>我的资产</div>
-           <Icon name="scan" size={20} style={{color:'#fff'}} />
+      <div className="card-white" style={{
+        background: '#fff', 
+        padding:'20px',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-sm)',
+        border: '1px solid var(--border)',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        margin: '0 20px 20px'
+      }}>
+        <div style={{flex:1}}>
+          <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
+             <div style={{fontSize:'14px', fontWeight:'600', color:'var(--text-main)'}}>My Wallet</div>
+             <Icon name="down" size={14} style={{color:'var(--text-muted)'}} />
+             <div style={{width:'1px', height:'14px', background:'#e5e7eb'}}></div>
+             <div style={{color:'var(--text-muted)', cursor:'pointer'}}>
+               <Icon name="copy" size={16} />
+             </div>
+          </div>
+          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>¥ 73,600.00</div>
         </div>
-        <div style={{fontSize:'32px', fontWeight:'800', marginBottom:'24px'}}>¥ 73,600.00</div>
-        <div className="row" style={{justifyContent:'space-between', gap:'12px'}}>
-          <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSend}>
-            <div style={{width:'48px', height:'48px', borderRadius:'24px', background:'rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center'}}><Icon name="up" size={20} /></div>
-            <span style={{fontSize:'12px'}}>发送</span>
-          </div>
-          <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onReceive}>
-            <div style={{width:'48px', height:'48px', borderRadius:'24px', background:'rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center'}}><Icon name="down" size={20} /></div>
-            <span style={{fontSize:'12px'}}>接收</span>
-          </div>
-          <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSwap}>
-            <div style={{width:'48px', height:'48px', borderRadius:'24px', background:'rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center'}}><Icon name="swap" size={20} /></div>
-            <span style={{fontSize:'12px'}}>兑换</span>
-          </div>
-          <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onStake}>
-            <div style={{width:'48px', height:'48px', borderRadius:'24px', background:'rgba(255,255,255,0.1)', display:'flex', alignItems:'center', justifyContent:'center'}}><Icon name="earn" size={20} /></div>
-            <span style={{fontSize:'12px'}}>理财</span>
-          </div>
+      </div>
+
+      <div className="row" style={{justifyContent:'space-between', gap:'12px', padding:'0 20px', marginBottom:'24px'}}>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSend}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="send" size={22} /></div>
+          <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>发送</span>
+        </div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onReceive}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="down" size={22} /></div>
+          <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>接收</span>
+        </div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSwap}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="swap" size={22} /></div>
+          <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>兑换</span>
+        </div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onStake}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="earn" size={22} /></div>
+          <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>存钱</span>
         </div>
       </div>
 
       <div className="card-white" style={{padding:'0', marginBottom:'100px'}}>
-        <div className="tabs" style={{padding:'0 20px', borderBottom:'1px solid var(--border)', display:'flex', gap:'24px'}}>
-           <button 
-             className={`tab-btn ${tab==='assets'?'active':''}`} 
-             style={{padding:'16px 0', background:'none', border:'none', borderBottom: tab==='assets'?'2px solid var(--primary)':'2px solid transparent', color: tab==='assets'?'var(--text-main)':'var(--text-muted)', fontWeight:'600', fontSize:'15px', cursor:'pointer'}}
-             onClick={()=>setTab('assets')}
-           >
-             资产列表
-           </button>
-           <button 
-             className={`tab-btn ${tab==='txs'?'active':''}`} 
-             style={{padding:'16px 0', background:'none', border:'none', borderBottom: tab==='txs'?'2px solid var(--primary)':'2px solid transparent', color: tab==='txs'?'var(--text-main)':'var(--text-muted)', fontWeight:'600', fontSize:'15px', cursor:'pointer'}}
-             onClick={()=>setTab('txs')}
-           >
-             交易记录
-           </button>
+        <div className="market-tabs" style={{padding:'16px 20px 0'}}>
+           <button className={`m-tab ${tab==='assets'?'active':''}`} onClick={()=>setTab('assets')}>资产列表</button>
+           <button className={`m-tab ${tab==='txs'?'active':''}`} onClick={()=>setTab('txs')}>交易记录</button>
         </div>
 
-        <div className="scroll-list" style={{maxHeight:'400px', overflowY:'auto'}}>
+        <div className="scroll-list no-scrollbar" style={{maxHeight:'400px', overflowY:'auto', padding:'0 20px'}}>
           {tab === 'assets' && longCoins.map((c,i) => (
             <div key={i} className="asset-item" onClick={()=>onAssetDetail({code:c.name})} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
               <div className="asset-left" style={{display:'flex', alignItems:'center', gap:'12px'}}>

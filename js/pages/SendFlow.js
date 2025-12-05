@@ -65,6 +65,10 @@ function SendFlow({ onConfirm, onCancel }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'16px', padding:'0 4px'}}>
+         <button onClick={onCancel} style={{background:'none', border:'none', padding:'8px', marginRight:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>发送</div>
+      </div>
       <Card>
         <div className="send-field" style={{marginBottom:'20px'}}>
           <div className="label" style={{marginBottom:'8px', fontWeight:'600'}}>接收地址</div>

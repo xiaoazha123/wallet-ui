@@ -11,7 +11,7 @@ function App() {
   const [currentNet, setCurrentNet] = useState('main')
   function push(v){ setStack(s=>[...s,view]); setView(v) }
   function back(){ setView(stack[stack.length-1] || (tab==='home'?'home':tab)); setStack(s=>s.slice(0,-1)) }
-  function gotoTab(t){ setTab(t); setView(t) }
+  function gotoTab(t){ setTab(t); setView(t); setStack([]) }
   const showBack = stack.length>0 && view!=='onboard'
   const title = useMemo(()=>{
     const map={home:'首页', market:'市场', trade:'交易', discover:'发现', assets:'资产'}
@@ -29,6 +29,7 @@ function App() {
     if(view==='settings') return '设置'
     if(view==='security') return '安全设置'
     if(view==='network') return '多链设置'
+    if(view==='language') return '语言设置'
     if(view==='earn-detail') return '存钱详情'
     if(view==='stake') return '存钱'
     if(view==='redeem') return '赎回'
@@ -58,21 +59,26 @@ function App() {
   const [currentNews,setCurrentNews] = useState(null)
   const [currentMarketTab,setCurrentMarketTab] = useState('自选')
 
+  const [currentReceiveToken, setCurrentReceiveToken] = useState(null)
+  const [currentNetSelect, setCurrentNetSelect] = useState('all')
+
   return (
     <div className="iphone-frame">
       <div className="dynamic-island"></div>
       <div className="app-screen">
         <StatusBar />
-        <Header 
-          title={title} 
-          view={view}
-          showBack={showBack} 
-          onBack={back} 
-          onSettings={()=>push('settings')} 
-          onNetwork={()=>setShowNetModal(true)} 
-          onService={()=>alert('客服功能即将上线')}
-          right={null} 
-        />
+        {view === 'home' && (
+          <Header 
+            title={title} 
+            view={view}
+            showBack={showBack} 
+            onBack={back} 
+            onSettings={()=>push('settings')} 
+            onNetwork={()=>setShowNetModal(true)} 
+            onService={()=>alert('客服功能即将上线')}
+            right={null} 
+          />
+        )}
 
         <div className="scroll-content">
           {showNetModal && <NetworkModal current={currentNet} onClose={()=>setShowNetModal(false)} onSelect={(id)=>{ setCurrentNet(id); setShowNetModal(false); setToast('已切换网络'); }} />}
@@ -136,26 +142,71 @@ function App() {
             />
           )}
 
-          {view==='wallets' && (<WalletsManage onBack={back} />)}
-          {view==='asset' && currentToken && (<AssetDetail token={currentToken} onBack={back} onSend={()=>push('send')} onReceive={()=>push('receive')} />)}
+          {view==='wallets' && (
+            <WalletsManage 
+              onBack={back} 
+              onAddWallet={(type)=>{
+                if(type === 'create') {
+                  setView('create-pass'); // Or skip pass if just adding, but usually needs security check or new pass flow
+                  // For prototype simplicity, maybe go to mnemonic generation directly or via password check
+                  // Let's assume creating a new wallet follows a similar flow: Pass -> Mnemonic -> Verify
+                  // But since we already have a wallet, maybe just generate new mnemonic?
+                  // Let's reuse 'create-pass' flow for now as it sets up the "new wallet" context
+                  setMnemonic(generateMnemonic());
+                  setView('create-pass');
+                } else {
+                  setView('import');
+                }
+              }}
+            />
+          )}
+          {view==='asset' && currentToken && (
+            <AssetDetail 
+              token={currentToken} 
+              onBack={back} 
+              onSend={()=>push('send')} 
+              onReceive={()=>{
+                // Directly go to receive detail with current token and network
+                // Assuming currentNet is the network ID (e.g., 'main', 'polygon') or we can pass a default
+                // The requirement is to use the network selected in the top right (which is `currentNet`)
+                // However, `token` object usually has network info. 
+                // Let's construct a token object that ReceiveView expects.
+                // ReceiveView uses token?.sym, token?.icon, token?.color, token?.net
+                const receiveToken = {
+                  sym: currentToken.code || currentToken.name, // Handle difference in property names
+                  name: currentToken.name || currentToken.code,
+                  icon: currentToken.icon || (currentToken.name ? currentToken.name[0] : 'C'),
+                  color: '#3b82f6', // Default color if not present
+                  net: currentNet === 'main' ? 'Ethereum' : (currentNet === 'polygon' ? 'Polygon' : 'Base') // Map ID to name if needed, or just pass ID
+                }
+                setCurrentReceiveToken(receiveToken); 
+                push('receive-detail');
+              }} 
+            />
+          )}
           {view==='send' && (<SendFlow onConfirm={()=>{ setToast('已广播到链上'); back() }} onCancel={back} />)}
-          {view==='receive' && (<ReceiveView address={address} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制地址'); }} />)}
+          {view==='receive' && (<ReceiveSelect onBack={back} onSelect={(t)=>{ setCurrentReceiveToken(t); push('receive-detail') }} onWalletSelect={()=>push('wallet-select')} onNetworkSelect={()=>push('network-select')} />)}
+          {view==='receive-detail' && (<ReceiveView token={currentReceiveToken} address={address} onBack={back} />)}
+          {view==='wallet-select' && (<WalletSelect onBack={back} onSelect={()=>{ back() }} />)}
+          {view==='network-select' && (<NetworkSelect current={currentNetSelect} onBack={back} onSelect={(n)=>{ setCurrentNetSelect(n.id); back() }} />)}
 
           {view==='settings' && (
             <SettingsPage 
               onWallets={()=>push('wallets')} 
               onSecurity={()=>push('security')} 
               onNetwork={()=>push('network')} 
-              onLang={()=>{ 
-                const next = lang==='中文'?'English':'中文'; 
-                setLang(next); 
-                localStorage.setItem('lang', next); 
-                setToast(`Switched to ${next}`) 
-              }} 
+              onLang={()=>push('language')} 
             />
           )}
           {view==='security' && (<SecuritySettings onBack={back} />)}
           {view==='network' && (<NetworkSettings onBack={back} />)}
+          {view==='language' && (
+            <LanguageSettings 
+              currentLang={lang} 
+              onSetLang={(l)=>{ setLang(l); localStorage.setItem('lang', l); setToast(`Language set to ${l}`); back() }} 
+              onBack={back} 
+            />
+          )}
 
           {view==='earn' && (<StakingHome onDetail={(p)=>{ setCurrentProduct(p); push('earn-detail') }} onStakeNow={(p)=>{ setCurrentProduct(p); push('stake') }} />)}
           {view==='earn-detail' && currentProduct && (<EarnDetail product={currentProduct} onStake={()=>push('stake')} onRedeem={()=>push('redeem')} onDeposit={()=>push('deposit')} />)}
@@ -177,7 +228,9 @@ function App() {
           )}
         </div>
 
-        {view!=='onboard' && (<BottomNav active={tab} onSelect={gotoTab} />)}
+        {['launch','init','create-pass','mnemonic','verify','import','bind-invite','receive','receive-detail','wallet-select','network-select'].includes(view) ? null : (
+           <BottomNav active={tab} onSelect={gotoTab} />
+        )}
         {toast && <Toast message={toast} onClose={()=>setToast('')} />}
       </div>
     </div>

@@ -1,0 +1,455 @@
+Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/globals.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/globals.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/utils/index.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/utils/index.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Icon.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Icon.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Button.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Button.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Input.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Input.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Card.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Card.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Toast.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Toast.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/StatusBar.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/StatusBar.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/BottomNav.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/BottomNav.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/Header.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/Header.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/components/NetworkModal.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/components/NetworkModal.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/LaunchSplash.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/LaunchSplash.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/InitChoice.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/InitChoice.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/CreatePassword.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/CreatePassword.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/ShowMnemonic.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/ShowMnemonic.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/VerifyMnemonic.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/VerifyMnemonic.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/ImportWallet.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/ImportWallet.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/BindInvitePage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/BindInvitePage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/HomePage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/HomePage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/SignInPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/SignInPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/PaymentPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/PaymentPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/InvitePage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/InvitePage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/GovernancePage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/GovernancePage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/MorePage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/MorePage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/TasksPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/TasksPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/PointsPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/PointsPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/MarketPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/MarketPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/NewsDetailPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/NewsDetailPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/SwapPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/SwapPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/DiscoverPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/DiscoverPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/GameList.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/GameList.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/GameDetail.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/GameDetail.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/AcademyList.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/AcademyList.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/CourseDetail.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/CourseDetail.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/WalletsManage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/WalletsManage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/AssetDetail.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/AssetDetail.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/SendFlow.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/SendFlow.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/ReceiveView.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/ReceiveView.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/SettingsPage.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/SettingsPage.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/SecuritySettings.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/SecuritySettings.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/NetworkSettings.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/NetworkSettings.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/LanguageSettings.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/LanguageSettings.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/EarnList.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/EarnList.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/EarnDetail.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/EarnDetail.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/StakingHome.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/StakingHome.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/StakeFlow.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/StakeFlow.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/RedeemFlow.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/RedeemFlow.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/DepositUSDT.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/DepositUSDT.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/InvestHome.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/InvestHome.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/BuyFlow.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/BuyFlow.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/pages/WalletOverview.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/pages/WalletOverview.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+index.html:1  Access to XMLHttpRequest at 'file:///D:/wallet/prototype/js/App.js' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome-extension, chrome-untrusted, data, edge, http, https, isolated-app.
+Inline Babel script:3  Uncaught ReferenceError: App is not defined
+    at <anonymous>:2:46
+    at REe (transformScriptTags.ts:109:10)
+    at n (transformScriptTags.ts:181:9)
+    at a (transformScriptTags.ts:213:11)
+    at d.src.i.onreadystatechange (transformScriptTags.ts:131:9)
+(匿名) @ Inline Babel script:3
+REe @ transformScriptTags.ts:109
+n @ transformScriptTags.ts:181
+a @ transformScriptTags.ts:213
+d.src.i.onreadystatechange @ transformScriptTags.ts:131
+XMLHttpRequest.send
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+transformScriptTags.ts:138   GET file:///D:/wallet/prototype/js/App.js net::ERR_FAILED
+s @ transformScriptTags.ts:138
+wEe @ transformScriptTags.ts:188
+(匿名) @ transformScriptTags.ts:263
+LEe @ index.ts:244
+FEe @ index.ts:228
+[新] 使用 Edge 中的 Copilot 来解释控制台错误: 单击
+         
+         以说明错误。
+        了解更多信息
+        不再显示
+
+
+
+        parse-error.ts:95 
+ Uncaught SyntaxError: /http:/localhost:8000/js/pages/SignInPage.js: Unexpected token, expected "," (27:8) (at parse-error.ts:95:45)
+
+  25 |         marginBottom:'24px',
+  26 |         boxShadow:'0 8px 20px rgba(99, 102, 241, 0.25)'
+> 27 |         margin:"0 20px 20px"
+     |         ^
+  28 |       }}>
+  29 |         <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'24px'}}>
+  30 |            <div>
+    at e (parse-error.ts:95:45)
+    at r.raise (index.ts:1507:19)
+    at r.unexpected (index.ts:1547:16)
+    at r.expect (util.ts:157:12)
+    at r.parseObjectLike (expression.ts:2084:14)
+    at r.parseExprAtom (expression.ts:1181:21)
+    at r.parseExprAtom (index.ts:583:35)
+    at r.parseExprSubscripts (expression.ts:742:23)
+    at r.parseUpdate (expression.ts:721:21)
+    at r.parseMaybeUnary (expression.ts:683:23)
+    at r.parseMaybeUnaryOrPrivate (expression.ts:417:14)
+    at r.parseExprOps (expression.ts:429:23)
+    at r.parseMaybeConditional (expression.ts:384:23)
+    at r.parseMaybeAssign (expression.ts:301:21)
+    at r.parseMaybeAssign (index.ts:3098:36)
+    at r.parseExpressionBase (expression.ts:226:23)
+    at expression.ts:217:39
+    at r.allowInAnd (expression.ts:3202:12)
+    at r.parseExpression (expression.ts:217:17)
+    at r.jsxParseExpressionContainer (index.ts:376:33)
+    at r.jsxParseAttributeValue (index.ts:331:23)
+    at r.jsxParseAttribute (index.ts:414:43)
+    at r.jsxParseOpeningElementAfterName (index.ts:440:30)
+    at r.jsxParseOpeningElementAfterName (index.ts:3859:51)
+    at r.jsxParseOpeningElementAt (index.ts:430:19)
+    at r.jsxParseElementAt (index.ts:470:35)
+    at r.jsxParseElementAt (index.ts:483:34)
+    at r.jsxParseElement (index.ts:559:19)
+    at r.parseExprAtom (index.ts:573:21)
+    at r.parseExprSubscripts (expression.ts:742:23)
+    at r.parseUpdate (expression.ts:721:21)
+    at r.parseMaybeUnary (expression.ts:683:23)
+    at r.parseMaybeUnaryOrPrivate (expression.ts:417:14)
+    at r.parseExprOps (expression.ts:429:23)
+    at r.parseMaybeConditional (expression.ts:384:23)
+    at r.parseMaybeAssign (expression.ts:301:21)
+    at index.ts:2985:39
+    at r.tryParse (util.ts:174:20)
+    at r.parseMaybeAssign (index.ts:2984:20)
+    at expression.ts:257:12
+    at r.allowInAnd (expression.ts:3202:12)
+    at r.parseMaybeAssignAllowIn (expression.ts:256:17)
+    at r.parseMaybeAssignAllowInOrVoidPattern (expression.ts:3316:17)
+    at r.parseParenAndDistinguishExpression (expression.ts:1822:16)
+    at r.parseParenAndDistinguishExpression (index.ts:3197:54)
+    at r.parseExprAtom (expression.ts:1170:21)
+    at r.parseExprAtom (index.ts:583:35)
+    at r.parseExprSubscripts (expression.ts:742:23)
+    at r.parseUpdate (expression.ts:721:21)
+    at r.parseMaybeUnary (expression.ts:683:23)
+react-dom.development.js:785 
+ Error: <path> attribute d: Expected number, "… 3.6-3.6 3.6 3.6z".
+react-dom.development.js:785 
+ Error: <path> attribute d: Expected number, "… 3.6-3.6 3.6 3.6z".
+﻿
+
