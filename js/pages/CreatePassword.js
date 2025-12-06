@@ -21,7 +21,7 @@ function CreatePassword({ onNext }) {
               <div style={{height:'4px', flex:1, borderRadius:'2px', background: strong ? '#10b981' : '#f3f4f6'}}></div>
            </div>
            <div style={{fontSize:'12px', color: strong?'#10b981':'var(--text-muted)', marginTop:'6px', textAlign:'right'}}>
-             {strong ? '密码强度：强' : '需包含大小写字母和数字，至少8位'}
+             {strong ? '密码强度：强' : '（原型演示：可直接点击下一步跳过）'}
            </div>
         </div>
 
@@ -40,7 +40,7 @@ function CreatePassword({ onNext }) {
       </Card>
 
       <div className="row" style={{marginTop:'40px'}}>
-        <Button onClick={()=>ok && onNext({pwd,face})} variant={ok?'primary':'disabled'} style={{height:'50px', borderRadius:'25px', width:'100%'}}>下一步</Button>
+        <Button onClick={()=>onNext({pwd,face})} style={{height:'50px', borderRadius:'25px', width:'100%'}}>下一步</Button>
       </div>
     </div>
   )

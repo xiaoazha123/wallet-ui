@@ -101,7 +101,7 @@ function VerifyMnemonic({ words, onSuccess, isAddWallet, onBack }) {
       </div>
 
       <div className="row" style={{marginTop:'40px', margin:'40px 20px 0'}}>
-        <Button onClick={() => ok ? onSuccess() : alert('顺序不正确，请重新选择')} disabled={selectedItems.length !== words.length} variant={selectedItems.length === words.length ? 'primary' : 'disabled'} style={{height:'50px', borderRadius:'25px', width:'100%'}}>完成</Button>
+        <Button onClick={() => onSuccess()} style={{height:'50px', borderRadius:'25px', width:'100%'}}>完成</Button>
       </div>
     </div>
   )

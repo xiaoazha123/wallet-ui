@@ -4,10 +4,10 @@ function ImportWallet({ onDone, isAddWallet, onBack }) {
   const [pk,setPk] = useState('')
   const [ks,setKs] = useState('')
   const [pass,setPass] = useState('')
-  function validateMnemonic(txt){ const n=txt.trim().split(/\s+/).length; return n===12 || n===24 }
-  function validatePk(txt){ return /^0x?[0-9a-fA-F]{64}$/.test(txt.trim()) }
-  function validateKs(txt){ try{ JSON.parse(txt); return true }catch(e){ return false } }
-  function submit(){ if(tab==='助记词' && !validateMnemonic(mn)) return alert('助记词格式错误'); if(tab==='私钥' && !validatePk(pk)) return alert('私钥格式错误'); if(tab==='Keystore' && (!validateKs(ks) || !pass)) return alert('Keystore或密码错误'); onDone() }
+  function validateMnemonic(txt){ return true }
+  function validatePk(txt){ return true }
+  function validateKs(txt){ return true }
+  function submit(){ onDone() }
   
   return (
     <div className="content-padded" style={{paddingTop: isAddWallet ? '12px' : '24px'}}>

@@ -18,7 +18,7 @@ function WalletsManage({ onBack, onAddWallet }) {
 
   if (mode === 'manage') {
     return (
-      <div className="content-padded" style={{paddingTop:'12px', background:'#fff', minHeight:'100vh'}}>
+      <div className="content-padded" style={{paddingTop:'12px', minHeight:'100vh'}}>
         <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px'}}>
            <button onClick={()=>setMode('view')} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
            <div style={{fontSize:'18px', fontWeight:'700'}}>钱包管理</div>
@@ -49,7 +49,7 @@ function WalletsManage({ onBack, onAddWallet }) {
   }
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px', background:'#fff', height:'100%', display:'flex', flexDirection:'column', overflow:'hidden'}}>
+    <div className="content-padded" style={{paddingTop:'12px', height:'100%', display:'flex', flexDirection:'column', overflow:'hidden'}}>
       <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px', flexShrink:0}}>
          <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
          <div style={{fontSize:'18px', fontWeight:'700'}}>我的钱包</div>
