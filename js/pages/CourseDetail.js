@@ -1,4 +1,4 @@
-function CourseDetail({ course, onComplete }) {
+function CourseDetail({ course, onComplete, onBack }) {
   const chapters = [
     { title:'1. 什么是区块链', time:'05:00', status:'completed' },
     { title:'2. 去中心化的意义', time:'03:20', status:'current' },
@@ -7,6 +7,12 @@ function CourseDetail({ course, onComplete }) {
   ]
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>课程详情</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="course-header-card" style={{
         background:'#4f46e5', 
         borderRadius:'24px', 

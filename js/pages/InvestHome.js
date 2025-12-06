@@ -1,4 +1,4 @@
-function InvestHome({ onBuy }) {
+function InvestHome({ onBuy, onBack }) {
   const [tab, setTab] = useState('earn')
   
   const holdings = [
@@ -20,6 +20,12 @@ function InvestHome({ onBuy }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>投资</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="invest-overview" style={{
         background:'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', 
         borderRadius:'24px', 

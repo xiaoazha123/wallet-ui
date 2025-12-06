@@ -1,4 +1,4 @@
-function ImportWallet({ onDone }) {
+function ImportWallet({ onDone, isAddWallet, onBack }) {
   const [tab,setTab] = useState('助记词')
   const [mn,setMn] = useState('')
   const [pk,setPk] = useState('')
@@ -10,9 +10,16 @@ function ImportWallet({ onDone }) {
   function submit(){ if(tab==='助记词' && !validateMnemonic(mn)) return alert('助记词格式错误'); if(tab==='私钥' && !validatePk(pk)) return alert('私钥格式错误'); if(tab==='Keystore' && (!validateKs(ks) || !pass)) return alert('Keystore或密码错误'); onDone() }
   
   return (
-    <div className="content-padded" style={{paddingTop:'24px'}}>
-      <div style={{marginBottom:'32px', margin:'0 20px 32px'}}>
-        <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>导入钱包</h1>
+    <div className="content-padded" style={{paddingTop: isAddWallet ? '12px' : '24px'}}>
+      {isAddWallet ? (
+        <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+           <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+           <div style={{fontSize:'18px', fontWeight:'700'}}>导入钱包</div>
+           <div style={{width:'40px'}}></div>
+        </div>
+      ) : null}
+      <div style={{marginBottom:'32px', margin: isAddWallet ? '0 20px 12px' : '0 20px 32px'}}>
+        {!isAddWallet && <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>导入钱包</h1>}
         <div style={{fontSize:'14px', color:'var(--text-muted)'}}>选择导入方式并输入相关信息</div>
       </div>
 

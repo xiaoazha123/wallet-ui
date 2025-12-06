@@ -1,4 +1,4 @@
-function TasksPage() {
+function TasksPage({ onBack }) {
   const tasks = [
     { id:1, title:'每日签到', reward:'+10', done:false, btn:'去签到', icon:'📅', sub:'连续签到奖励更多' },
     { id:2, title:'邀请好友', reward:'+100/人', done:false, btn:'去邀请', icon:'👥', sub:'邀请无上限，多邀多得' },
@@ -8,9 +8,15 @@ function TasksPage() {
   ]
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>任务中心</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <Card>
          <div className="list-head" style={{marginBottom:'16px', display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-           <div style={{fontSize:'18px', fontWeight:'700'}}>任务中心</div>
+           <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>每日任务</div>
            <div style={{fontSize:'12px', color:'var(--text-muted)'}}>已完成 1/5</div>
          </div>
          

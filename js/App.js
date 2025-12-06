@@ -9,6 +9,7 @@ function App() {
   const [mnemonic,setMnemonic] = useState(generateMnemonic())
   const [showNetModal, setShowNetModal] = useState(false)
   const [currentNet, setCurrentNet] = useState('main')
+  const [afterVerify, setAfterVerify] = useState(null)
   function push(v){ setStack(s=>[...s,view]); setView(v) }
   function back(){ setView(stack[stack.length-1] || (tab==='home'?'home':tab)); setStack(s=>s.slice(0,-1)) }
   function gotoTab(t){ setTab(t); setView(t); setStack([]) }
@@ -86,11 +87,11 @@ function App() {
           {view==='launch' && (
             <LaunchSplash lang={lang} onLang={(l)=>{ setLang(l); localStorage.setItem('lang', l) }} onNext={()=>setView('init')} />
           )}
-          {view==='init' && (<InitChoice onCreate={()=>setView('create-pass')} onImport={()=>setView('import')} />)}
-          {view==='create-pass' && (<CreatePassword onNext={()=>setView('mnemonic')} />)}
-          {view==='mnemonic' && (<ShowMnemonic words={mnemonic} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制助记词') }} acknowledged={{a:false,b:false}} onAcknowledgeChange={()=>{}} onNext={()=>setView('verify')} />)}
-          {view==='verify' && (<VerifyMnemonic words={mnemonic} onSuccess={()=>{ setBacked(false); setView('bind-invite') }} />)}
-          {view==='import' && (<ImportWallet onDone={()=>{ setBacked(true); setView('bind-invite') }} />)}
+          {view==='init' && (<InitChoice onCreate={()=>setView('mnemonic')} onImport={()=>setView('import')} />)}
+          {view==='create-pass' && (<CreatePassword onNext={()=>setView('bind-invite')} />)}
+          {view==='mnemonic' && (<ShowMnemonic isAddWallet={stack.length > 0} onBack={back} words={mnemonic} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制助记词') }} acknowledged={{a:false,b:false}} onAcknowledgeChange={()=>{}} onNext={()=>setView('verify')} />)}
+          {view==='verify' && (<VerifyMnemonic isAddWallet={stack.length > 0} onBack={back} words={mnemonic} onSuccess={()=>{ setBacked(false); if(stack.length===0) setView('create-pass'); else back(); }} />)}
+          {view==='import' && (<ImportWallet isAddWallet={stack.length > 0} onBack={back} onDone={()=>{ setBacked(true); if(stack.length===0) setView('create-pass'); else back(); }} />)}
           {view==='bind-invite' && (<BindInvitePage onNext={()=>{ setToast('欢迎使用 Planet 钱包'); setView('home') }} />)}
 
           {view==='home' && (
@@ -107,13 +108,13 @@ function App() {
             />
           )}
 
-          {view==='signin' && (<SignInPage onSign={()=>{ setToast('签到成功 +10积分'); back() }} />)}
-          {view==='payment' && (<PaymentPage />)}
-          {view==='invite' && (<InvitePage />)}
-          {view==='governance' && (<GovernancePage />)}
-          {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} />)}
-          {view==='tasks' && (<TasksPage />)}
-          {view==='points' && (<PointsPage />)}
+          {view==='signin' && (<SignInPage onSign={()=>{ setToast('签到成功 +10积分'); back() }} onBack={back} />)}
+          {view==='payment' && (<PaymentPage onBack={back} />)}
+          {view==='invite' && (<InvitePage onBack={back} />)}
+          {view==='governance' && (<GovernancePage onBack={back} />)}
+          {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} onBack={back} />)}
+          {view==='tasks' && (<TasksPage onBack={back} />)}
+          {view==='points' && (<PointsPage onBack={back} />)}
 
           {view==='market' && (
             <MarketPage 
@@ -142,24 +143,48 @@ function App() {
             />
           )}
 
-          {view==='wallets' && (
-            <WalletsManage 
-              onBack={back} 
-              onAddWallet={(type)=>{
-                if(type === 'create') {
-                  setView('create-pass'); // Or skip pass if just adding, but usually needs security check or new pass flow
-                  // For prototype simplicity, maybe go to mnemonic generation directly or via password check
-                  // Let's assume creating a new wallet follows a similar flow: Pass -> Mnemonic -> Verify
-                  // But since we already have a wallet, maybe just generate new mnemonic?
-                  // Let's reuse 'create-pass' flow for now as it sets up the "new wallet" context
-                  setMnemonic(generateMnemonic());
-                  setView('create-pass');
+          {view==='password-verify' && (
+            <PasswordVerify 
+              onSuccess={()=>{
+                // After verification, proceed with the pending action
+                // We need to know what the pending action was.
+                // We can use a state 'pendingAction' or just pass it via prop if we had a router
+                // Here we can use a temporary state or just assume based on where we came from?
+                // Better: use a state to store the 'next view' and 'next action props'
+                // For simplicity in this prototype, let's use a state `afterVerify`
+                if (afterVerify) {
+                  afterVerify();
+                  setAfterVerify(null);
                 } else {
-                  setView('import');
+                  back();
                 }
               }}
+              onBack={back}
             />
           )}
+
+          {view==='wallets' && (
+             <WalletsManage 
+               onBack={back} 
+               onAddWallet={(type)=>{
+                 // Set the action to perform after verification
+                 setAfterVerify(() => () => {
+                   if(type === 'create') {
+                     setMnemonic(generateMnemonic());
+                     // Skip history stack for verification page so back goes to wallets
+                     // Actually push is fine, verify is a step.
+                     // But we want back from mnemonic to go to wallets, not verify.
+                     // So we might want to replace the verify view in stack?
+                     // For now standard push flow: Wallets -> Verify -> Mnemonic
+                     push('mnemonic');
+                   } else {
+                     push('import');
+                   }
+                 });
+                 push('password-verify');
+               }}
+             />
+           )}
           {view==='asset' && currentToken && (
             <AssetDetail 
               token={currentToken} 
@@ -196,9 +221,16 @@ function App() {
               onSecurity={()=>push('security')} 
               onNetwork={()=>push('network')} 
               onLang={()=>push('language')} 
+              onBack={back}
             />
           )}
-          {view==='security' && (<SecuritySettings onBack={back} />)}
+          {view==='security' && (<SecuritySettings onBack={back} onChangePassword={()=>push('change-password')} />)}
+          {view==='change-password' && (
+            <ChangePassword 
+              onBack={back} 
+              onSuccess={()=>{ setToast('密码修改成功'); back(); }} 
+            />
+          )}
           {view==='network' && (<NetworkSettings onBack={back} />)}
           {view==='language' && (
             <LanguageSettings 
@@ -208,31 +240,59 @@ function App() {
             />
           )}
 
-          {view==='earn' && (<StakingHome onDetail={(p)=>{ setCurrentProduct(p); push('earn-detail') }} onStakeNow={(p)=>{ setCurrentProduct(p); push('stake') }} />)}
-          {view==='earn-detail' && currentProduct && (<EarnDetail product={currentProduct} onStake={()=>push('stake')} onRedeem={()=>push('redeem')} onDeposit={()=>push('deposit')} />)}
+          {view==='earn' && (<StakingHome onDetail={(p)=>{ setCurrentProduct(p); push('earn-detail') }} onStakeNow={(p)=>{ setCurrentProduct(p); push('stake') }} onBack={back} />)}
+          {view==='earn-detail' && currentProduct && (<EarnDetail product={currentProduct} onStake={()=>push('stake')} onRedeem={()=>push('redeem')} onDeposit={()=>push('deposit')} onBack={back} />)}
           {view==='stake' && (<StakeFlow onConfirm={()=>{ setToast('已质押'); back() }} onCancel={back} />)}
           {view==='redeem' && (<RedeemFlow onConfirm={()=>{ setToast('已赎回'); back() }} onCancel={back} />)}
-          {view==='deposit' && (<DepositUSDT address={address} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制地址'); }} />)}
+          {view==='deposit' && (<DepositUSDT address={address} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制地址'); }} onBack={back} />)}
 
-          {view==='invest' && (<InvestHome onBuy={()=>push('buy')} />)}
+          {view==='invest' && (<InvestHome onBuy={()=>push('buy')} onBack={back} />)}
           {view==='buy' && (<BuyFlow onConfirm={()=>{ setToast('购买成功'); back() }} onCancel={back} />)}
 
-          {view==='game' && (<GameList onEnter={(g)=>{ setCurrentGame(g); push('game-detail') }} />)}
-          {view==='game-detail' && currentGame && (<GameDetail game={currentGame} onTx={(m)=>setToast(m)} />)}
+          {view==='game' && (<GameList onEnter={(g)=>{ setCurrentGame(g); push('game-detail') }} onBack={back} />)}
+          {view==='game-detail' && currentGame && (<GameDetail game={currentGame} onTx={(m)=>setToast(m)} onBack={back} />)}
 
-          {view==='academy' && (<AcademyList onOpen={(c)=>{ setCurrentCourse(c); push('course') }} />)}
-          {view==='course' && currentCourse && (<CourseDetail course={currentCourse} onComplete={()=>setToast('学习进度已记录')} />)}
+          {view==='academy' && (<AcademyList onOpen={(c)=>{ setCurrentCourse(c); push('course') }} onBack={back} />)}
+          {view==='course' && currentCourse && (<CourseDetail course={currentCourse} onComplete={()=>setToast('学习进度已记录')} onBack={back} />)}
 
           {view==='assets' && (
             <WalletOverview onReceive={()=>push('receive')} onSend={()=>push('send')} onSwap={()=>push('trade')} onStake={()=>push('earn')} onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} onWallets={()=>push('wallets')} />
           )}
         </div>
 
-        {['launch','init','create-pass','mnemonic','verify','import','bind-invite','receive','receive-detail','wallet-select','network-select'].includes(view) ? null : (
+        {['home','market','trade','discover','assets'].includes(view) ? (
            <BottomNav active={tab} onSelect={gotoTab} />
-        )}
+        ) : null}
         {toast && <Toast message={toast} onClose={()=>setToast('')} />}
       </div>
+    </div>
+  )
+}
+
+function LanguageSettings({ currentLang, onSetLang, onBack }) {
+  const langs = ['中文', 'English', '日本語', '한국어', 'Español']
+  return (
+    <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>语言设置</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+      <Card>
+        {langs.map((l,i)=>(
+          <div key={l} onClick={()=>onSetLang(l)} style={{
+            padding:'16px 0',
+            borderBottom: i<langs.length-1 ? '1px solid var(--border)' : 'none',
+            display:'flex',
+            justifyContent:'space-between',
+            alignItems:'center',
+            cursor:'pointer'
+          }}>
+            <div style={{fontSize:'16px', fontWeight: currentLang===l?'600':'400', color:'var(--text-main)'}}>{l}</div>
+            {currentLang===l && <Icon name="check" size={20} style={{color:'var(--primary)'}} />}
+          </div>
+        ))}
+      </Card>
     </div>
   )
 }

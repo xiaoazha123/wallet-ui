@@ -1,4 +1,4 @@
-function PointsPage() {
+function PointsPage({ onBack }) {
   const redeemList = [
     { id:1, name:'Planet 限量马克杯', cost: 500, img:'☕' },
     { id:2, name:'10 USDT 抵扣券', cost: 1000, img:'🎟️' },
@@ -16,6 +16,12 @@ function PointsPage() {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>我的积分</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="points-hero" style={{
         background:'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
         borderRadius:'24px', 

@@ -13,6 +13,15 @@ function ReceiveSelect({ onBack, onSelect, onWalletSelect, onNetworkSelect }) {
     { sym:'DOGE', name:'Dogecoin', net:'Dogecoin', icon:'D', color:'#ba9f33' },
   ]
 
+  // Safe click handler to prevent errors if props are undefined
+  const handleWalletClick = () => {
+    if (onWalletSelect) {
+      onWalletSelect();
+    } else {
+      console.warn('onWalletSelect is not defined');
+    }
+  };
+
   return (
     <div className="content-padded" style={{paddingTop:'12px', background:'#fff', minHeight:'100vh'}}>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
@@ -21,10 +30,9 @@ function ReceiveSelect({ onBack, onSelect, onWalletSelect, onNetworkSelect }) {
          <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="close" size={20} /></button>
       </div>
 
-      <div onClick={onWalletSelect} style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'12px 16px', marginBottom:'16px', cursor:'pointer'}}>
+      <div onClick={handleWalletClick} style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'12px 16px', marginBottom:'16px', cursor:'pointer'}}>
          <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
            <div style={{width:'24px', height:'24px', borderRadius:'6px', background:'#f59e0b', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontSize:'12px'}}><Icon name="wallet" /></div>
-           <div style={{fontSize:'14px', fontWeight:'600'}}>My Wallet <span style={{fontSize:'10px', color:'#9ca3af', fontWeight:'400', background:'#f3f4f6', padding:'2px 4px', borderRadius:'4px'}}>无私钥</span></div>
          </div>
          <Icon name="right" size={16} style={{color:'#9ca3af'}} />
       </div>

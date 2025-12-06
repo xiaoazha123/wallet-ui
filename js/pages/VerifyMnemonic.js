@@ -1,4 +1,4 @@
-function VerifyMnemonic({ words, onSuccess }) {
+function VerifyMnemonic({ words, onSuccess, isAddWallet, onBack }) {
   // Use indices 0..N-1 to track shuffling
   // We need to keep track of original words but shuffle their positions
   // Actually, simplest is: shuffled is an array of objects { word, id } where id is unique (e.g. index in original array if words are unique, or just random id)
@@ -27,9 +27,16 @@ function VerifyMnemonic({ words, onSuccess }) {
   const ok = selectedItems.map(i => i.word).join(' ') === words.join(' ')
 
   return (
-    <div className="content-padded" style={{paddingTop:'24px'}}>
-      <div style={{marginBottom:'24px', margin:'0 20px 24px'}}>
-         <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>验证助记词</h1>
+    <div className="content-padded" style={{paddingTop: isAddWallet ? '12px' : '24px'}}>
+      {isAddWallet ? (
+        <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+           <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+           <div style={{fontSize:'18px', fontWeight:'700'}}>验证助记词</div>
+           <div style={{width:'40px'}}></div>
+        </div>
+      ) : null}
+      <div style={{marginBottom:'24px', margin: isAddWallet ? '0 20px 12px' : '0 20px 24px'}}>
+         {!isAddWallet && <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>验证助记词</h1>}
          <div style={{fontSize:'14px', color:'var(--text-muted)', lineHeight:'1.5'}}>
            请按正确的顺序点击下方的单词。
          </div>

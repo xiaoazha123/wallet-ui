@@ -10,10 +10,11 @@ function AssetDetail({ token, onBack, onSend, onReceive }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
-      {/* <div style={{display:'flex', alignItems:'center', marginBottom:'16px', padding:'0 4px'}}>
-         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', marginRight:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
          <div style={{fontSize:'18px', fontWeight:'700'}}>资产详情</div>
-      </div> */}
+         <div style={{width:'40px'}}></div>
+      </div>
       
       <div className="token-info" style={{marginBottom:'20px', padding:'0 20px'}}>
          <div className="token-code" style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)'}}>{token.code}</div>

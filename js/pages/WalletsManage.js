@@ -2,7 +2,7 @@ function WalletsManage({ onBack, onAddWallet }) {
   const [mode, setMode] = useState('view') // 'view' or 'manage'
   const [showAddSheet, setShowAddSheet] = useState(false)
   const [items,setItems] = useState([
-    { name:'My Wallet', addr:'无私钥', assets:'¥0', backed:true, type:'无私钥', color:'#f59e0b', selected:true },
+    { name:'My Wallet',  assets:'¥0', backed:true, color:'#f59e0b', selected:true },
   ])
 
   function rename(i) { 
@@ -49,21 +49,21 @@ function WalletsManage({ onBack, onAddWallet }) {
   }
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px', background:'#fff', minHeight:'100vh', display:'flex', flexDirection:'column'}}>
-      <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px'}}>
+    <div className="content-padded" style={{paddingTop:'12px', background:'#fff', height:'100%', display:'flex', flexDirection:'column', overflow:'hidden'}}>
+      <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:'20px', padding:'0 8px', flexShrink:0}}>
          <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
          <div style={{fontSize:'18px', fontWeight:'700'}}>我的钱包</div>
          <button onClick={()=>setMode('manage')} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'#f59e0b', fontSize:'14px', fontWeight:'600'}}>管理</button>
       </div>
 
-      <div style={{padding:'0 20px', marginBottom:'24px'}}>
+      <div style={{padding:'0 20px', marginBottom:'24px', flexShrink:0}}>
          <div style={{display:'flex', alignItems:'center', gap:'4px', fontSize:'14px', color:'var(--text-muted)', marginBottom:'4px'}}>
            <Icon name="chart" size={14} /> 投资组合 <Icon name="right" size={12} />
          </div>
          <div style={{fontSize:'32px', fontWeight:'800'}}>¥0</div>
       </div>
 
-      <div style={{flex:1, display:'flex', flexDirection:'column'}}>
+      <div style={{display:'flex', flexDirection:'column', overflowY:'auto'}}>
          {items.map((w,i)=>(
            <div key={i} style={{display:'flex', justifyContent:'space-between', alignItems:'center', padding:'16px 20px', borderTop:'1px solid #f9fafb', cursor:'pointer'}}>
               <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
@@ -80,7 +80,7 @@ function WalletsManage({ onBack, onAddWallet }) {
          ))}
       </div>
 
-      <div style={{padding:'20px 20px 40px'}}>
+      <div style={{padding:'450px 20px 40px', flexShrink:0}}>
          <Button onClick={()=>setShowAddSheet(true)} style={{width:'100%', height:'50px', borderRadius:'12px', background:'#f59e0b', color:'#fff', fontSize:'16px', fontWeight:'600', border:'none'}}>添加钱包</Button>
       </div>
 

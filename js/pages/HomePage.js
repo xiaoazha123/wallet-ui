@@ -29,7 +29,7 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '24px'
+        marginBottom: '20px'
       }}>
         <div style={{flex:1}}>
           <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
@@ -56,30 +56,39 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
         </div>
       </div>
 
-      <div className="grid-menu-row" style={{marginTop:'0'}}>
-         <button className="grid-btn" onClick={()=>onMini('signin')}>
-           <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="calendar" /></div>
-           <div className="grid-label">签到</div>
-         </button>
-         <button className="grid-btn" onClick={()=>onMini('payment')}>
-           <div className="grid-icon" style={{background:'#fff7ed', color:'#f97316'}}><Icon name="scan" /></div>
-           <div className="grid-label">支付</div>
-         </button>
-         <button className="grid-btn" onClick={()=>onMini('invite')}>
-           <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="invite" /></div>
-           <div className="grid-label">邀请</div>
-         </button>
-         <button className="grid-btn" onClick={()=>onMini('governance')}>
-           <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="vote" /></div>
-           <div className="grid-label">治理</div>
-         </button>
-         <button className="grid-btn" onClick={()=>setShowMoreSheet(true)}>
-           <div className="grid-icon" style={{background:'#f3f4f6', color:'#6b7280'}}><Icon name="more" /></div>
-           <div className="grid-label">更多</div>
-         </button>
+      <div className="card-white" style={{
+        background: '#fff',
+        padding: '20px 10px',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-sm)',
+        border: '1px solid var(--border)',
+        marginBottom: '20px'
+      }}>
+        <div className="grid-menu-row" style={{marginTop:'0', marginBottom: 0, margin: '0 10px'}}>
+           <button className="grid-btn" onClick={()=>onMini('signin')}>
+             <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="calendar" /></div>
+             <div className="grid-label">签到</div>
+           </button>
+           <button className="grid-btn" onClick={()=>onMini('payment')}>
+             <div className="grid-icon" style={{background:'#fff7ed', color:'#f97316'}}><Icon name="scan" /></div>
+             <div className="grid-label">支付</div>
+           </button>
+           <button className="grid-btn" onClick={()=>onMini('invite')}>
+             <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="invite" /></div>
+             <div className="grid-label">邀请</div>
+           </button>
+           <button className="grid-btn" onClick={()=>onMini('governance')}>
+             <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="vote" /></div>
+             <div className="grid-label">治理</div>
+           </button>
+           <button className="grid-btn" onClick={()=>setShowMoreSheet(true)}>
+             <div className="grid-icon" style={{background:'#f3f4f6', color:'#6b7280'}}><Icon name="more" /></div>
+             <div className="grid-label">更多</div>
+           </button>
+        </div>
       </div>
 
-      <div className="big-actions-row" style={{gap:'16px', padding:'0 20px', marginBottom:'24px'}}>
+      <div className="big-actions-row" style={{gap:'16px', padding:'0 20px', marginBottom:'20px'}}>
          <div className="big-action-card" onClick={onStake} style={{
            background:'#fff', 
            border:'1px solid var(--border)', 

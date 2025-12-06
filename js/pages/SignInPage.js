@@ -1,4 +1,4 @@
-function SignInPage({ onSign }) {
+function SignInPage({ onSign, onBack }) {
   const [signed, setSigned] = useState(false)
   const week = ['一','二','三','四','五','六','日']
   // Mock calendar for current month (30 days)
@@ -9,14 +9,14 @@ function SignInPage({ onSign }) {
     points: (i+1)%7===0 ? 50 : 10
   }))
   
-  const redeemList = [
-    { id:1, name:'Planet 限量马克杯', cost: 500, img:'☕' },
-    { id:2, name:'10 USDT 抵扣券', cost: 1000, img:'🎟️' },
-    { id:3, name:'VIP 身份 (30天)', cost: 2000, img:'👑' },
-  ]
-
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>每日签到</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="signin-header" style={{
         background:'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)', 
         padding:'24px', 

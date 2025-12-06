@@ -52,7 +52,7 @@ function ReceiveView({ token, address, onBack }) {
          </div>
       </div>
 
-      <div style={{padding:'20px 40px 40px'}}>
+      <div style={{padding:'120px 20px 40px'}}>
          <Button style={{width:'100%', height:'48px', borderRadius:'24px', background:'#f3f4f6', color:'var(--text-main)', fontSize:'16px', fontWeight:'600', border:'none'}}>分享</Button>
       </div>
     </div>

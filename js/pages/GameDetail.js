@@ -1,6 +1,12 @@
-function GameDetail({ game, onTx }) {
+function GameDetail({ game, onTx, onBack }) {
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>游戏详情</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="game-hero" style={{
         background:'#1f2937', 
         borderRadius:'24px', 
@@ -17,7 +23,7 @@ function GameDetail({ game, onTx }) {
             <div className="dh-meta" style={{fontSize:'14px', opacity:0.8, marginBottom:'20px'}}>{game.cat} · {game.players || '10k+'} 玩家在线</div>
             
             <div className="row" style={{gap:'12px'}}>
-              <button onClick={()=>onTx('连接钱包')} style={{flex:1, background:'var(--primary)', color:'#fff', border:'none', padding:'12px', borderRadius:'24px', fontWeight:'600', fontSize:'15px'}}>连接钱包</button>
+              <button onClick={()=>onTx('进入游戏')} style={{flex:1, background:'var(--primary)', color:'#fff', border:'none', padding:'12px', borderRadius:'24px', fontWeight:'600', fontSize:'15px'}}>进入游戏</button>
               <button onClick={()=>onTx('访问官网')} style={{flex:1, background:'rgba(255,255,255,0.1)', color:'#fff', border:'1px solid rgba(255,255,255,0.2)', padding:'12px', borderRadius:'24px', fontWeight:'600', fontSize:'15px'}}>访问官网</button>
             </div>
          </div>

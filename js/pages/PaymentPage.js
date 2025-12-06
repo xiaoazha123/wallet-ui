@@ -1,4 +1,4 @@
-function PaymentPage() {
+function PaymentPage({ onBack }) {
   const txs = [
     { id:1, name:'星巴克咖啡', time:'今天 10:23', amt:'-32.00', icon:'☕' },
     { id:2, name:'7-11 便利店', time:'昨天 18:45', amt:'-15.50', icon:'🏪' },
@@ -6,6 +6,12 @@ function PaymentPage() {
   ]
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>支付</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="payment-card" style={{
         background:'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
         borderRadius:'24px', 

@@ -1,4 +1,4 @@
-function GameList({ onEnter }) {
+function GameList({ onEnter, onBack }) {
    const [tab, setTab] = useState('热门')
    const games = [
      { name:'星际远征', desc:'探索宇宙，建立你的舰队', cat:'SLG', players:'12k', tags:['P2E','战斗'], img:'🚀' },
@@ -8,6 +8,12 @@ function GameList({ onEnter }) {
    ]
    return (
      <div className="content-padded" style={{paddingTop:'12px'}}>
+       <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+          <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+          <div style={{fontSize:'18px', fontWeight:'700'}}>游戏中心</div>
+          <div style={{width:'40px'}}></div>
+       </div>
+
        <div className="top-tabs" style={{marginBottom:'16px', display:'flex', gap:'6px', overflowX:'auto', scrollbarWidth:'none', margin:'0 20px 20px'}}>
          {['热门','最新','策略','休闲','竞技','角色扮演'].map(t=> (
            <button key={t} 

@@ -1,4 +1,4 @@
-function StakingHome({ onDetail, onStakeNow }) {
+function StakingHome({ onDetail, onStakeNow, onBack }) {
   const [seg,setSeg] = useState('灵活存钱')
   const products = [
     { code:'USDT', apy:'8.5%', lock:'灵活', min:'100', icon:'$' },
@@ -12,6 +12,12 @@ function StakingHome({ onDetail, onStakeNow }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>存钱</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="earn-hero" style={{
         background:'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)', 
         borderRadius:'24px', 
@@ -136,8 +142,8 @@ function StakingHome({ onDetail, onStakeNow }) {
               </div>
               
               <div style={{display:'flex', gap:'12px'}}>
-                <Button variant="secondary" onClick={()=>onDetail(p)} style={{flex:1, height:'40px', fontSize:'14px'}}>详情</Button>
                 <Button onClick={()=>onStakeNow(p)} style={{flex:1, height:'40px', fontSize:'14px'}}>立即存入</Button>
+                <Button variant="secondary" onClick={()=>onDetail(p)} style={{flex:1, height:'40px', fontSize:'14px'}}>详情</Button>
               </div>
             </div>
           ))}

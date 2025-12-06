@@ -1,4 +1,4 @@
-function AcademyList({ onOpen }) {
+function AcademyList({ onOpen, onBack }) {
   const [filter, setFilter] = useState('全部')
   const courses = [
     { title:'区块链基础', level:'初级', duration:'10m', author:'Planet 学院', img:'📘' },
@@ -9,6 +9,12 @@ function AcademyList({ onOpen }) {
   const list = filter==='全部' ? courses : courses.filter(c=>c.level===filter)
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>Web3 学院</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
        <div className="top-tabs" style={{padding:'0 20px', marginBottom:'16px', display:'flex', gap:'12px', overflowX:'auto', scrollbarWidth:'none'}}>
          {['全部','初级','中级','高级'].map(t=> (
            <button key={t} 

@@ -1,6 +1,12 @@
-function SettingsPage({ onWallets, onSecurity, onNetwork, onLang }) {
+function SettingsPage({ onWallets, onSecurity, onNetwork, onLang, onBack }) {
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>设置</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
        <div className="card-white" style={{padding:'0'}}>
          <div className="settings-list">
            <div className="settings-item" onClick={onWallets} style={{padding:'16px', display:'flex', alignItems:'center', borderBottom:'1px solid var(--border)'}}>

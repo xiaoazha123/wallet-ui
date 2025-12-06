@@ -4,6 +4,8 @@ function SwapPage({ onSwap }) {
   const [payToken, setPayToken] = useState('USDT')
   const [rxToken, setRxToken] = useState('PNT')
   const rate = 12.5 // 1 USDT = 12.5 PNT
+  const [showPwdModal, setShowPwdModal] = useState(false)
+  const [pwd, setPwd] = useState('')
 
   useEffect(() => {
     if (!payAmt) { setRxAmt(''); return }
@@ -14,7 +16,9 @@ function SwapPage({ onSwap }) {
   }, [payAmt])
 
   function doSwap() {
-    if (!payAmt) return
+    // Check password logic here (simple check for prototype)
+    if (!pwd) return alert('请输入密码')
+    setShowPwdModal(false) // Close modal
     onSwap()
   }
 
@@ -133,8 +137,34 @@ function SwapPage({ onSwap }) {
       </Card>
 
       <div className="row" style={{marginTop:'24px'}}>
-        <Button onClick={doSwap} style={{width:'100%', height:'50px', fontSize:'16px'}}>立即兑换</Button>
+        <Button onClick={()=>setShowPwdModal(true)} style={{width:'100%', height:'50px', fontSize:'16px'}}>立即兑换</Button>
       </div>
+
+      {showPwdModal && (
+        <div className="modal-overlay" style={{alignItems:'center', justifyContent:'center'}}>
+          <div className="modal-box" style={{margin:'20px', borderRadius:'24px', padding:'24px', width:'85%'}}>
+            <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'20px'}}>安全验证</div>
+            <div style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'20px', textAlign:'center'}}>请输入交易密码以确认支付</div>
+            
+            <input 
+              type="password" 
+              autoFocus
+              className="pwd-input" 
+              placeholder="请输入交易密码" 
+              value={pwd} 
+              onChange={e=>setPwd(e.target.value)} 
+              style={{width:'100%', padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', marginBottom:'24px', background:'#f9fafb'}} 
+            />
+            
+            <div style={{display:'flex', gap:'140px'}}>
+              <Button onClick={doSwap} style={{flex:1}}>确认</Button>
+              <Button variant="ghost" onClick={()=>setShowPwdModal(false)} style={{flex:1}}>取消</Button>
+            </div>
+            
+            <div className="bio-hint" style={{marginTop:'20px', textAlign:'center', color:'var(--primary)', fontSize:'14px', cursor:'pointer'}}> 使用生物识别</div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

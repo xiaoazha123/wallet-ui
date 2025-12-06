@@ -6,6 +6,7 @@ function SendFlow({ onConfirm, onCancel }) {
   const [showAdv, setShowAdv] = useState(false)
   const [pwd, setPwd] = useState('')
   const [step, setStep] = useState(1)
+  const [showPwdModal, setShowPwdModal] = useState(false) // New state for modal
 
   const balance = 1200.50
   const gasEst = {
@@ -24,10 +25,13 @@ function SendFlow({ onConfirm, onCancel }) {
     setStep(2)
   }
   function doSend() {
+    // Check password logic here (simple check for prototype)
     if (!pwd) return alert('请输入密码')
+    setShowPwdModal(false) // Close modal
     onConfirm({ addr, token, amt, gas: gasEst[gasSpeed].fee })
   }
 
+  // If step 2, show confirmation page, but password input is now in modal
   if (step === 2) {
     return (
       <div className="content-padded" style={{paddingTop:'12px'}}>
@@ -48,17 +52,39 @@ function SendFlow({ onConfirm, onCancel }) {
              </div>
            </div>
            
-           <div className="pwd-input-area" style={{marginBottom:'24px'}}>
-             <div className="label" style={{marginBottom:'8px', fontWeight:'600'}}>安全验证</div>
-             <input type="password" className="pwd-input" placeholder="请输入交易密码" value={pwd} onChange={e=>setPwd(e.target.value)} style={{width:'100%', padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none'}} />
-             <div className="bio-hint" style={{marginTop:'12px', textAlign:'center', color:'var(--primary)', fontSize:'14px'}}><Icon name="scan" size={16}/> 使用生物识别</div>
-           </div>
+           {/* Password input removed from here, moved to modal */}
 
-           <div className="row" style={{gap:'12px'}}>
-             <Button onClick={doSend} style={{flex:1}}>确认发送</Button>
+           <div className="row" style={{gap:'120px',margin:'0 0 0'}}>
+             <Button onClick={()=>setShowPwdModal(true)} style={{flex:1}}>确认发送</Button>
              <Button variant="ghost" onClick={()=>setStep(1)} style={{flex:1}}>返回修改</Button>
            </div>
          </Card>
+
+         {showPwdModal && (
+            <div className="modal-overlay" style={{alignItems:'center', justifyContent:'center'}}>
+              <div className="modal-box" style={{margin:'20px', borderRadius:'24px', padding:'24px', width:'85%'}}>
+                <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'20px'}}>安全验证</div>
+                <div style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'20px', textAlign:'center'}}>请输入交易密码以确认支付</div>
+                
+                <input 
+                  type="password" 
+                  autoFocus
+                  className="pwd-input" 
+                  placeholder="请输入交易密码" 
+                  value={pwd} 
+                  onChange={e=>setPwd(e.target.value)} 
+                  style={{width:'100%', padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', marginBottom:'24px', background:'#f9fafb'}} 
+                />
+                
+                <div style={{display:'flex', gap:'140px'}}>
+                  <Button onClick={doSend} style={{flex:1}}>确认</Button>
+                  <Button variant="ghost" onClick={()=>setShowPwdModal(false)} style={{flex:1}}>取消</Button>
+                </div>
+                
+                <div className="bio-hint" style={{marginTop:'20px', textAlign:'center', color:'var(--primary)', fontSize:'14px', cursor:'pointer'}}> 使用生物识别</div>
+              </div>
+            </div>
+         )}
       </div>
     )
   }
@@ -105,7 +131,7 @@ function SendFlow({ onConfirm, onCancel }) {
              <span style={{fontWeight:'600'}}>Gas 费用</span>
              <span className="gas-val" style={{color:'var(--text-muted)'}}>{gasEst[gasSpeed].fee} TRX</span>
           </div>
-          <div className="gas-sel" style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px'}}>
+          <div className="gas-sel" style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:'8px', marginBottom:'20px'}}>
              {['slow','standard','fast'].map(s => (
                <button key={s} className={`gas-opt ${gasSpeed===s?'active':''}`} onClick={()=>setGasSpeed(s)} style={{
                  padding:'10px', 
@@ -122,7 +148,7 @@ function SendFlow({ onConfirm, onCancel }) {
           </div>
         </div>
 
-        <div className="row" style={{marginTop:'32px', gap:'12px'}}>
+        <div className="row" style={{marginTop:'32px', gap:'160px', margin:'0 0 0'}}>
           <Button onClick={doCheck} style={{flex:1}}>下一步</Button>
           <Button variant="ghost" onClick={onCancel} style={{flex:1}}>取消</Button>
         </div>

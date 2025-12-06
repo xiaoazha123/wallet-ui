@@ -8,6 +8,12 @@ function NewsDetailPage({ news, onBack, onCourse }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>新闻详情</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div style={{marginBottom:'20px', padding:'0 20px'}}>
         <h1 style={{fontSize:'24px', fontWeight:'800', color:'var(--text-main)', lineHeight:'1.3', margin:'0 0 12px 0'}}>{news.title}</h1>
         <div style={{display:'flex', alignItems:'center', gap:'8px', fontSize:'13px', color:'var(--text-muted)'}}>

@@ -9,6 +9,12 @@ function NetworkSettings({ onBack }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>多链设置</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="network-header" style={{
         background:'linear-gradient(135deg, #f97316 0%, #ea580c 100%)', 
         borderRadius:'24px', 
@@ -54,16 +60,6 @@ function NetworkSettings({ onBack }) {
           </div>
         ))}
       </Card>
-
-      <div className="row" style={{marginTop:'24px', margin:'24px 20px 0'}}>
-         <Button variant="secondary" onClick={()=>alert('添加自定义RPC')} style={{width:'100%', height:'50px', borderRadius:'25px', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px'}}>
-           <Icon name="plus" size={16} /> 添加自定义网络
-         </Button>
-      </div>
-      
-      <div className="row" style={{marginTop:'16px'}}>
-        <Button variant="ghost" onClick={onBack}>返回</Button>
-      </div>
     </div>
   )
 }

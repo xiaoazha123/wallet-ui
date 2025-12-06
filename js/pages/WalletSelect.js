@@ -1,6 +1,6 @@
 function WalletSelect({ onSelect, onBack }) {
   const wallets = [
-    { id:1, name:'My Wallet', type:'无私钥', balance:'¥0', selected:true, color:'#f59e0b' },
+    { name:'My Wallet', type:'无私钥', balance:'¥0', color:'#f59e0b', selected:true },
   ]
 
   return (

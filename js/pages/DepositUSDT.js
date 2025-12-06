@@ -1,8 +1,13 @@
-function DepositUSDT({ address, onCopy }) {
+function DepositUSDT({ address, onCopy, onBack }) {
   return (
-    <div className="content-padded" style={{paddingTop:'24px'}}>
+    <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>充值 USDT</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div style={{marginBottom:'32px', margin:'0 20px 32px'}}>
-        <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>充值 USDT</h1>
         <div style={{fontSize:'14px', color:'var(--text-muted)'}}>仅支持 TRC20 网络充值</div>
       </div>
 

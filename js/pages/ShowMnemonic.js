@@ -1,8 +1,15 @@
-function ShowMnemonic({ words, onCopy, onNext, onAcknowledgeChange, acknowledged }) {
+function ShowMnemonic({ words, onCopy, onNext, onAcknowledgeChange, acknowledged, isAddWallet, onBack }) {
   return (
-    <div className="content-padded" style={{paddingTop:'24px'}}>
-      <div style={{marginBottom:'24px', margin:'0 20px 24px'}}>
-         <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>备份助记词</h1>
+    <div className="content-padded" style={{paddingTop: isAddWallet ? '12px' : '24px'}}>
+      {isAddWallet ? (
+        <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+           <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+           <div style={{fontSize:'18px', fontWeight:'700'}}>备份助记词</div>
+           <div style={{width:'40px'}}></div>
+        </div>
+      ) : null}
+      <div style={{marginBottom:'24px', margin: isAddWallet ? '0 20px 12px' : '0 20px 24px'}}>
+         {!isAddWallet && <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>备份助记词</h1>}
          <div style={{fontSize:'14px', color:'var(--text-muted)', lineHeight:'1.5'}}>
            请准确抄写下方的12个单词，并保存在安全的地方。
          </div>

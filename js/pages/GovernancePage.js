@@ -1,4 +1,4 @@
-function GovernancePage() {
+function GovernancePage({ onBack }) {
   const [tab, setTab] = useState('voting')
   const [power, setPower] = useState(0)
   
@@ -16,6 +16,12 @@ function GovernancePage() {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>治理</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
        <div className="gov-stats" style={{
          background:'#1f2937', 
          padding:'20px', 

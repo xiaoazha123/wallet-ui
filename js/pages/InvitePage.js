@@ -1,4 +1,4 @@
-function InvitePage() {
+function InvitePage({ onBack }) {
   const [tab, setTab] = useState('center')
   const [copied, setCopied] = useState(false)
   const inviteCode = '888888'
@@ -24,6 +24,12 @@ function InvitePage() {
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
+      <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
+         <button onClick={onBack} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)'}}><Icon name="back" size={24} /></button>
+         <div style={{fontSize:'18px', fontWeight:'700'}}>邀请好友</div>
+         <div style={{width:'40px'}}></div>
+      </div>
+
       <div className="top-tabs" style={{padding:'0 20px', marginBottom:'16px', display:'flex', justifyContent:'center'}}>
          <div style={{background:'#f3f4f6', padding:'4px', borderRadius:'12px', display:'inline-flex'}}>
            <button className={`tab-btn ${tab==='center'?'active':''}`} onClick={()=>setTab('center')} style={{
@@ -52,7 +58,10 @@ function InvitePage() {
              </div>
              <div className="invite-info-row" style={{marginBottom:'20px'}}>
                <div className="i-label" style={{fontSize:'14px', opacity:0.8, marginBottom:'4px'}}>我的邀请码</div>
-               <div className="i-code" onClick={()=>copy(inviteCode)} style={{fontSize:'32px', fontWeight:'800', letterSpacing:'2px', cursor:'pointer'}}>{inviteCode} <Icon name="copy" size={20} style={{opacity:0.8}}/></div>
+               <div className="i-code" onClick={()=>copy(inviteCode)} style={{fontSize:'32px', fontWeight:'800', letterSpacing:'2px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px'}}>
+                 {inviteCode} 
+                 <Icon name="copy" size={24} style={{opacity:0.8}}/>
+               </div>
              </div>
              <button onClick={()=>alert('调用系统分享')} style={{width:'100%', background:'#fff', color:'var(--primary)', border:'none', padding:'14px', borderRadius:'24px', fontSize:'16px', fontWeight:'700'}}>一键邀请好友</button>
           </div>
@@ -105,7 +114,8 @@ function InvitePage() {
              margin:'0 20px',
              boxShadow:'var(--shadow-sm)',
              border:'1px solid var(--border)',
-             marginBottom:'20px'
+             marginBottom:'20px',
+             margin:'0 20px 20px'
            }}>
               <div className="ro-label" style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'8px', textAlign:'center'}}>累计返佣 (PNT)</div>
               <div className="ro-total" style={{fontSize:'36px', fontWeight:'800', color:'var(--primary)', textAlign:'center', marginBottom:'24px'}}>1,250.50</div>
