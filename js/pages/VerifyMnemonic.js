@@ -77,7 +77,7 @@ function VerifyMnemonic({ words, onSuccess, isAddWallet, onBack }) {
         flexWrap:'wrap', 
         gap:'8px', 
         justifyContent:'center',
-        padding: '0 10px'
+        padding: '0 20px'
       }}>
         {shuffledItems.map((item, i) => {
            // Check if this specific item (by id) is already selected

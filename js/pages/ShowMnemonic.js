@@ -74,7 +74,7 @@ function ShowMnemonic({ words, onCopy, onNext, onAcknowledgeChange, acknowledged
       </div>
 
       <div className="row">
-        <Button onClick={onNext} variant={(acknowledged.a && acknowledged.b)?'primary':'disabled'} style={{height:'50px', borderRadius:'25px', width:'100%'}}>下一步</Button>
+        <Button onClick={onNext} variant={(acknowledged.a && acknowledged.b)?'primary':'disabled'} style={{marginTop:'70px', height:'50px', borderRadius:'25px', width:'100%',background:'#6366f1',color: '#ffffff'}}>下一步</Button>
       </div>
     </div>
   )
