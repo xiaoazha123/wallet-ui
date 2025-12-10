@@ -25,7 +25,7 @@ function StakingHome({ onDetail, onStakeNow, onBack }) {
         color:'#fff', 
         marginBottom:'24px',
         boxShadow:'0 10px 25px rgba(109, 40, 217, 0.3)',
-        margin:'0 20px 24px'
+        margin:'0 20px 10px'
       }}>
          <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'24px'}}>
            <div>
@@ -48,7 +48,7 @@ function StakingHome({ onDetail, onStakeNow, onBack }) {
          </div>
       </div>
 
-      <div className="no-scrollbar" style={{display:'flex', gap:'12px', marginBottom:'24px', overflowX:'auto', paddingBottom:'4px', margin:'0 20px 24px'}}>
+      <div className="no-scrollbar" style={{display:'flex', gap:'12px', marginBottom:'24px', overflowX:'auto', paddingBottom:'4px', margin:'0 20px 10px'}}>
          <div style={{
            minWidth:'260px', 
            background:'#fff', 

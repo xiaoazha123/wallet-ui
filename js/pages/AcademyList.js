@@ -34,7 +34,7 @@ function AcademyList({ onOpen, onBack }) {
          ))}
        </div>
        
-       <div className="course-list" style={{padding:'0 20px', paddingBottom:'100px', display:'flex', flexDirection:'column', gap:'16px'}}>
+       <div className="course-list" style={{padding:'0 20px', paddingBottom:'100px', display:'flex', flexDirection:'column', gap:'10px'}}>
          {list.map((c,i)=>(
            <div key={i} className="course-item" onClick={()=>onOpen(c)} style={{
              background:'#fff', 

@@ -42,7 +42,7 @@ function EarnDetail({ product, onStake, onRedeem, onDeposit, onBack }) {
            </div>
         </Card>
 
-        <div style={{margin:'20px 20px'}}>
+        <div style={{margin:'20px 20px 10px'}}>
           <div style={{fontSize:'16px', fontWeight:'700', marginBottom:'12px', paddingLeft:'4px'}}>我的持仓</div>
           <div style={{
              background:'#fff', 

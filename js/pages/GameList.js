@@ -39,7 +39,7 @@ function GameList({ onEnter, onBack }) {
              background:'#fff', 
              borderRadius:'16px', 
              padding:'16px', 
-             marginBottom:'16px', 
+             marginBottom:'10px', 
              boxShadow:'var(--shadow-sm)',
              border:'1px solid var(--border)',
              display:'flex',

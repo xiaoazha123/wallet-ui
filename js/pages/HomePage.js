@@ -29,7 +29,7 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom: '20px'
+        marginBottom: '10px'
       }}>
         <div style={{flex:1}}>
           <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
@@ -62,7 +62,7 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
         borderRadius: '20px',
         boxShadow: 'var(--shadow-sm)',
         border: '1px solid var(--border)',
-        marginBottom: '20px'
+        marginBottom: '10px'
       }}>
         <div className="grid-menu-row" style={{marginTop:'0', marginBottom: 0, margin: '0 10px'}}>
            <button className="grid-btn" onClick={()=>onMini('signin')}>
@@ -88,7 +88,7 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
         </div>
       </div>
 
-      <div className="big-actions-row" style={{gap:'16px', padding:'0 20px', marginBottom:'20px'}}>
+      <div className="big-actions-row" style={{gap:'16px', padding:'0 20px', marginBottom:'10px'}}>
          <div className="big-action-card" onClick={onStake} style={{
            background:'#fff', 
            border:'1px solid var(--border)', 

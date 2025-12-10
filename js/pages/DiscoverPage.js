@@ -28,7 +28,7 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail }) {
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
       {/* Banners */}
-      <div className="banner-scroll no-scrollbar" style={{display:'flex', gap:'12px', overflowX:'auto', marginBottom:'24px', scrollbarWidth:'none', margin:'0 20px 20px'}}>
+      <div className="banner-scroll no-scrollbar" style={{display:'flex', gap:'12px', overflowX:'auto', marginBottom:'24px', scrollbarWidth:'none', margin:'0 20px 10px'}}>
          {banners.map(b=>(
            <div key={b.id} style={{
              minWidth:'280px', 
@@ -49,7 +49,7 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail }) {
          ))}
       </div>
 
-      <div className="section-head" style={{padding:'0 20px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0 20px 20px'}}>
+      <div className="section-head" style={{padding:'0 20px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0 20px 10px'}}>
          <div style={{fontSize:'18px', fontWeight:'700', color:'var(--text-main)'}}>推荐 DApp</div>
          <div style={{fontSize:'13px', color:'var(--primary)', fontWeight:'600', cursor:'pointer'}} onClick={()=>alert('更多DApp')}>查看更多</div>
       </div>

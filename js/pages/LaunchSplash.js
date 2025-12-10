@@ -1,4 +1,6 @@
-function LaunchSplash({ lang, onLang, onNext }) {
+function LaunchSplash({ onCreate, onImport }) {
+  const [showImport, setShowImport] = useState(false)
+
   return (
     <div 
       className="content-padded" 
@@ -6,141 +8,150 @@ function LaunchSplash({ lang, onLang, onNext }) {
         height:'100%',
         display:'flex',
         flexDirection:'column',
-        paddingTop:'60px',
-        paddingBottom:'30px',
+        padding: 0,
+        background: '#fff',
+        position: 'relative',
+        overflow: 'hidden'
       }}
     >
-
-      {/* 上半部分整体下移 */}
-      <div 
-        style={{
-          display:'flex',
-          flexDirection:'column',
-          alignItems:'center',
-          justifyContent:'flex-start',
-          marginTop:'40px',     // 让整体往下
-          marginBottom:'60px'
-        }}
-      >
-        <div className="logo-placeholder" style={{
-          width:'120px',
-          height:'120px',
-          borderRadius:'32px',
-          background:'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-          marginBottom:'28px',
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          fontSize:'60px',
-          color:'#fff',
-          boxShadow:'0 12px 30px rgba(99, 102, 241, 0.3)'
-        }}>
-          <Icon name="planet" />
-        </div>
-
-        <h1 style={{
-          fontSize:'34px',
-          fontWeight:'800',
-          marginBottom:'14px',
-          background:'linear-gradient(135deg, #111827 0%, #4b5563 100%)',
-          WebkitBackgroundClip:'text',
-          WebkitTextFillColor:'transparent'
-        }}>Planet 钱包</h1>
-
-        <div 
-          style={{
-            fontSize:'15px',
-            color:'var(--text-muted)',
-            lineHeight:'1.6',
-            maxWidth:'260px',
-            textAlign:'center'
-          }}
-        >
-          开启您的 Web3 之旅<br/>安全、便捷、去中心化
-        </div>
-      </div>
-
-
-      {/* 中间按钮区域 */}
+      {/* 顶部背景图 */}
       <div style={{
-        display:'flex',
-        flexDirection:'column',
-        alignItems:'center',
-        width:'100%',
-        marginBottom:'auto'   // 中间部分向上，底部说明永远在最下
+        width: '100%',
+        height: '420px',
+        overflow: 'hidden',
+        position: 'relative',
       }}>
-
-        {/* 语言选择 */}
-        <div 
+        <img 
+          src="./planet_home1.png" 
+          alt="background" 
           style={{
-            background:'#f3f4f6',
-            borderRadius:'24px',
-            padding:'4px',
-            display:'inline-flex',
-            marginBottom:'28px'
-          }}
-        >
-          <button onClick={()=>onLang('中文')} style={{
-            padding:'8px 22px',
-            borderRadius:'20px',
-            border:'none',
-            background: lang==='中文'?'#fff':'transparent',
-            color: lang==='中文'?'var(--text-main)':'var(--text-muted)',
-            fontWeight: lang==='中文'?'600':'400',
-            boxShadow: lang==='中文'?'0 2px 8px rgba(0,0,0,0.05)':'none',
-            fontSize:'14px',
-            cursor:'pointer'
-          }}>中文</button>
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block'
+          }} 
+        />
+      </div>
 
-          <button onClick={()=>onLang('English')} style={{
-            padding:'8px 22px',
-            borderRadius:'20px',
-            border:'none',
-            background: lang==='English'?'#fff':'transparent',
-            color: lang==='English'?'var(--text-main)':'var(--text-muted)',
-            fontWeight: lang==='English'?'600':'400',
-            boxShadow: lang==='English'?'0 2px 8px rgba(0,0,0,0.05)':'none',
-            fontSize:'14px',
-            cursor:'pointer'
-          }}>English</button>
+      {/* 文本区域 */}
+      <div style={{
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px 24px',
+        textAlign: 'center'
+      }}>
+        <h1 style={{
+          fontSize: '22px',
+          fontWeight: '800',
+          color: '#1f2937',
+          marginBottom: '16px',
+          letterSpacing: '1px'
+        }}>Planet非托管钱包</h1>
+        
+        <div style={{
+          fontSize: '15px',
+          color: '#6b7280',
+          lineHeight: '1.6',
+          maxWidth: '280px',
+          marginBottom: '32px'
+        }}>
+          安全管理多个钱包，多账户自由切换
         </div>
 
-        {/* 主按钮 */}
-        <Button 
-          onClick={onNext} 
-          style={{
+        {/* 按钮区域 */}
+        <div style={{width:'100%', marginTop:'80px', display:'flex', flexDirection:'column', gap:'16px'}}>
+          <Button onClick={onCreate} style={{
             height:'52px',
-            borderRadius:'26px',
-            width:'100%',
+            borderRadius:'12px',
+            fontSize:'16px',
             fontWeight:'600',
-            fontSize:'17px',
-            display:'flex',
-            justifyContent:'center',
-            alignItems:'center',
-          }}
-        >
-          <div style={{ display:'flex', alignItems:'center' }}>
-            立即开始
-            <Icon name="right" size={18} style={{ marginLeft:8 }} />
-          </div>
-        </Button>
+            background: '#3b82f6'
+          }}>创建钱包</Button>
+
+
+          <Button onClick={()=>setShowImport(true)} style={{
+            height:'52px',
+            borderRadius:'12px',
+            fontSize:'16px',
+            fontWeight:'600',
+            background: '#fff',
+            color: '#3b82f6',
+            border: '1px solid #3b82f6'
+          }}>导入钱包</Button>
+        </div>
       </div>
 
-      {/* 底部说明 —— 永远在最下方 */}
-      <div 
-        style={{
-          textAlign:'center',
-          fontSize:'12px',
-          color:'var(--text-muted)',
-          marginTop:'20px'
-        }}
-      >
-        继续即代表您同意 
-        <span style={{color:'var(--primary)', fontWeight:'600', cursor:'pointer'}}> 服务条款 </span>
-        和 
-        <span style={{color:'var(--primary)', fontWeight:'600', cursor:'pointer'}}> 隐私政策</span>
-      </div>
-
+      {/* 导入方式选择弹窗 */}
+      {showImport && (
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.4)',
+          zIndex: 200,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end'
+        }} onClick={()=>setShowImport(false)}>
+           <div style={{
+             background: '#fff',
+             borderRadius: '24px 24px 0 0',
+             padding: '24px 24px 40px',
+             animation: 'slideUp 0.3s ease',
+             height: '420px' // 与上方图片高度对应，正好占据下方区域
+           }} onClick={e=>e.stopPropagation()}>
+             <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'24px'}}>
+               <div style={{fontSize:'18px', fontWeight:'700'}}>选择导入方式</div>
+               <div onClick={()=>setShowImport(false)} style={{padding:'4px', cursor:'pointer', color:'#9ca3af'}}>
+                 <Icon name="close" size={20} />
+               </div>
+             </div>
+             
+             <div style={{display:'flex', flexDirection:'column', gap:'16px'}}>
+               {[
+                 { id:'助记词', desc:'助记词由单词组成，以空格隔开', icon:'file' },
+                 { id:'私钥', desc:'明文私钥字符', icon:'key' },
+                 { id:'Keystore', desc:'加密的私钥 JSON 文件', icon:'code' }
+               ].map(item => (
+                 <div key={item.id} onClick={()=>onImport(item.id)} style={{
+                   display: 'flex',
+                   alignItems: 'center',
+                   padding: '16px',
+                   borderRadius: '16px',
+                   background: '#fff',
+                   border: '1px solid #f3f4f6',
+                   cursor: 'pointer',
+                   boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
+                 }}>
+                   <div style={{
+                     width: '40px',
+                     height: '40px',
+                     borderRadius: '12px',
+                     background: '#fff',
+                     border: '1px solid #e5e7eb',
+                     display: 'flex',
+                     alignItems: 'center',
+                     justifyContent: 'center',
+                     marginRight: '16px',
+                     color: '#374151'
+                   }}>
+                     <Icon name={item.icon} size={20} />
+                   </div>
+                   <div style={{flex:1}}>
+                     <div style={{fontSize:'16px', fontWeight:'600', color:'#1f2937', marginBottom:'4px'}}>{item.id}</div>
+                     <div style={{fontSize:'12px', color:'#9ca3af'}}>{item.desc}</div>
+                   </div>
+                   <Icon name="right" size={16} style={{color:'#d1d5db'}} />
+                 </div>
+               ))}
+             </div>
+           </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -31,7 +31,7 @@ function GovernancePage({ onBack }) {
          boxShadow:'0 10px 25px rgba(31, 41, 55, 0.3)',
          display:'flex',
          gap:'12px',
-         margin:'0 20px 20px'
+         margin:'0 20px 10px'
        }}>
          <div className="gov-card" style={{flex:1, background:'#374151', padding:'16px', borderRadius:'16px', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
            <div>

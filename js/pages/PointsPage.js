@@ -30,7 +30,7 @@ function PointsPage({ onBack }) {
         textAlign:'center',
         marginBottom:'24px',
         boxShadow:'0 10px 25px rgba(245, 158, 11, 0.3)',
-        margin:'0 20px 20px'
+        margin:'0 20px 10px'
       }}>
          <div style={{fontSize:'14px', opacity:0.9, marginBottom:'8px'}}>当前积分</div>
          <h1 style={{fontSize:'48px', fontWeight:'800', margin:'0 0 24px 0', letterSpacing:'1px'}}>1,250</h1>

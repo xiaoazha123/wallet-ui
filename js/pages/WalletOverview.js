@@ -29,7 +29,6 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        margin: '0 20px 20px'
       }}>
         <div style={{flex:1}}>
           <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
@@ -44,21 +43,31 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
         </div>
       </div>
 
-      <div className="row" style={{justifyContent:'space-between', gap:'12px', padding:'0 20px', marginBottom:'24px'}}>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSend}>
-          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="send" size={22} /></div>
+      <div className="card-white" style={{
+        background: '#fff',
+        padding: '20px',
+        borderRadius: '20px',
+        boxShadow: 'var(--shadow-sm)',
+         border: '1px solid var(--border)',
+         margin: '0 20px 10px',
+         display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start'
+      }}>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer', flex:1}} onClick={onSend}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--primary)'}}><Icon name="send" size={22} /></div>
           <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>发送</span>
         </div>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onReceive}>
-          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="down" size={22} /></div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer', flex:1}} onClick={onReceive}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--primary)'}}><Icon name="down" size={22} /></div>
           <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>接收</span>
         </div>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onSwap}>
-          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="swap" size={22} /></div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer', flex:1}} onClick={onSwap}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--primary)'}}><Icon name="swap" size={22} /></div>
           <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>兑换</span>
         </div>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}} onClick={onStake}>
-          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'var(--shadow-sm)', color:'var(--primary)'}}><Icon name="earn" size={22} /></div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer', flex:1}} onClick={onStake}>
+          <div style={{width:'50px', height:'50px', borderRadius:'25px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--primary)'}}><Icon name="earn" size={22} /></div>
           <span style={{fontSize:'13px', fontWeight:'500', color:'var(--text-main)'}}>存钱</span>
         </div>
       </div>
@@ -69,7 +78,7 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
            <button className={`m-tab ${tab==='txs'?'active':''}`} onClick={()=>setTab('txs')}>交易记录</button>
         </div>
 
-        <div className="scroll-list no-scrollbar" style={{maxHeight:'400px', overflowY:'auto', padding:'0 20px'}}>
+        <div className="scroll-list no-scrollbar" style={{padding:'0 20px'}}>
           {tab === 'assets' && longCoins.map((c,i) => (
             <div key={i} className="asset-item" onClick={()=>onAssetDetail({code:c.name})} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
               <div className="asset-left" style={{display:'flex', alignItems:'center', gap:'12px'}}>

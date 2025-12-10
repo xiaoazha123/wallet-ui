@@ -9,7 +9,7 @@ function App() {
   const [mnemonic,setMnemonic] = useState(generateMnemonic())
   const [showNetModal, setShowNetModal] = useState(false)
   const [currentNet, setCurrentNet] = useState('main')
-  const [afterVerify, setAfterVerify] = useState(null)
+  const [importTab, setImportTab] = useState('助记词')
   function push(v){ setStack(s=>[...s,view]); setView(v) }
   function back(){ setView(stack[stack.length-1] || (tab==='home'?'home':tab)); setStack(s=>s.slice(0,-1)) }
   function gotoTab(t){ setTab(t); setView(t); setStack([]) }
@@ -67,7 +67,7 @@ function App() {
     <div className="iphone-frame">
       <div className="dynamic-island"></div>
       <div className="app-screen">
-        <StatusBar />
+        <StatusBar className={view==='launch' ? 'overlay' : ''} />
         {view === 'home' && (
           <Header 
             title={title} 
@@ -85,13 +85,19 @@ function App() {
           {showNetModal && <NetworkModal current={currentNet} onClose={()=>setShowNetModal(false)} onSelect={(id)=>{ setCurrentNet(id); setShowNetModal(false); setToast('已切换网络'); }} />}
 
           {view==='launch' && (
-            <LaunchSplash lang={lang} onLang={(l)=>{ setLang(l); localStorage.setItem('lang', l) }} onNext={()=>setView('init')} />
+            <LaunchSplash 
+              onCreate={()=>setView('mnemonic')}
+              onImport={(tab)=>{
+                setImportTab(tab)
+                setView('import')
+              }}
+            />
           )}
           {view==='init' && (<InitChoice onCreate={()=>setView('mnemonic')} onImport={()=>setView('import')} />)}
           {view==='create-pass' && (<CreatePassword onNext={()=>setView('bind-invite')} />)}
           {view==='mnemonic' && (<ShowMnemonic isAddWallet={stack.length > 0} onBack={back} words={mnemonic} onCopy={(text)=>{ navigator.clipboard.writeText(text); setToast('已复制助记词') }} acknowledged={{a:false,b:false}} onAcknowledgeChange={()=>{}} onNext={()=>setView('verify')} />)}
           {view==='verify' && (<VerifyMnemonic isAddWallet={stack.length > 0} onBack={back} words={mnemonic} onSuccess={()=>{ setBacked(false); if(stack.length===0) setView('create-pass'); else back(); }} />)}
-          {view==='import' && (<ImportWallet isAddWallet={stack.length > 0} onBack={back} onDone={()=>{ setBacked(true); if(stack.length===0) setView('create-pass'); else back(); }} />)}
+          {view==='import' && (<ImportWallet isAddWallet={stack.length > 0} initialTab={importTab} onBack={back} onDone={()=>{ setBacked(true); if(stack.length===0) setView('create-pass'); else back(); }} />)}
           {view==='bind-invite' && (<BindInvitePage onNext={()=>{ setToast('欢迎使用 Planet 钱包'); setView('home') }} />)}
 
           {view==='home' && (

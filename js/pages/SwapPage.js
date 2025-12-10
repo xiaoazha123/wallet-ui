@@ -30,7 +30,7 @@ function SwapPage({ onSwap }) {
 
   return (
     <div className="content-padded" style={{paddingTop:'24px'}}>
-      <div className="swap-container" style={{position:'relative', margin:'0 20px 20px'}}>
+      <div className="swap-container" style={{position:'relative', margin:'0 20px 10px'}}>
         <div className="swap-card top" style={{
           background:'#fff', 
           borderRadius:'20px', 

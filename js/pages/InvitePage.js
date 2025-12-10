@@ -114,8 +114,8 @@ function InvitePage({ onBack }) {
              margin:'0 20px',
              boxShadow:'var(--shadow-sm)',
              border:'1px solid var(--border)',
-             marginBottom:'20px',
-             margin:'0 20px 20px'
+             marginBottom:'10px',
+             margin:'0 20px 10px'
            }}>
               <div className="ro-label" style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'8px', textAlign:'center'}}>累计返佣 (PNT)</div>
               <div className="ro-total" style={{fontSize:'36px', fontWeight:'800', color:'var(--primary)', textAlign:'center', marginBottom:'24px'}}>1,250.50</div>
