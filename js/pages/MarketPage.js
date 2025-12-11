@@ -47,7 +47,7 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
 
       {seg==='市场' && (
         <>
-          <div className="market-search" style={{padding:'0 20px', marginBottom:'16px'}}>
+          <div className="market-search" style={{padding:'0 20px', marginBottom:'10px'}}>
              <div style={{background:'#fff', padding:'10px 16px', borderRadius:'16px', display:'flex', alignItems:'center', gap:'10px', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}>
                <Icon name="search" size={18} style={{color:'var(--text-muted)'}} />
                <input value={q} onChange={e=>setQ(e.target.value)} placeholder="搜索代币" style={{border:'none', outline:'none', width:'100%', fontSize:'14px'}} />
@@ -100,7 +100,7 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
       {seg==='新闻' && (
          <div className="news-list" style={{padding:'0 20px', paddingBottom:'100px'}}>
            {newsList.map(n => (
-             <div key={n.id} className="news-card" onClick={()=>onNewsDetail(n)} style={{background:'#fff', borderRadius:'16px', padding:'16px', marginBottom:'16px', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}>
+             <div key={n.id} className="news-card" onClick={()=>onNewsDetail(n)} style={{background:'#fff', borderRadius:'16px', padding:'16px', marginBottom:'10px', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}>
                <div style={{display:'flex', justifyContent:'space-between', marginBottom:'8px'}}>
                   <div className="news-tags" style={{display:'flex', gap:'6px'}}>
                     {n.tags.map(t=><span key={t} style={{fontSize:'10px', padding:'2px 6px', background:'#f3f4f6', borderRadius:'4px', color:'var(--text-muted)'}}>{t}</span>)}
@@ -110,7 +110,7 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
                <div className="news-title" style={{fontSize:'15px', fontWeight:'600', lineHeight:'1.5', marginBottom:'12px', color:'var(--text-main)'}}>{n.title}</div>
                <div className="news-meta" style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                  <span style={{fontSize:'12px', color:'var(--text-muted)'}}>{n.source}</span>
-                 <span style={{fontSize:'12px', color:'var(--primary)'}}>查看详情 ></span>
+                 <span style={{fontSize:'12px', color:'var(--primary)'}}>查看详情 </span>
                </div>
              </div>
            ))}

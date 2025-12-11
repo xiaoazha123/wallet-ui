@@ -121,7 +121,7 @@ function ImportWallet({ onDone, isAddWallet, onBack, initialTab }) {
       </Card>
       
       <div className="row" style={{marginTop:'40px'}}>
-        <Button onClick={submit} style={{height:'50px', borderRadius:'25px', width:'100%'}}>开始导入</Button>
+        <Button onClick={submit} style={{height:'50px', borderRadius:'25px', width:'100%',marginTop:'150px'}}>开始导入</Button>
       </div>
     </div>
   )
