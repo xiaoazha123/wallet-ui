@@ -54,7 +54,7 @@ function SendFlow({ onConfirm, onCancel }) {
            
            {/* Password input removed from here, moved to modal */}
 
-           <div className="row" style={{gap:'120px',margin:'0 0 0'}}>
+           <div className="row" style={{display:'flex', gap:'16px', margin:'0 0 0'}}>
              <Button onClick={()=>setShowPwdModal(true)} style={{flex:1}}>确认发送</Button>
              <Button variant="ghost" onClick={()=>setStep(1)} style={{flex:1}}>返回修改</Button>
            </div>
@@ -76,7 +76,7 @@ function SendFlow({ onConfirm, onCancel }) {
                   style={{width:'100%', padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', marginBottom:'24px', background:'#f9fafb'}} 
                 />
                 
-                <div style={{display:'flex', gap:'140px'}}>
+                <div style={{display:'flex', gap:'16px'}}>
                   <Button onClick={doSend} style={{flex:1}}>确认</Button>
                   <Button variant="ghost" onClick={()=>setShowPwdModal(false)} style={{flex:1}}>取消</Button>
                 </div>

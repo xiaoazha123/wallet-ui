@@ -117,7 +117,7 @@ function App() {
           {view==='signin' && (<SignInPage onSign={()=>{ setToast('签到成功 +10积分'); back() }} onBack={back} />)}
           {view==='payment' && (<PaymentPage onBack={back} />)}
           {view==='invite' && (<InvitePage onBack={back} />)}
-          {view==='governance' && (<GovernancePage onBack={back} />)}
+          {view==='governance' && (<GovernancePage onBack={back} onToast={setToast} />)}
           {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} onBack={back} />)}
           {view==='tasks' && (<TasksPage onBack={back} />)}
           {view==='points' && (<PointsPage onBack={back} />)}
@@ -146,6 +146,7 @@ function App() {
               onAcademy={()=>setView('academy')} 
               onGameDetail={(g)=>{ setCurrentGame(g); push('game-detail') }} 
               onCourseDetail={(c)=>{ setCurrentCourse(c); push('course') }} 
+              onToast={setToast}
             />
           )}
 
@@ -262,7 +263,7 @@ function App() {
           {view==='course' && currentCourse && (<CourseDetail course={currentCourse} onComplete={()=>setToast('学习进度已记录')} onBack={back} />)}
 
           {view==='assets' && (
-            <WalletOverview onReceive={()=>push('receive')} onSend={()=>push('send')} onSwap={()=>push('trade')} onStake={()=>push('earn')} onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} onWallets={()=>push('wallets')} />
+            <WalletOverview onReceive={()=>push('receive')} onSend={()=>push('send')} onSwap={()=>push('trade')} onStake={()=>push('earn')} onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} onWallets={()=>push('wallets')} onToast={setToast} />
           )}
         </div>
 

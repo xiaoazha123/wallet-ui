@@ -1,4 +1,4 @@
-function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets }) {
+function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets, onToast }) {
   const [tab, setTab] = useState('assets')
   const coins = [
     { name:'BTC', balance:'0.05', value:'¥ 18,500.00', chg:'+1.2%', icon:'' },
@@ -19,7 +19,8 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
   const longTxs = [...txs, ...txs, ...txs] // Triple for scrolling
   
   return (
-    <div className="content-padded" style={{paddingTop:'12px'}}>
+    <div className="content-padded" style={{paddingTop:'0'}}>
+      <TopNavBar title="资产" />
       <div className="card-white" style={{
         background: '#fff', 
         padding:'20px',
@@ -35,7 +36,10 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
              <div style={{fontSize:'14px', fontWeight:'600', color:'var(--text-main)'}}>My Wallet</div>
              <Icon name="down" size={14} style={{color:'var(--text-muted)'}} />
              <div style={{width:'1px', height:'14px', background:'#e5e7eb'}}></div>
-             <div style={{color:'var(--text-muted)', cursor:'pointer'}}>
+             <div style={{color:'var(--text-muted)', cursor:'pointer'}} onClick={(e)=>{
+               e.stopPropagation();
+               if(onToast) onToast('已复制地址');
+             }}>
                <Icon name="copy" size={16} />
              </div>
           </div>

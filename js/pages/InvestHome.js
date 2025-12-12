@@ -1,6 +1,8 @@
 function InvestHome({ onBuy, onBack }) {
   const [tab, setTab] = useState('earn')
-  
+  const [showDevModal, setShowDevModal] = useState(false)
+  const [devFeature, setDevFeature] = useState('')
+
   const holdings = [
     { name: 'PNT', amount: '1,200', val: '¥ 2,808', profit: '+12.5%', icon:'P' },
     { name: 'USDT 活期', amount: '500', val: '¥ 3,500', profit: '+0.05%', icon:'$' },
@@ -27,46 +29,49 @@ function InvestHome({ onBuy, onBack }) {
       </div>
 
       <div className="invest-overview" style={{
-        background:'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', 
+        background:'#fff', 
         borderRadius:'24px', 
         padding:'24px', 
-        color:'#fff', 
+        color:'var(--text-main)', 
         marginBottom:'24px',
-        boxShadow:'0 10px 25px rgba(2, 132, 199, 0.3)',
-        margin: '0 20px 24px'
+        boxShadow:'var(--shadow-md)',
+        margin: '0 20px 24px',
+        border: '1px solid var(--border)'
       }}>
-        <div style={{fontSize:'14px', opacity:0.9, marginBottom:'4px'}}>总投资资产 (CNY)</div>
-        <div style={{fontSize:'32px', fontWeight:'800', marginBottom:'20px'}}>¥ 6,308.00</div>
-        <div style={{display:'flex', gap:'24px'}}>
+        <div style={{fontSize:'14px', opacity:0.8, marginBottom:'4px', color:'var(--text-muted)'}}>总投资资产 (CNY)</div>
+        <div style={{fontSize:'32px', fontWeight:'800', marginBottom:'20px', color:'var(--primary)'}}>¥ 6,308.00</div>
+        <div style={{display:'flex', gap:'32px'}}>
            <div>
-             <div style={{fontSize:'12px', opacity:0.8, marginBottom:'4px'}}>累计收益</div>
-             <div style={{fontSize:'10px', fontWeight:'700', color:'#bef264'}}>+¥ 128.50</div>
+             <div style={{fontSize:'12px', opacity:0.8, marginBottom:'4px', color:'var(--text-muted)'}}>累计收益</div>
+             <div style={{fontSize:'15px', fontWeight:'700', color:'#16a34a'}}>+¥ 128.50</div>
            </div>
            <div>
-             <div style={{fontSize:'13px', opacity:0.8, marginBottom:'4px'}}>昨日收益</div>
-             <div style={{fontSize:'18px', fontWeight:'700', color:'#bef264'}}>+¥ 12.30</div>
+             <div style={{fontSize:'13px', opacity:0.8, marginBottom:'4px', color:'var(--text-muted)'}}>昨日收益</div>
+             <div style={{fontSize:'15px', fontWeight:'700', color:'#16a34a'}}>+¥ 12.30</div>
            </div>
         </div>
       </div>
 
       <div className="invest-grid" style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'12px', marginBottom:'24px', margin:'0 20px 24px'}}>
-        <div onClick={()=>alert('定投功能开发中')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px'}}>
+        <div onClick={()=>{ setDevFeature('定投'); setShowDevModal(true); }} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
           <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#0ea5e9', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="chart" /></div>
           <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>定投</div>
         </div>
-        <div onClick={()=>setTab('earn')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px'}}>
+        <div onClick={()=>setTab('earn')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
           <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#8b5cf6', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="earn" /></div>
           <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>理财</div>
         </div>
-        <div onClick={()=>setTab('rwa')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px'}}>
+        <div onClick={()=>setTab('rwa')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
           <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#f59e0b', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="invest" /></div>
           <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>RWA</div>
         </div>
-        <div onClick={onBuy} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px'}}>
+        <div onClick={onBuy} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
           <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#10b981', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="plus" /></div>
           <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>买币</div>
         </div>
       </div>
+      
+      {showDevModal && <FeatureModal title={`${devFeature}功能开发中`} onClose={()=>setShowDevModal(false)} />}
 
       <Card>
         <div className="tabs-modern" style={{display:'flex', background:'#f9fafb', borderRadius:'12px', padding:'4px', marginBottom:'20px'}}>

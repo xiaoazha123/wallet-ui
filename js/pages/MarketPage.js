@@ -4,14 +4,16 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
   const [tab,setTab] = useState(initialTab || '自选')
   useEffect(()=>{ if(initialTab) setTab(initialTab) }, [initialTab])
   const coins = [
-    { name:'BTC', price:'¥120000', chg:'+0.38%' },
-    { name:'ETH', price:'¥120000', chg:'+0.38%' },
-    { name:'BNB', price:'¥120000', chg:'+0.38%' },
-    { name:'SOL', price:'¥120000', chg:'+0.38%' },
-    { name:'ASTER', price:'¥120000', chg:'+0.38%' },
-    { name:'HYPE', price:'¥120000', chg:'+0.38%' },
+    { name:'BTC', price:'¥205,432', chg:'+1.24%' },
+    { name:'ETH', price:'¥12,450', chg:'-0.56%' },
+    { name:'BNB', price:'¥2,340', chg:'+0.12%' },
+    { name:'SOL', price:'¥145', chg:'+5.32%' },
+    { name:'ASTER', price:'¥0.45', chg:'+12.4%' },
+    { name:'HYPE', price:'¥1.20', chg:'-3.21%' },
   ]
-  const longCoins = Array.from({length:30}, (_,i)=> coins[i % coins.length])
+  
+  const filteredCoins = coins.filter(c => c.name.toLowerCase().includes(q.toLowerCase()))
+  const displayCoins = q ? filteredCoins : Array.from({length:30}, (_,i)=> coins[i % coins.length])
 
   const newsList = [
     { id: 1, title: '以太坊上海升级即将启动，质押提款将开放', source: 'ETH Foundation', time: '10分钟前', tags: ['技术','升级'] },
@@ -22,8 +24,9 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
   ]
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px'}}>
-      <div className="market-header" style={{padding:'0 20px', marginBottom:'16px'}}>
+    <div className="content-padded" style={{paddingTop:'0'}}>
+      <TopNavBar title="行情" />
+      <div className="market-header" style={{padding:'0px 20px', marginBottom:'10px'}}>
         <div className="top-tabs" style={{background:'#f3f4f6', padding:'4px', borderRadius:'12px', display:'inline-flex'}}>
           {['市场','新闻'].map(t=> (
             <button key={t} 
@@ -67,7 +70,7 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
              </div>
 
              <div className="scroll-list" style={{ overflowY:'auto', padding:'0 20px'}}>
-              {longCoins.map((c,i)=> (
+              {displayCoins.map((c,i)=> (
                 <div key={i} className="coin-row" onClick={()=>onAssetDetail({code:c.name})} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
                   <div className="coin-left" style={{flex:1, display:'flex', alignItems:'center', gap:'12px'}}>
                     <div className="coin-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', fontSize:'12px', color:'#6b7280'}}>{c.name[0]}</div>

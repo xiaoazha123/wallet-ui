@@ -44,26 +44,26 @@ function InvitePage({ onBack }) {
       {tab==='center' && (
         <>
           <div className="invite-card" style={{
-            background:'linear-gradient(135deg, #a855f7 0%, #7c3aed 100%)', 
+            background:'#fff', 
             borderRadius:'24px', 
             padding:'32px 24px', 
-            color:'#fff', 
             textAlign:'center', 
             marginBottom:'24px',
-            boxShadow:'0 10px 25px rgba(168, 85, 247, 0.3)',
+            boxShadow:'var(--shadow-md)',
+            border:'1px solid var(--border)',
             margin:'0 20px 20px'
           }}>
-             <div className="qr-box" style={{background:'#fff', padding:'16px', borderRadius:'16px', display:'inline-block', marginBottom:'20px'}}>
+             <div className="qr-box" style={{background:'#f9fafb', padding:'16px', borderRadius:'24px', display:'inline-block', marginBottom:'20px', border:'1px solid var(--border)'}}>
                <Icon name="qr" size={140} style={{color:'#000'}} />
              </div>
-             <div className="invite-info-row" style={{marginBottom:'20px'}}>
-               <div className="i-label" style={{fontSize:'14px', opacity:0.8, marginBottom:'4px'}}>我的邀请码</div>
-               <div className="i-code" onClick={()=>copy(inviteCode)} style={{fontSize:'32px', fontWeight:'800', letterSpacing:'2px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px'}}>
+             <div className="invite-info-row" style={{marginBottom:'24px'}}>
+               <div className="i-label" style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'8px'}}>我的邀请码</div>
+               <div className="i-code" onClick={()=>copy(inviteCode)} style={{fontSize:'32px', fontWeight:'800', letterSpacing:'2px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', gap:'8px', color:'var(--text-main)'}}>
                  {inviteCode} 
-                 <Icon name="copy" size={24} style={{opacity:0.8}}/>
+                 <Icon name="copy" size={20} style={{opacity:0.5, color:'var(--text-muted)'}}/>
                </div>
              </div>
-             <button onClick={()=>alert('调用系统分享')} style={{width:'100%', background:'#fff', color:'var(--primary)', border:'none', padding:'14px', borderRadius:'24px', fontSize:'16px', fontWeight:'700'}}>一键邀请好友</button>
+             <button onClick={()=>alert('调用系统分享')} style={{width:'100%', background:'var(--primary)', color:'#fff', border:'none', padding:'14px', borderRadius:'24px', fontSize:'16px', fontWeight:'700', boxShadow:'0 4px 12px rgba(99, 102, 241, 0.3)'}}>一键邀请好友</button>
           </div>
 
           <div className="stat-grid-3" style={{display:'flex', gap:'12px', padding:'0 20px', marginBottom:'24px'}}>

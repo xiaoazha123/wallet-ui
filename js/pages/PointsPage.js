@@ -23,18 +23,45 @@ function PointsPage({ onBack }) {
       </div>
 
       <div className="points-hero" style={{
-        background:'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
+        background:'#fff', 
         borderRadius:'24px', 
         padding:'32px 24px', 
-        color:'#fff', 
+        color:'var(--text-main)', 
         textAlign:'center',
         marginBottom:'24px',
-        boxShadow:'0 10px 25px rgba(245, 158, 11, 0.3)',
-        margin:'0 20px 10px'
+        boxShadow:'var(--shadow-md)',
+        margin:'0 20px 10px',
+        border: '1px solid var(--border)',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-         <div style={{fontSize:'14px', opacity:0.9, marginBottom:'8px'}}>当前积分</div>
-         <h1 style={{fontSize:'48px', fontWeight:'800', margin:'0 0 24px 0', letterSpacing:'1px'}}>1,250</h1>
-         <button className="small" style={{background:'rgba(255,255,255,0.2)', border:'none', padding:'10px 24px', borderRadius:'20px', color:'#fff', fontWeight:'600', backdropFilter:'blur(4px)'}} onClick={()=>alert('去签到')}>去签到赚积分</button>
+         <div style={{fontSize:'13px', opacity:0.8, marginBottom:'8px', color:'var(--text-muted)', letterSpacing:'1px', textTransform:'uppercase'}}>当前积分余额</div>
+         <h1 style={{fontSize:'56px', fontWeight:'800', margin:'0 0 24px 0', letterSpacing:'-1px', color:'var(--primary)'}}>1,250</h1>
+         
+         <div style={{display:'flex', justifyContent:'center', gap:'16px'}}>
+           <button className="small" style={{
+             flex: 1,
+             background:'var(--primary)', 
+             border:'none', 
+             padding:'12px 0', 
+             borderRadius:'30px', 
+             color:'#fff', 
+             fontWeight:'700', 
+             fontSize:'15px',
+             boxShadow:'0 4px 12px rgba(99, 102, 241, 0.3)'
+           }} onClick={()=>alert('去签到')}>签到</button>
+           
+           <button className="small" style={{
+             flex: 1,
+             background:'#f3f4f6', 
+             border:'none', 
+             padding:'12px 0', 
+             borderRadius:'30px', 
+             color:'var(--text-main)', 
+             fontWeight:'600', 
+             fontSize:'15px'
+           }} onClick={()=>alert('积分规则')}>规则</button>
+         </div>
       </div>
 
       <Card>

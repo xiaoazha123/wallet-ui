@@ -19,32 +19,33 @@ function StakingHome({ onDetail, onStakeNow, onBack }) {
       </div>
 
       <div className="earn-hero" style={{
-        background:'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)', 
+        background:'#fff', 
         borderRadius:'24px', 
         padding:'24px', 
-        color:'#fff', 
+        color:'var(--text-main)', 
         marginBottom:'24px',
-        boxShadow:'0 10px 25px rgba(109, 40, 217, 0.3)',
-        margin:'0 20px 10px'
+        boxShadow:'var(--shadow-md)',
+        margin:'0 20px 10px',
+        border: '1px solid var(--border)'
       }}>
          <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'24px'}}>
            <div>
-             <div style={{fontSize:'14px', opacity:0.9, marginBottom:'4px'}}>总存钱金额</div>
-             <div style={{fontSize:'20px', fontWeight:'800'}}>¥ 12,450.00</div>
-             <div style={{fontSize:'10px', opacity:0.8, marginTop:'4px'}}>≈ $1,718.23</div>
+             <div style={{fontSize:'14px', opacity:0.8, marginBottom:'4px', color:'var(--text-muted)'}}>总存钱金额</div>
+             <div style={{fontSize:'24px', fontWeight:'800', color:'var(--primary)'}}>¥ 12,450.00</div>
+             <div style={{fontSize:'12px', opacity:0.8, marginTop:'4px', color:'var(--text-muted)'}}>≈ $1,718.23</div>
            </div>
            <div style={{textAlign:'right'}}>
-             <div style={{fontSize:'12px', opacity:0.9, marginBottom:'4px'}}>累计收益</div>
-             <div style={{fontSize:'18px', fontWeight:'700'}}>+¥ 235.80</div>
+             <div style={{fontSize:'12px', opacity:0.9, marginBottom:'4px', color:'var(--text-muted)'}}>累计收益</div>
+             <div style={{fontSize:'18px', fontWeight:'700', color:'#16a34a'}}>+¥ 235.80</div>
            </div>
          </div>
          
-         <div style={{background:'rgba(255,255,255,0.15)', borderRadius:'16px', padding:'12px 16px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+         <div style={{background:'#f9fafb', borderRadius:'16px', padding:'12px 16px', display:'flex', justifyContent:'space-between', alignItems:'center', border:'1px solid var(--border)'}}>
            <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-             <div style={{fontSize:'13px'}}>今日收益</div>
-             <div style={{fontSize:'16px', fontWeight:'700'}}>+¥ 12.50</div>
+             <div style={{fontSize:'13px', color:'var(--text-muted)'}}>今日收益</div>
+             <div style={{fontSize:'16px', fontWeight:'700', color:'#16a34a'}}>+¥ 12.50</div>
            </div>
-           <button style={{background:'rgba(255,255,255,0.2)', border:'none', padding:'6px 12px', borderRadius:'12px', color:'#fff', fontSize:'12px'}}>收益明细</button>
+           <button style={{background:'#fff', border:'1px solid var(--border)', padding:'6px 12px', borderRadius:'12px', color:'var(--text-main)', fontSize:'12px', fontWeight:'600'}}>收益明细</button>
          </div>
       </div>
 

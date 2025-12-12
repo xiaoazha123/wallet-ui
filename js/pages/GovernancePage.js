@@ -1,6 +1,7 @@
-function GovernancePage({ onBack }) {
+function GovernancePage({ onBack, onToast }) {
   const [tab, setTab] = useState('voting')
   const [power, setPower] = useState(0)
+  const [votedNodes, setVotedNodes] = useState({})
   
   const nodes = [
     { rank: 1, name: '星球基金会', votes: '1.2B', apy: '5.2%', status: '超级代表' },
@@ -22,65 +23,119 @@ function GovernancePage({ onBack }) {
          <div style={{width:'40px'}}></div>
       </div>
 
-       <div className="gov-stats" style={{
-         background:'#1f2937', 
-         padding:'20px', 
-         borderRadius:'24px', 
-         color:'#fff', 
-         marginBottom:'24px',
-         boxShadow:'0 10px 25px rgba(31, 41, 55, 0.3)',
-         display:'flex',
-         gap:'12px',
-         margin:'0 20px 10px'
-       }}>
-         <div className="gov-card" style={{flex:1, background:'#374151', padding:'16px', borderRadius:'16px', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
-           <div>
-             <h3 style={{fontSize:'12px', opacity:0.6, margin:'0 0 4px 0', fontWeight:'400'}}>我的投票权</h3>
-             <div className="val" style={{fontSize:'24px', fontWeight:'800', marginBottom:'12px'}}>{power}</div>
+      {/* 头部统计卡片 - 纯白风格 */}
+      <div className="gov-stats" style={{
+        background: '#fff',
+        padding: '24px', 
+        borderRadius: '20px', 
+        marginBottom: '10px',
+        boxShadow: 'var(--shadow-sm)',
+        border: '1px solid var(--border)',
+        display: 'flex',
+        gap: '24px',
+        margin: '0 20px 10px'
+      }}>
+        <div className="gov-card" style={{
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'space-between',
+        }}>
+          <div>
+            <h3 style={{fontSize: '13px', color: 'var(--text-muted)', margin: '0 0 8px 0', fontWeight: '500'}}>我的投票权</h3>
+            <div className="val" style={{fontSize: '28px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '16px'}}>{power}</div>
+          </div>
+          <button onClick={()=>{
+            setPower(p => p + 1000);
+            if(onToast) onToast('质押成功，票权 +1000');
+          }} style={{
+            width: '100%', 
+            background: '#eff6ff', 
+            color: '#3b82f6', 
+            border: 'none', 
+            padding: '10px 0', 
+            borderRadius: '12px', 
+            fontSize: '13px', 
+            fontWeight: '600', 
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}>获取票权</button>
+        </div>
+
+        {/* 分隔线 */}
+        <div style={{width:'1px', background:'var(--border)', margin:'10px 0'}}></div>
+
+        <div className="gov-card" style={{
+          flex: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'center',
+        }}>
+          <h3 style={{fontSize: '13px', color: 'var(--text-muted)', margin: '0 0 8px 0', fontWeight: '500'}}>全网总票数</h3>
+          <div className="val" style={{fontSize: '28px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '16px'}}>3.2B</div>
+          <div style={{display:'flex', alignItems:'center', gap:'6px', fontSize: '12px', color: 'var(--text-muted)', background:'#f9fafb', padding:'8px 12px', borderRadius:'10px'}}>
+             <div style={{width:'6px', height:'6px', borderRadius:'50%', background:'#22c55e'}}></div>
+             下一轮: 4h 12m
+          </div>
+        </div>
+      </div>
+
+      {/* 合并后的列表卡片 */}
+      <Card>
+        {/* 内置 Tabs */}
+        <div style={{display:'flex', justifyContent:'center', marginBottom:'20px'}}>
+           <div style={{background:'#f1f5f9', padding:'4px', borderRadius:'12px', display:'inline-flex'}}>
+             <button className={`tab-btn ${tab==='voting'?'active':''}`} onClick={()=>setTab('voting')} style={{
+               padding:'8px 24px', borderRadius:'10px', border:'none', 
+               background: tab==='voting'?'#fff':'transparent', 
+               color: tab==='voting'?'#0f172a':'#64748b', 
+               fontWeight:'600', 
+               boxShadow: tab==='voting'?'0 2px 4px rgba(0,0,0,0.05)':'none', 
+               fontSize:'14px', cursor:'pointer',
+               transition: 'all 0.2s'
+             }}>节点投票</button>
+             <button className={`tab-btn ${tab==='proposals'?'active':''}`} onClick={()=>setTab('proposals')} style={{
+               padding:'8px 24px', borderRadius:'10px', border:'none', 
+               background: tab==='proposals'?'#fff':'transparent', 
+               color: tab==='proposals'?'#0f172a':'#64748b', 
+               fontWeight:'600', 
+               boxShadow: tab==='proposals'?'0 2px 4px rgba(0,0,0,0.05)':'none', 
+               fontSize:'14px', cursor:'pointer',
+               transition: 'all 0.2s'
+             }}>治理提案</button>
            </div>
-           <button style={{width:'100%', background:'#fff', color:'#1f2937', border:'none', padding:'8px 0', borderRadius:'20px', fontSize:'12px', fontWeight:'700', cursor:'pointer'}}>获取票权</button>
-         </div>
-         <div className="gov-card" style={{flex:1, background:'#374151', padding:'16px', borderRadius:'16px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-           <h3 style={{fontSize:'12px', opacity:0.6, margin:'0 0 4px 0', fontWeight:'400'}}>全网总票数</h3>
-           <div className="val" style={{fontSize:'24px', fontWeight:'800', marginBottom:'16px'}}>3.2B</div>
-           <h3 style={{fontSize:'12px', opacity:0.6, margin:'0', fontWeight:'400'}}>下一轮: 4h 12m</h3>
-         </div>
-       </div>
+        </div>
 
-       <div className="top-tabs" style={{padding:'0 20px', marginBottom:'24px', display:'flex', justifyContent:'center'}}>
-         <div style={{background:'#fff', padding:'4px', borderRadius:'16px', display:'inline-flex', boxShadow:'var(--shadow-sm)'}}>
-           <button className={`tab-btn ${tab==='voting'?'active':''}`} onClick={()=>setTab('voting')} style={{
-             padding:'8px 32px', borderRadius:'12px', border:'none', background: tab==='voting'?'#fff':'transparent', color: tab==='voting'?'var(--text-main)':'var(--text-muted)', fontWeight:'600', boxShadow: tab==='voting'?'0 2px 8px rgba(0,0,0,0.05)':'none', fontSize:'14px', cursor:'pointer'
-           }}>节点投票</button>
-           <button className={`tab-btn ${tab==='proposals'?'active':''}`} onClick={()=>setTab('proposals')} style={{
-             padding:'8px 32px', borderRadius:'12px', border:'none', background: tab==='proposals'?'#fff':'transparent', color: tab==='proposals'?'var(--text-main)':'var(--text-muted)', fontWeight:'600', boxShadow: tab==='proposals'?'0 2px 8px rgba(0,0,0,0.05)':'none', fontSize:'14px', cursor:'pointer'
-           }}>治理提案</button>
-         </div>
-       </div>
-
-       <Card>
+        {/* 列表内容 */}
          {tab === 'voting' && (
            <div className="node-list">
-             {nodes.map((n,i) => (
+             {nodes.map((n,i) => {
+               const isVoted = votedNodes[n.name];
+               return (
                <div key={n.rank} className="node-item" style={{display:'flex', alignItems:'center', padding:'16px 0', borderBottom: i<nodes.length-1 ? '1px solid var(--border)' : 'none'}}>
                  <div className="node-rank" style={{width:'30px', fontSize:'14px', fontWeight:'700', color:n.rank<=3?'var(--primary)':'var(--text-muted)'}}>#{n.rank}</div>
                  <div className="node-info" style={{flex:1}}>
                    <div className="node-name" style={{fontSize:'15px', fontWeight:'600', marginBottom:'4px'}}>{n.name}</div>
                    <div className="node-sub" style={{fontSize:'12px', color:'var(--text-muted)'}}>{n.votes} 票 · APY <span className="node-apr" style={{color:'#16a34a', fontWeight:'600'}}>{n.apy}</span></div>
                  </div>
-                 <button className="small" onClick={()=>alert(`已投票给 ${n.name}`)} style={{
+                 <button className="small" onClick={()=>{
+                    if(isVoted) return;
+                    if(power<=0) { if(onToast) onToast('票权不足，请先获取票权'); return; }
+                    setVotedNodes(prev => ({...prev, [n.name]:true}));
+                    if(onToast) onToast(`已投票给 ${n.name}`);
+                 }} style={{
                    padding:'8px 20px', 
                    borderRadius:'20px', 
-                   background: n.status==='超级代表'?'#6366f1':'#f3f4f6', 
-                   color: n.status==='超级代表'?'#fff':'var(--text-main)', 
+                   background: isVoted ? '#e5e7eb' : (n.status==='超级代表'?'#6366f1':'#f3f4f6'), 
+                   color: isVoted ? '#9ca3af' : (n.status==='超级代表'?'#fff':'var(--text-main)'), 
                    border:'none', 
                    fontSize:'13px', 
                    fontWeight:'600',
-                   cursor:'pointer',
-                   boxShadow: n.status==='超级代表'?'0 4px 10px rgba(99, 102, 241, 0.3)':'none'
-                 }}>投票</button>
+                   cursor: isVoted ? 'default' : 'pointer',
+                   boxShadow: (!isVoted && n.status==='超级代表')?'0 4px 10px rgba(99, 102, 241, 0.3)':'none'
+                 }}>{isVoted ? '已投票' : '投票'}</button>
                </div>
-             ))}
+             )})}
            </div>
          )}
 

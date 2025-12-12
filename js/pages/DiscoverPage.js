@@ -1,4 +1,4 @@
-function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail }) {
+function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail, onToast }) {
   const banners = [
     { id:1, title:'星球争霸 S1', sub:'赢取百万奖池', color:'#4f46e5' },
     { id:2, title:'DeFi 训练营', sub:'小白变大神', color:'#ea580c' },
@@ -26,13 +26,15 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail }) {
   ]
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px'}}>
+    <div className="content-padded" style={{paddingTop:'0'}}>
+      <TopNavBar title="发现" />
       {/* Banners */}
       <div className="banner-scroll no-scrollbar" style={{display:'flex', gap:'12px', overflowX:'auto', marginBottom:'24px', scrollbarWidth:'none', margin:'0 20px 10px'}}>
          {banners.map(b=>(
-           <div key={b.id} style={{
+           <div key={b.id} onClick={()=>{ if(onToast) onToast('活动即将开始'); }} style={{
              minWidth:'280px', 
              height:'140px', 
+             cursor: 'pointer',
              borderRadius:'20px', 
              background:b.color, 
              padding:'20px',
@@ -62,7 +64,7 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail }) {
         marginBottom:'32px'
       }}>
          {dapps.map(d=>(
-           <div key={d.id} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px'}}>
+           <div key={d.id} onClick={()=>{ if(onToast) onToast(`${d.name} 即将上线`); }} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
               <div style={{width:'56px', height:'56px', borderRadius:'16px', background:'#fff', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'24px'}}>
                 {d.icon}
               </div>

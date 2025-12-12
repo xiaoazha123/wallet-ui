@@ -29,7 +29,8 @@ function SwapPage({ onSwap }) {
   }
 
   return (
-    <div className="content-padded" style={{paddingTop:'24px'}}>
+    <div className="content-padded" style={{paddingTop:'0'}}>
+      <TopNavBar title="交易" />
       <div className="swap-container" style={{position:'relative', margin:'0 20px 10px'}}>
         <div className="swap-card top" style={{
           background:'#fff', 
