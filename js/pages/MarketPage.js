@@ -1,19 +1,22 @@
-function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
+function MarketPage({ onAssetDetail, initialTab, onNewsDetail, allCoins, favorites }) {
   const [seg,setSeg] = useState('市场')
   const [q,setQ] = useState('')
-  const [tab,setTab] = useState(initialTab || '自选')
-  useEffect(()=>{ if(initialTab) setTab(initialTab) }, [initialTab])
-  const coins = [
-    { name:'BTC', price:'¥205,432', chg:'+1.24%' },
-    { name:'ETH', price:'¥12,450', chg:'-0.56%' },
-    { name:'BNB', price:'¥2,340', chg:'+0.12%' },
-    { name:'SOL', price:'¥145', chg:'+5.32%' },
-    { name:'ASTER', price:'¥0.45', chg:'+12.4%' },
-    { name:'HYPE', price:'¥1.20', chg:'-3.21%' },
-  ]
   
-  const filteredCoins = coins.filter(c => c.name.toLowerCase().includes(q.toLowerCase()))
-  const displayCoins = q ? filteredCoins : Array.from({length:30}, (_,i)=> coins[i % coins.length])
+  // Flatten allCoins to display roughly 100 items for the "all coins" feel
+  // Since we only have 12, we will repeat them to mock a long list
+  // In a real app, this would be a paginated API call
+  let longList = []
+  for(let i=0; i<9; i++) {
+     longList = longList.concat(allCoins)
+  }
+  // Trim to exactly 100 or so if needed, but ~108 is fine.
+  
+  let displayCoins = []
+  if (q) {
+      displayCoins = longList.filter(c => c.name.toLowerCase().includes(q.toLowerCase()) || c.code.toLowerCase().includes(q.toLowerCase()))
+  } else {
+      displayCoins = longList
+  }
 
   const newsList = [
     { id: 1, title: '以太坊上海升级即将启动，质押提款将开放', source: 'ETH Foundation', time: '10分钟前', tags: ['技术','升级'] },
@@ -63,25 +66,25 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
           </div>
 
           <div className="card-white" style={{padding:'0', marginBottom:'100px'}}>
-             <div className="market-tabs" style={{padding:'16px 20px 0'}}>
-               {['自选','热门','最新'].map(t=> (
-                 <button key={t} className={`m-tab ${tab===t?'active':''}`} onClick={()=>setTab(t)}>{t}</button>
-               ))}
-             </div>
-             
              <div style={{padding:'12px 20px 8px', display:'flex', justifyContent:'space-between', fontSize:'12px', color:'var(--text-muted)'}}>
                 <span style={{flex:1}}>资产名称</span>
                 <span style={{flex:1, textAlign:'right'}}>最新价 / 24h涨跌</span>
              </div>
 
              <div className="scroll-list" style={{ overflowY:'auto', padding:'0 20px'}}>
+              {displayCoins.length === 0 && (
+                 <div style={{padding:'20px', textAlign:'center', color:'var(--text-muted)'}}>
+                   暂无数据
+                 </div>
+              )}
               {displayCoins.map((c,i)=> (
-                <div key={i} className="coin-row" onClick={()=>onAssetDetail({code:c.name})} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
+                <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
                   <div className="coin-left" style={{flex:1, display:'flex', alignItems:'center', gap:'12px'}}>
+                    <div style={{width:'20px', color:'var(--text-muted)', fontSize:'12px', fontWeight:'600'}}>{i+1}</div>
                     <div className="coin-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', fontSize:'12px', color:'#6b7280'}}>{c.name[0]}</div>
                     <div>
                       <div className="coin-name" style={{fontSize:'15px', fontWeight:'700', color:'var(--text-main)'}}>{c.name}</div>
-                      <div style={{fontSize:'12px', color:'var(--text-muted)'}}>Rank {i+1}</div>
+                      <div style={{fontSize:'12px', color:'var(--text-muted)'}}>市值 $200B</div>
                     </div>
                   </div>
                   <div className="coin-right" style={{flex:1, textAlign:'right'}}>

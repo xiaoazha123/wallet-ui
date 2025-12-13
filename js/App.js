@@ -61,8 +61,29 @@ function App() {
   const [currentNews,setCurrentNews] = useState(null)
   const [currentMarketTab,setCurrentMarketTab] = useState('自选')
 
-  const [currentReceiveToken, setCurrentReceiveToken] = useState(null)
   const [currentNetSelect, setCurrentNetSelect] = useState('all')
+
+  const allCoins = [
+    { name:'BTC', price:'¥680,000', chg:'+2.38%', code:'BTC' },
+    { name:'ETH', price:'¥23,000', chg:'-1.12%', code:'ETH' },
+    { name:'SOL', price:'¥1,050', chg:'+5.67%', code:'SOL' },
+    { name:'BNB', price:'¥4,200', chg:'+0.45%', code:'BNB' },
+    { name:'XRP', price:'¥4.50', chg:'-0.89%', code:'XRP' },
+    { name:'ADA', price:'¥3.20', chg:'+1.20%', code:'ADA' },
+    { name:'DOGE', price:'¥1.10', chg:'+8.90%', code:'DOGE' },
+    { name:'DOT', price:'¥50.00', chg:'-2.30%', code:'DOT' },
+    { name:'AVAX', price:'¥250.00', chg:'+3.40%', code:'AVAX' },
+    { name:'LINK', price:'¥120.00', chg:'+0.10%', code:'LINK' },
+    { name:'MATIC', price:'¥6.80', chg:'-1.50%', code:'MATIC' },
+    { name:'UNI', price:'¥45.00', chg:'+2.10%', code:'UNI' },
+  ]
+  const [favorites, setFavorites] = useState(['BTC','ETH','SOL'])
+  const toggleFavorite = (code) => {
+    setFavorites(prev => {
+      if(prev.includes(code)) return prev.filter(c => c !== code)
+      return [...prev, code]
+    })
+  }
 
   return (
     <div className="iphone-frame">
@@ -111,7 +132,9 @@ function App() {
               onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
               onMore={(which)=>{ setCurrentMarketTab(which); gotoTab('market') }} 
               onCopy={()=>{ setToast('已复制地址') }} 
-              onMini={(v)=>push(v)} 
+              onMini={(v)=>push(v)}
+              allCoins={allCoins}
+              favorites={favorites}
             />
           )}
 
@@ -129,6 +152,8 @@ function App() {
               initialTab={currentMarketTab} 
               onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
               onNewsDetail={(n)=>{ setCurrentNews(n); push('news-detail') }}
+              allCoins={allCoins}
+              favorites={favorites}
             />
           )}
 
@@ -198,6 +223,8 @@ function App() {
             <AssetDetail 
               token={currentToken} 
               onBack={back} 
+              isFavorite={favorites.includes(currentToken.code)}
+              onToggleFavorite={()=>toggleFavorite(currentToken.code)}
               onSend={()=>push('send')} 
               onReceive={()=>{
                 // Directly go to receive detail with current token and network

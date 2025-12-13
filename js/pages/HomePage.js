@@ -1,17 +1,20 @@
-function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini }) {
+function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites }) {
   const [q,setQ] = useState('')
   const [tab,setTab] = useState('自选')
   const [currentWallet,setCurrentWallet] = useState({ name:'My Wallet', addr: address })
   const [showMoreSheet, setShowMoreSheet] = useState(false)
-  const coins = [
-    { name:'BTC', price:'¥120000', chg:'+0.38%' },
-    { name:'ETH', price:'¥120000', chg:'+0.38%' },
-    { name:'BNB', price:'¥120000', chg:'+0.38%' },
-    { name:'SOL', price:'¥120000', chg:'+0.38%' },
-    { name:'ASTER', price:'¥120000', chg:'+0.38%' },
-    { name:'HYPE', price:'¥120000', chg:'+0.38%' },
-  ]
-  const visible = coins.concat(coins).concat(coins) // Triple the list to ensure scrolling
+
+  let visible = []
+  if (q) {
+      visible = allCoins.filter(c => c.name.toLowerCase().includes(q.toLowerCase()) || c.code.toLowerCase().includes(q.toLowerCase()))
+  } else {
+      if (tab === '自选') {
+          visible = allCoins.filter(c => favorites.includes(c.code))
+      } else {
+          // 热门: show first 6
+          visible = allCoins.slice(0, 6)
+      }
+  }
 
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
@@ -117,13 +120,18 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
 
       <div className="card-white" style={{padding:'0', overflow:'hidden', marginBottom:'120px'}}>
         <div className="market-tabs" style={{padding:'16px 20px 0'}}>
-          {['自选','热门','最新'].map(t=> (
+          {['自选','热门'].map(t=> (
             <button key={t} className={`m-tab ${tab===t?'active':''}`} onClick={()=>setTab(t)}>{t}</button>
           ))}
         </div>
         <div className="no-scrollbar" style={{maxHeight:'400px', overflowY:'auto', padding:'0 20px'}}>
+          {visible.length === 0 && (
+             <div style={{padding:'20px', textAlign:'center', color:'var(--text-muted)'}}>
+               {tab==='自选' ? '暂无自选代币，请去市场添加' : '暂无数据'}
+             </div>
+          )}
           {visible.map((c,i)=> (
-            <div key={i} className="coin-row" onClick={()=>onAssetDetail({code:c.name})}>
+            <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)}>
               <div className="coin-left">
                 <div className="coin-icon"></div>
                 <div className="coin-name">{c.name}</div>

@@ -8,7 +8,8 @@ function TopNavBar({ title, onBack }) {
       position: 'sticky',
       top: 0,
       zIndex: 100,
-      borderBottom: '1px solid var(--border)'
+      borderBottom: '1px solid var(--border)',
+      background: 'var(--bg)'
     }}>
       {onBack && (
         <button onClick={onBack} style={{
