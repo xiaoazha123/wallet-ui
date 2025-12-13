@@ -46,7 +46,7 @@ function C2CPage({ onBack }) {
            display: 'flex', 
            alignItems: 'center', 
            gap: '24px', 
-           padding: '16px 20px', 
+           padding: '16px 25px', 
            borderBottom: '1px solid var(--border)'
          }}>
             {['express', 'p2p', 'block'].map(t => (
