@@ -17,9 +17,9 @@ function InvitePage({ onBack }) {
   ]
 
   const rebates = [
-    { date: '12-01 14:30', user: 'User_9921', level: '一级', amt: '+ 50.00 PNT' },
-    { date: '12-01 09:15', user: 'User_8812', level: '二级', amt: '+ 12.50 PNT' },
-    { date: '11-30 22:10', user: 'User_3301', level: '一级', amt: '+ 50.00 PNT' },
+    { date: '12-01 14:30', user: 'User_9921', level: '一级', amt: '+ 50.00 H' },
+    { date: '12-01 09:15', user: 'User_8812', level: '二级', amt: '+ 12.50 H' },
+    { date: '11-30 22:10', user: 'User_3301', level: '一级', amt: '+ 50.00 H' },
   ]
 
   return (
@@ -117,7 +117,7 @@ function InvitePage({ onBack }) {
              marginBottom:'10px',
              margin:'0 20px 10px'
            }}>
-              <div className="ro-label" style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'8px', textAlign:'center'}}>累计返佣 (PNT)</div>
+              <div className="ro-label" style={{fontSize:'14px', color:'var(--text-muted)', marginBottom:'8px', textAlign:'center'}}>累计返佣 (H)</div>
               <div className="ro-total" style={{fontSize:'36px', fontWeight:'800', color:'var(--primary)', textAlign:'center', marginBottom:'24px'}}>1,250.50</div>
               <div className="ro-grid" style={{display:'flex', gap:'12px', marginBottom:'24px'}}>
                 <div className="ro-item" style={{flex:1, background:'#f9fafb', padding:'12px', borderRadius:'12px', textAlign:'center'}}>

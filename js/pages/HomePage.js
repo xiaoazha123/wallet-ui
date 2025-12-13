@@ -1,7 +1,6 @@
-function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites, onSearch }) {
+function HomePage({ address, currentWallet, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites, onSearch }) {
   const [q,setQ] = useState('')
   const [tab,setTab] = useState('自选')
-  const [currentWallet,setCurrentWallet] = useState({ name:'My Wallet', addr: address })
   const [showMoreSheet, setShowMoreSheet] = useState(false)
 
   let visible = []

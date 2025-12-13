@@ -51,27 +51,6 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail, onToast
          ))}
       </div>
 
-      <div className="section-head" style={{padding:'0 20px', marginBottom:'12px', display:'flex', justifyContent:'space-between', alignItems:'center', margin:'0 20px 10px'}}>
-         <div style={{fontSize:'18px', fontWeight:'700', color:'var(--text-main)'}}>推荐 DApp</div>
-         <div style={{fontSize:'13px', color:'var(--primary)', fontWeight:'600', cursor:'pointer'}} onClick={()=>alert('更多DApp')}>查看更多</div>
-      </div>
-
-      <div className="dapp-grid" style={{
-        display:'grid', 
-        gridTemplateColumns:'repeat(4, 1fr)', 
-        gap:'16px', 
-        padding:'0 20px', 
-        marginBottom:'32px'
-      }}>
-         {dapps.map(d=>(
-           <div key={d.id} onClick={()=>{ if(onToast) onToast(`${d.name} 即将上线`); }} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
-              <div style={{width:'56px', height:'56px', borderRadius:'16px', background:'#fff', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'24px'}}>
-                {d.icon}
-              </div>
-              <div style={{fontSize:'12px', color:'var(--text-main)', fontWeight:'500'}}>{d.name}</div>
-           </div>
-         ))}
-      </div>
 
       <Card>
         <div className="list-head" style={{marginBottom:'16px'}}>

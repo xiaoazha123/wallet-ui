@@ -2,8 +2,8 @@ function SwapPage({ onSwap }) {
   const [payAmt, setPayAmt] = useState('')
   const [rxAmt, setRxAmt] = useState('')
   const [payToken, setPayToken] = useState('USDT')
-  const [rxToken, setRxToken] = useState('PNT')
-  const rate = 12.5 // 1 USDT = 12.5 PNT
+  const [rxToken, setRxToken] = useState('H')
+  const rate = 12.5 // 1 USDT = 12.5 H
   const [showPwdModal, setShowPwdModal] = useState(false)
   const [pwd, setPwd] = useState('')
 

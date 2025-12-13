@@ -8,6 +8,8 @@ function App() {
   const [backed,setBacked] = useState(true)
   const [mnemonic,setMnemonic] = useState(generateMnemonic())
   const [showNetModal, setShowNetModal] = useState(false)
+  const [showFeatureModal, setShowFeatureModal] = useState(false) // New state for feature modal
+  const [featureTitle, setFeatureTitle] = useState('') // Title for the feature modal
   const [currentNet, setCurrentNet] = useState('main')
   const [importTab, setImportTab] = useState('助记词')
   function push(v){ setStack(s=>[...s,view]); setView(v) }
@@ -61,22 +63,31 @@ function App() {
   const [currentNews,setCurrentNews] = useState(null)
   const [currentMarketTab,setCurrentMarketTab] = useState('自选')
 
+  const [currentReceiveToken, setCurrentReceiveToken] = useState(null) // Added missing state
+
   const [currentNetSelect, setCurrentNetSelect] = useState('all')
+  const [currentWallet, setCurrentWallet] = useState({ name:'My Wallet', addr: address })
 
   const allCoins = [
-    { name:'BTC', price:'¥680,000', chg:'+2.38%', code:'BTC' },
-    { name:'ETH', price:'¥23,000', chg:'-1.12%', code:'ETH' },
-    { name:'SOL', price:'¥1,050', chg:'+5.67%', code:'SOL' },
-    { name:'BNB', price:'¥4,200', chg:'+0.45%', code:'BNB' },
-    { name:'XRP', price:'¥4.50', chg:'-0.89%', code:'XRP' },
-    { name:'ADA', price:'¥3.20', chg:'+1.20%', code:'ADA' },
-    { name:'DOGE', price:'¥1.10', chg:'+8.90%', code:'DOGE' },
-    { name:'DOT', price:'¥50.00', chg:'-2.30%', code:'DOT' },
-    { name:'AVAX', price:'¥250.00', chg:'+3.40%', code:'AVAX' },
-    { name:'LINK', price:'¥120.00', chg:'+0.10%', code:'LINK' },
-    { name:'MATIC', price:'¥6.80', chg:'-1.50%', code:'MATIC' },
-    { name:'UNI', price:'¥45.00', chg:'+2.10%', code:'UNI' },
+    { name:'BTC', price:'¥680,000', chg:'+2.38%', code:'BTC', network: 'btc' },
+    { name:'ETH', price:'¥23,000', chg:'-1.12%', code:'ETH', network: 'main' },
+    { name:'SOL', price:'¥1,050', chg:'+5.67%', code:'SOL', network: 'sol' },
+    { name:'BNB', price:'¥4,200', chg:'+0.45%', code:'BNB', network: 'bsc' },
+    { name:'XRP', price:'¥4.50', chg:'-0.89%', code:'XRP', network: 'main' },
+    { name:'ADA', price:'¥3.20', chg:'+1.20%', code:'ADA', network: 'main' },
+    { name:'DOGE', price:'¥1.10', chg:'+8.90%', code:'DOGE', network: 'main' },
+    { name:'DOT', price:'¥50.00', chg:'-2.30%', code:'DOT', network: 'polkadot' },
+    { name:'AVAX', price:'¥250.00', chg:'+3.40%', code:'AVAX', network: 'avalanche' },
+    { name:'LINK', price:'¥120.00', chg:'+0.10%', code:'LINK', network: 'main' },
+    { name:'MATIC', price:'¥6.80', chg:'-1.50%', code:'MATIC', network: 'polygon' },
+    { name:'UNI', price:'¥45.00', chg:'+2.10%', code:'UNI', network: 'main' },
   ]
+  
+  const displayCoins = useMemo(() => {
+    if (currentNet === 'all') return allCoins;
+    return allCoins.filter(c => c.network === currentNet);
+  }, [currentNet, allCoins]);
+
   const [favorites, setFavorites] = useState(['BTC','ETH','SOL'])
   const toggleFavorite = (code) => {
     setFavorites(prev => {
@@ -98,13 +109,14 @@ function App() {
             onBack={back} 
             onSettings={()=>push('settings')} 
             onNetwork={()=>setShowNetModal(true)} 
-            onService={()=>alert('客服功能即将上线')}
+            onService={()=>{ setFeatureTitle('客服功能开发中'); setShowFeatureModal(true); }}
             right={null} 
           />
         )}
 
         <div className="scroll-content">
           {showNetModal && <NetworkModal current={currentNet} onClose={()=>setShowNetModal(false)} onSelect={(id)=>{ setCurrentNet(id); setShowNetModal(false); setToast('已切换网络'); }} />}
+          {showFeatureModal && <FeatureModal title={featureTitle} onClose={()=>setShowFeatureModal(false)} />}
 
           {view==='launch' && (
             <LaunchSplash 
@@ -125,6 +137,7 @@ function App() {
           {view==='home' && (
             <HomePage 
               address={address} 
+              currentWallet={currentWallet}
               onWallets={()=>push('wallets')} 
               onReceive={()=>push('receive')} 
               onStake={()=>push('earn')} 
@@ -133,7 +146,7 @@ function App() {
               onMore={(which)=>{ setCurrentMarketTab(which); gotoTab('market') }} 
               onCopy={()=>{ setToast('已复制地址') }} 
               onMini={(v)=>push(v)}
-              allCoins={allCoins}
+              allCoins={displayCoins}
               favorites={favorites}
               onSearch={()=>push('search')}
             />
@@ -153,7 +166,7 @@ function App() {
               initialTab={currentMarketTab} 
               onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
               onNewsDetail={(n)=>{ setCurrentNews(n); push('news-detail') }}
-              allCoins={allCoins}
+              allCoins={displayCoins}
               favorites={favorites}
             />
           )}
@@ -201,7 +214,7 @@ function App() {
           {view==='search' && (
             <SearchPage 
               onBack={back}
-              allCoins={allCoins}
+              allCoins={displayCoins}
               onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
             />
           )}
@@ -301,7 +314,16 @@ function App() {
           {view==='course' && currentCourse && (<CourseDetail course={currentCourse} onComplete={()=>setToast('学习进度已记录')} onBack={back} />)}
 
           {view==='assets' && (
-            <WalletOverview onReceive={()=>push('receive')} onSend={()=>push('send')} onSwap={()=>push('trade')} onStake={()=>push('earn')} onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} onWallets={()=>push('wallets')} onToast={setToast} />
+            <WalletOverview 
+              currentWallet={currentWallet}
+              onReceive={()=>push('receive')} 
+              onSend={()=>push('send')} 
+              onSwap={()=>push('trade')} 
+              onStake={()=>push('earn')} 
+              onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
+              onWallets={()=>push('wallets')} 
+              onToast={setToast} 
+            />
           )}
         </div>
 

@@ -32,7 +32,7 @@ function GameDetail({ game, onTx, onBack }) {
       <div className="stat-row" style={{display:'flex', gap:'12px', marginBottom:'24px', margin:'0 20px 20px'}}>
          <div className="stat-box" style={{flex:1, background:'#fff', padding:'16px', borderRadius:'16px', textAlign:'center', border:'1px solid var(--border)', boxShadow:'var(--shadow-sm)'}}>
            <div className="sb-label" style={{fontSize:'12px', color:'var(--text-muted)', marginBottom:'4px'}}>地板价</div>
-           <div className="sb-val" style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>120 PNT</div>
+           <div className="sb-val" style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>120 H</div>
          </div>
          <div className="stat-box" style={{flex:1, background:'#fff', padding:'16px', borderRadius:'16px', textAlign:'center', border:'1px solid var(--border)', boxShadow:'var(--shadow-sm)'}}>
            <div className="sb-label" style={{fontSize:'12px', color:'var(--text-muted)', marginBottom:'4px'}}>24h 交易量</div>

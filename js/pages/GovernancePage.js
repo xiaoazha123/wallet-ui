@@ -3,6 +3,87 @@ function GovernancePage({ onBack, onToast }) {
   const [power, setPower] = useState(0)
   const [votedNodes, setVotedNodes] = useState({})
   
+  const [showPowerModal, setShowPowerModal] = useState(false)
+  const [stakeAmount, setStakeAmount] = useState('')
+  const [stakePwd, setStakePwd] = useState('')
+  
+  const [showUnstakeModal, setShowUnstakeModal] = useState(false)
+  const [unstakeAmount, setUnstakeAmount] = useState('')
+  const [unstakePwd, setUnstakePwd] = useState('')
+
+  const openUnstakeModal = () => {
+      setUnstakeAmount('')
+      setUnstakePwd('')
+      setShowUnstakeModal(true)
+  }
+
+  const confirmUnstake = () => {
+      if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return onToast && onToast('请输入有效的赎回数量');
+      if (parseFloat(unstakeAmount) > power) return onToast && onToast('可赎回票权不足');
+      if (!unstakePwd) return onToast && onToast('请输入密码');
+
+      // Simulate unstaking
+      setPower(p => p - parseFloat(unstakeAmount));
+      setShowUnstakeModal(false);
+      if(onToast) onToast(`成功赎回 ${unstakeAmount} H，票权已释放`);
+  }
+
+  const openPowerModal = () => {
+    setStakeAmount('')
+    setStakePwd('')
+    setShowPowerModal(true)
+  }
+
+  const confirmStake = () => {
+    if (!stakeAmount || parseFloat(stakeAmount) <= 0) return onToast && onToast('请输入有效的质押数量');
+    if (!stakePwd) return onToast && onToast('请输入密码');
+    
+    // Simulate staking
+    setPower(p => p + parseFloat(stakeAmount));
+    setShowPowerModal(false);
+    if(onToast) onToast(`成功质押 ${stakeAmount} H，获得 ${stakeAmount} 票权`);
+  }
+
+  // Voting Modal State
+  const [showVoteModal, setShowVoteModal] = useState(false)
+  const [voteTarget, setVoteTarget] = useState(null) // Proposal ID or Node Name
+  const [voteType, setVoteType] = useState('') // 'approve', 'oppose', 'node'
+  const [voteAmount, setVoteAmount] = useState('')
+  const [votePwd, setVotePwd] = useState('')
+
+  const openVoteModal = (target, type) => {
+    setVoteTarget(target)
+    setVoteType(type)
+    setVoteAmount('')
+    setVotePwd('')
+    setShowVoteModal(true)
+  }
+
+  const confirmVote = () => {
+    if (!voteAmount || parseFloat(voteAmount) <= 0) {
+       if(onToast) onToast('请输入有效的票数');
+       return;
+    }
+    if (parseFloat(voteAmount) > power) {
+       if(onToast) onToast('票权不足');
+       return;
+    }
+    if (!votePwd) {
+       if(onToast) onToast('请输入密码');
+       return;
+    }
+    
+    // Simulate API call / Logic
+    setShowVoteModal(false);
+    if (voteType === 'node') {
+        setVotedNodes(prev => ({...prev, [voteTarget.name]: true}));
+        if(onToast) onToast(`已为节点 ${voteTarget.name} 投票 ${voteAmount} 票`);
+    } else {
+        // Proposal vote
+        if(onToast) onToast(`提案 #${voteTarget.id} ${voteType==='approve'?'赞成':'反对'}投票成功`);
+    }
+  }
+
   const nodes = [
     { rank: 1, name: '星球基金会', votes: '1.2B', apy: '5.2%', status: '超级代表' },
     { rank: 2, name: '币安质押', votes: '980M', apy: '4.8%', status: '超级代表' },
@@ -45,21 +126,32 @@ function GovernancePage({ onBack, onToast }) {
             <h3 style={{fontSize: '13px', color: 'var(--text-muted)', margin: '0 0 8px 0', fontWeight: '500'}}>我的投票权</h3>
             <div className="val" style={{fontSize: '28px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '16px'}}>{power}</div>
           </div>
-          <button onClick={()=>{
-            setPower(p => p + 1000);
-            if(onToast) onToast('质押成功，票权 +1000');
-          }} style={{
-            width: '100%', 
-            background: '#eff6ff', 
-            color: '#3b82f6', 
-            border: 'none', 
-            padding: '10px 0', 
-            borderRadius: '12px', 
-            fontSize: '13px', 
-            fontWeight: '600', 
-            cursor: 'pointer',
-            transition: 'all 0.2s'
-          }}>获取票权</button>
+          <div style={{display:'flex', gap:'8px'}}>
+            <button onClick={openPowerModal} style={{
+              flex: 1, 
+              background: '#eff6ff', 
+              color: '#3b82f6', 
+              border: 'none', 
+              padding: '10px 0', 
+              borderRadius: '12px', 
+              fontSize: '13px', 
+              fontWeight: '600', 
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>获取票权</button>
+            <button onClick={openUnstakeModal} style={{
+              flex: 1, 
+              background: '#f3f4f6', 
+              color: '#4b5563', 
+              border: 'none', 
+              padding: '10px 0', 
+              borderRadius: '12px', 
+              fontSize: '13px', 
+              fontWeight: '600', 
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}>赎回</button>
+          </div>
         </div>
 
         {/* 分隔线 */}
@@ -113,7 +205,6 @@ function GovernancePage({ onBack, onToast }) {
                const isVoted = votedNodes[n.name];
                return (
                <div key={n.rank} className="node-item" style={{display:'flex', alignItems:'center', padding:'16px 0', borderBottom: i<nodes.length-1 ? '1px solid var(--border)' : 'none'}}>
-                 <div className="node-rank" style={{width:'30px', fontSize:'14px', fontWeight:'700', color:n.rank<=3?'var(--primary)':'var(--text-muted)'}}>#{n.rank}</div>
                  <div className="node-info" style={{flex:1}}>
                    <div className="node-name" style={{fontSize:'15px', fontWeight:'600', marginBottom:'4px'}}>{n.name}</div>
                    <div className="node-sub" style={{fontSize:'12px', color:'var(--text-muted)'}}>{n.votes} 票 · APY <span className="node-apr" style={{color:'#16a34a', fontWeight:'600'}}>{n.apy}</span></div>
@@ -121,8 +212,7 @@ function GovernancePage({ onBack, onToast }) {
                  <button className="small" onClick={()=>{
                     if(isVoted) return;
                     if(power<=0) { if(onToast) onToast('票权不足，请先获取票权'); return; }
-                    setVotedNodes(prev => ({...prev, [n.name]:true}));
-                    if(onToast) onToast(`已投票给 ${n.name}`);
+                    openVoteModal(n, 'node');
                  }} style={{
                    padding:'8px 20px', 
                    borderRadius:'20px', 
@@ -159,8 +249,8 @@ function GovernancePage({ onBack, onToast }) {
                   
                   {p.status === '投票中' && (
                     <div className="prop-vote" style={{display:'flex', gap:'8px'}}>
-                      <button className="small" onClick={()=>alert('已投赞成票')} style={{flex:1, background:'#16a34a', color:'#fff', border:'none', padding:'8px', borderRadius:'8px', fontSize:'12px', fontWeight:'600'}}>赞成</button>
-                      <button className="small" variant="secondary" onClick={()=>alert('已投反对票')} style={{flex:1, background:'#ef4444', color:'#fff', border:'none', padding:'8px', borderRadius:'8px', fontSize:'12px', fontWeight:'600'}}>反对</button>
+                      <button className="small" onClick={()=>openVoteModal(p, 'approve')} style={{flex:1, background:'#16a34a', color:'#fff', border:'none', padding:'8px', borderRadius:'8px', fontSize:'12px', fontWeight:'600'}}>赞成</button>
+                      <button className="small" variant="secondary" onClick={()=>openVoteModal(p, 'oppose')} style={{flex:1, background:'#ef4444', color:'#fff', border:'none', padding:'8px', borderRadius:'8px', fontSize:'12px', fontWeight:'600'}}>反对</button>
                     </div>
                   )}
                </div>
@@ -168,6 +258,125 @@ function GovernancePage({ onBack, onToast }) {
            </div>
          )}
        </Card>
+
+       {showVoteModal && (
+         <div className="modal-overlay" style={{alignItems:'center', justifyContent:'center'}}>
+            <div className="modal-box" style={{margin:'20px', borderRadius:'24px', padding:'24px', width:'85%'}}>
+               <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'20px'}}>
+                  {voteType==='node' ? '为节点投票' : (voteType==='approve' ? '投赞成票' : '投反对票')}
+               </div>
+               
+               {voteTarget && (
+                 <div style={{background:'#f9fafb', padding:'12px', borderRadius:'12px', marginBottom:'20px', textAlign:'center'}}>
+                    <div style={{fontSize:'14px', fontWeight:'600'}}>{voteTarget.name || voteTarget.title}</div>
+                    {voteTarget.id && <div style={{fontSize:'12px', color:'var(--text-muted)'}}>#{voteTarget.id}</div>}
+                 </div>
+               )}
+
+               <div style={{marginBottom:'16px'}}>
+                 <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>投票数量 (可用: {power})</div>
+                 <input 
+                   type="number" 
+                   value={voteAmount} 
+                   onChange={e=>setVoteAmount(e.target.value)} 
+                   placeholder="请输入票数" 
+                   style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                 />
+               </div>
+
+               <div style={{marginBottom:'24px'}}>
+                 <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>交易密码</div>
+                 <input 
+                   type="password" 
+                   value={votePwd} 
+                   onChange={e=>setVotePwd(e.target.value)} 
+                   placeholder="请输入密码" 
+                   style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                 />
+               </div>
+
+               <div style={{display:'flex', gap:'12px'}}>
+                 <Button onClick={confirmVote} style={{flex:1}}>确认</Button>
+                 <Button variant="ghost" onClick={()=>setShowVoteModal(false)} style={{flex:1}}>取消</Button>
+               </div>
+            </div>
+         </div>
+       )}
+
+       {showPowerModal && (
+         <div className="modal-overlay" style={{alignItems:'center', justifyContent:'center'}}>
+            <div className="modal-box" style={{margin:'20px', borderRadius:'24px', padding:'24px', width:'85%'}}>
+               <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'20px'}}>获取票权</div>
+               <div style={{textAlign:'center', fontSize:'13px', color:'var(--text-muted)', marginBottom:'20px'}}>
+                  质押 H 代币以获取等量投票权。质押期间代币将被冻结，可随时赎回。
+                </div>
+                
+                <div style={{marginBottom:'16px'}}>
+                  <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>质押数量</div>
+                  <input 
+                    type="number" 
+                    value={stakeAmount} 
+                    onChange={e=>setStakeAmount(e.target.value)} 
+                    placeholder="输入 H 数量" 
+                    style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                  />
+                </div>
+
+               <div style={{marginBottom:'24px'}}>
+                 <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>交易密码</div>
+                 <input 
+                   type="password" 
+                   value={stakePwd} 
+                   onChange={e=>setStakePwd(e.target.value)} 
+                   placeholder="请输入密码" 
+                   style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                 />
+               </div>
+
+               <div style={{display:'flex', gap:'12px'}}>
+                 <Button onClick={confirmStake} style={{flex:1}}>确认质押</Button>
+                 <Button variant="ghost" onClick={()=>setShowPowerModal(false)} style={{flex:1}}>取消</Button>
+               </div>
+            </div>
+         </div>
+       )}
+       {showUnstakeModal && (
+         <div className="modal-overlay" style={{alignItems:'center', justifyContent:'center'}}>
+            <div className="modal-box" style={{margin:'20px', borderRadius:'24px', padding:'24px', width:'85%'}}>
+               <div style={{textAlign:'center', fontSize:'18px', fontWeight:'700', marginBottom:'20px'}}>赎回代币</div>
+               <div style={{textAlign:'center', fontSize:'13px', color:'var(--text-muted)', marginBottom:'20px'}}>
+                  释放选票并赎回质押的 H 代币。赎回后票权将相应减少。
+                </div>
+               
+               <div style={{marginBottom:'16px'}}>
+                 <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>赎回数量 (可赎回: {power})</div>
+                 <input 
+                   type="number" 
+                   value={unstakeAmount} 
+                   onChange={e=>setUnstakeAmount(e.target.value)} 
+                   placeholder="输入数量" 
+                   style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                 />
+               </div>
+
+               <div style={{marginBottom:'24px'}}>
+                 <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'8px'}}>交易密码</div>
+                 <input 
+                   type="password" 
+                   value={unstakePwd} 
+                   onChange={e=>setUnstakePwd(e.target.value)} 
+                   placeholder="请输入密码" 
+                   style={{width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid var(--border)', outline:'none', fontSize:'16px'}} 
+                 />
+               </div>
+
+               <div style={{display:'flex', gap:'12px'}}>
+                 <Button onClick={confirmUnstake} style={{flex:1}}>确认赎回</Button>
+                 <Button variant="ghost" onClick={()=>setShowUnstakeModal(false)} style={{flex:1}}>取消</Button>
+               </div>
+            </div>
+         </div>
+       )}
     </div>
   )
 }

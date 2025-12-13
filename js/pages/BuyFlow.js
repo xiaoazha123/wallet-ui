@@ -20,8 +20,8 @@ function BuyFlow({ onConfirm, onCancel }) {
       </div>
 
       <div style={{marginBottom:'32px', margin:'0 20px 32px'}}>
-        <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>购买 PNT</h1>
-        <div style={{fontSize:'14px', color:'var(--text-muted)'}}>使用 USDT 快速兑换 PNT 代币</div>
+        <h1 style={{fontSize:'24px', fontWeight:'800', marginBottom:'8px'}}>购买 H</h1>
+        <div style={{fontSize:'14px', color:'var(--text-muted)'}}>使用 USDT 快速兑换 H 代币</div>
       </div>
 
       <Card>
@@ -40,16 +40,16 @@ function BuyFlow({ onConfirm, onCancel }) {
              alignItems:'center'
            }}>
               <div>
-                <div style={{fontSize:'12px', color:'var(--text-muted)', marginBottom:'4px'}}>获得 PNT</div>
+                <div style={{fontSize:'12px', color:'var(--text-muted)', marginBottom:'4px'}}>获得 H</div>
                 <div style={{fontSize:'18px', fontWeight:'700', color:'var(--text-main)'}}>{getQty(usdt)}</div>
               </div>
-              <div style={{fontSize:'14px', fontWeight:'600'}}>PNT</div>
+              <div style={{fontSize:'14px', fontWeight:'600'}}>H</div>
            </div>
         </div>
         
         <div style={{fontSize:'12px', color:'var(--text-muted)', marginTop:'8px', display:'flex', justifyContent:'space-between'}}>
            <span>当前汇率</span>
-           <span>1 PNT ≈ 2.34 USDT</span>
+           <span>1 H ≈ 2.34 USDT</span>
         </div>
       </Card>
       

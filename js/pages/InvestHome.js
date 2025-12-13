@@ -4,7 +4,7 @@ function InvestHome({ onBuy, onBack }) {
   const [devFeature, setDevFeature] = useState('')
 
   const holdings = [
-    { name: 'PNT', amount: '1,200', val: '¥ 2,808', profit: '+12.5%', icon:'P' },
+    { name: 'H', amount: '1,200', val: '¥ 2,808', profit: '+12.5%', icon:'H' },
     { name: 'USDT 活期', amount: '500', val: '¥ 3,500', profit: '+0.05%', icon:'$' },
   ]
 

@@ -1,10 +1,12 @@
 function NetworkModal({ current, onClose, onSelect }) {
   const nets = [
-    { id:'main', name:'Ethereum Mainnet', icon:'M' },
+    { id:'all', name:'全部网络', icon:'A' },
+    { id:'main', name:'Ethereum Mainnet', icon:'E' },
     { id:'bsc', name:'BNB Smart Chain', icon:'B' },
-    { id:'trx', name:'TRON Mainnet', icon:'T' },
+    { id:'test', name:'Sepolia Testnet', icon:'S' },
+    { id:'polygon', name:'Polygon', icon:'P' },
+    { id:'btc', name:'Bitcoin', icon:'₿' },
     { id:'sol', name:'Solana', icon:'S' },
-    { id:'test', name:'Sepolia Testnet', icon:'T' },
   ]
   return (
     <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') onClose()}}>

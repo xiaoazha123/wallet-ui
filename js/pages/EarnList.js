@@ -1,7 +1,7 @@
 function EarnList({ onDetail }) {
   const products = [
     { code:'USDT', apy:'8.5%', lock:'30 天', min:'100' },
-    { code:'PNT', apy:'15%', lock:'60 天', min:'50' },
+    { code:'H', apy:'15%', lock:'60 天', min:'50' },
   ]
   return (
     <div className="content">

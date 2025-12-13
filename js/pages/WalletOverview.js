@@ -1,4 +1,4 @@
-function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets, onToast }) {
+function WalletOverview({ currentWallet, onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets, onToast }) {
   const [tab, setTab] = useState('assets')
   const coins = [
     { name:'BTC', balance:'0.05', value:'¥ 18,500.00', chg:'+1.2%', icon:'' },
@@ -14,7 +14,7 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
     { type: '收款', amount: '+0.05 ETH', time: '昨天 19:10', status: '成功' },
     { type: '质押收益', amount: '+12 USDT', time: '2025-11-02', status: '成功' },
     { type: '兑换', amount: '-100 USDT', time: '2025-10-28', status: '成功' },
-    { type: '收款', amount: '+500 PNT', time: '2025-10-25', status: '成功' },
+    { type: '收款', amount: '+500 H', time: '2025-10-25', status: '成功' },
   ]
   const longTxs = [...txs, ...txs, ...txs] // Triple for scrolling
   
@@ -33,7 +33,7 @@ function WalletOverview({ onReceive, onSend, onSwap, onStake, onAssetDetail, onW
       }}>
         <div style={{flex:1}}>
           <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'8px', cursor:'pointer'}} onClick={onWallets}>
-             <div style={{fontSize:'14px', fontWeight:'600', color:'var(--text-main)'}}>My Wallet</div>
+             <div style={{fontSize:'14px', fontWeight:'600', color:'var(--text-main)'}}>{currentWallet?.name || 'My Wallet'}</div>
              <Icon name="down" size={14} style={{color:'var(--text-muted)'}} />
              <div style={{width:'1px', height:'14px', background:'#e5e7eb'}}></div>
              <div style={{color:'var(--text-muted)', cursor:'pointer'}} onClick={(e)=>{
