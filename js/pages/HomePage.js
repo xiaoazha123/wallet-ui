@@ -159,6 +159,10 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
                  <div className="grid-icon" style={{background:'#fff7ed', color:'#f97316'}}><Icon name="earn" /></div>
                  <div className="grid-label">我的积分</div>
                </button>
+               <button className="grid-btn" onClick={()=>{ onMini('invite'); setShowMoreSheet(false) }}>
+                 <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="invite" /></div>
+                 <div className="grid-label">邀请好友</div>
+               </button>
             </div>
           </div>
         </div>
