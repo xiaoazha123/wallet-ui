@@ -1,4 +1,4 @@
-function MorePage({ onTask, onPoints, onBack }) {
+function MorePage({ onTask, onPoints, onInvite, onBack }) {
   return (
     <div className="content-padded" style={{paddingTop:'12px'}}>
       <div style={{display:'flex', alignItems:'center', marginBottom:'20px', padding:'0 8px'}}>
@@ -16,6 +16,10 @@ function MorePage({ onTask, onPoints, onBack }) {
            <button className="grid-item" onClick={onPoints} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', background:'none', border:'none', cursor:'pointer'}}>
              <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'#4b5563'}}><Icon name="earn" size={24} /></div>
              <span style={{fontSize:'12px', color:'var(--text-main)', fontWeight:'500'}}>积分</span>
+           </button>
+           <button className="grid-item" onClick={onInvite} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', background:'none', border:'none', cursor:'pointer'}}>
+             <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', color:'#4b5563'}}><Icon name="invite" size={24} /></div>
+             <span style={{fontSize:'12px', color:'var(--text-main)', fontWeight:'500'}}>邀请</span>
            </button>
         </div>
       </Card>

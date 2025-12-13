@@ -1,7 +1,7 @@
 function BottomNav({ active, onSelect }) {
   const items = [
     { key: 'home', label: '首页', icon: 'wallet' },
-    { key: 'market', label: '市场', icon: 'chart' },
+    { key: 'market', label: '行情', icon: 'chart' },
     { key: 'trade', label: '交易', icon: 'swap' },
     { key: 'discover', label: '发现', icon: 'compass' },
     { key: 'assets', label: '资产', icon: 'pie' },

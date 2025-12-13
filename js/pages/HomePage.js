@@ -73,9 +73,9 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
              <div className="grid-icon" style={{background:'#fff7ed', color:'#f97316'}}><Icon name="scan" /></div>
              <div className="grid-label">支付</div>
            </button>
-           <button className="grid-btn" onClick={()=>onMini('invite')}>
-             <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="invite" /></div>
-             <div className="grid-label">邀请</div>
+           <button className="grid-btn" onClick={()=>onMini('c2c')}>
+             <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="c2c" /></div>
+             <div className="grid-label">C2C</div>
            </button>
            <button className="grid-btn" onClick={()=>onMini('governance')}>
              <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="vote" /></div>

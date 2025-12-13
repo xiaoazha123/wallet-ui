@@ -27,11 +27,12 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
     <div className="content-padded" style={{paddingTop:'0'}}>
       <TopNavBar title="行情" />
       <div className="market-header" style={{padding:'0px 20px', marginBottom:'10px'}}>
-        <div className="top-tabs" style={{background:'#f3f4f6', padding:'4px', borderRadius:'12px', display:'inline-flex'}}>
+        <div className="top-tabs" style={{background:'#f3f4f6', padding:'4px', borderRadius:'12px', display:'flex', width: '100%'}}>
           {['市场','新闻'].map(t=> (
             <button key={t} 
               onClick={()=>setSeg(t)}
               style={{
+                flex: 1,
                 padding:'6px 20px', 
                 borderRadius:'10px', 
                 border:'none', 
@@ -41,7 +42,11 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail }) {
                 fontSize:'14px',
                 boxShadow: seg===t ? 'var(--shadow-sm)' : 'none',
                 cursor:'pointer',
-                transition:'all 0.2s'
+                transition:'all 0.2s',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
               }}
             >{t}</button>
           ))}

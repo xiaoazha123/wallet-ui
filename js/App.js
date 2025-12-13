@@ -50,6 +50,7 @@ function App() {
     if(view==='invest') return '投资'
     if(view==='game') return '游戏中心'
     if(view==='academy') return 'Web3 学院'
+    if(view==='c2c') return 'C2C 交易'
     return map[tab]
   },[tab,view])
 
@@ -118,9 +119,10 @@ function App() {
           {view==='payment' && (<PaymentPage onBack={back} />)}
           {view==='invite' && (<InvitePage onBack={back} />)}
           {view==='governance' && (<GovernancePage onBack={back} onToast={setToast} />)}
-          {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} onBack={back} />)}
+          {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} onInvite={()=>push('invite')} onBack={back} />)}
           {view==='tasks' && (<TasksPage onBack={back} />)}
           {view==='points' && (<PointsPage onBack={back} />)}
+          {view==='c2c' && (<C2CPage onBack={back} />)}
 
           {view==='market' && (
             <MarketPage 
