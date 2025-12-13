@@ -135,6 +135,7 @@ function App() {
               onMini={(v)=>push(v)}
               allCoins={allCoins}
               favorites={favorites}
+              onSearch={()=>push('search')}
             />
           )}
 
@@ -194,6 +195,14 @@ function App() {
                 }
               }}
               onBack={back}
+            />
+          )}
+
+          {view==='search' && (
+            <SearchPage 
+              onBack={back}
+              allCoins={allCoins}
+              onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
             />
           )}
 

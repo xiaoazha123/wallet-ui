@@ -80,7 +80,6 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail, allCoins, favorit
               {displayCoins.map((c,i)=> (
                 <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
                   <div className="coin-left" style={{flex:1, display:'flex', alignItems:'center', gap:'12px'}}>
-                    <div style={{width:'20px', color:'var(--text-muted)', fontSize:'12px', fontWeight:'600'}}>{i+1}</div>
                     <div className="coin-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', fontSize:'12px', color:'#6b7280'}}>{c.name[0]}</div>
                     <div>
                       <div className="coin-name" style={{fontSize:'15px', fontWeight:'700', color:'var(--text-main)'}}>{c.name}</div>

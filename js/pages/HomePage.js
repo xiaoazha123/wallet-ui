@@ -1,4 +1,4 @@
-function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites }) {
+function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites, onSearch }) {
   const [q,setQ] = useState('')
   const [tab,setTab] = useState('自选')
   const [currentWallet,setCurrentWallet] = useState({ name:'My Wallet', addr: address })
@@ -17,10 +17,10 @@ function HomePage({ address, onWallets, onReceive, onStake, onInvest, onAssetDet
   }
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px'}}>
-      <div className="search-box">
+    <div className="content-padded">
+      <div className="search-box" onClick={onSearch}>
          <Icon name="search" size={18} />
-         <input value={q} onChange={e=>setQ(e.target.value)} placeholder="搜索代币、DApp" />
+         <div style={{color:'#9ca3af', fontSize:'14px'}}>搜索代币</div>
       </div>
 
       <div className="card-white" style={{
