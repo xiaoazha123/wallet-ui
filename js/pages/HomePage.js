@@ -1,4 +1,4 @@
-function HomePage({ address, currentWallet, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites, onSearch }) {
+function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, onStake, onInvest, onAssetDetail, onMore, onCopy, onMini, allCoins, favorites, onSearch }) {
   const [q,setQ] = useState('')
   const [tab,setTab] = useState('自选')
   const [showMoreSheet, setShowMoreSheet] = useState(false)
@@ -42,7 +42,9 @@ function HomePage({ address, currentWallet, onWallets, onReceive, onStake, onInv
                <Icon name="copy" size={16} />
              </div>
           </div>
-          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>¥ 0.00</div>
+          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>
+             ¥ {totalValue ? totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'}
+          </div>
         </div>
 
         <div>

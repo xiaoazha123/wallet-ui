@@ -2,9 +2,8 @@ function WalletOverview({ currentWallet, totalValue, onReceive, onSend, onSwap, 
   const [tab, setTab] = useState('assets')
   
   // Use displayCoins passed from App.js if available, otherwise fallback (or empty)
-  // The 'longCoins' logic was just for scrolling demo, we can adapt it.
-  const coinsToList = displayCoins || []
-  const longCoins = [...coinsToList, ...coinsToList] // Still mocking long list for scroll effect if needed
+  // Filter coins to only show those with balance > 0
+  const coinsToList = (displayCoins || []).filter(c => c.balance > 0)
   
   const txs = [
     { type: '转账', amount: '-0.2 BTC', time: '今天 12:32', status: '成功' },
@@ -82,7 +81,10 @@ function WalletOverview({ currentWallet, totalValue, onReceive, onSend, onSwap, 
         </div>
 
         <div className="scroll-list no-scrollbar" style={{padding:'0 20px'}}>
-          {tab === 'assets' && longCoins.map((c,i) => (
+          {tab === 'assets' && coinsToList.length === 0 && (
+             <div style={{padding:'40px', textAlign:'center', color:'var(--text-muted)'}}>暂无资产</div>
+          )}
+          {tab === 'assets' && coinsToList.map((c,i) => (
             <div key={i} className="asset-item" onClick={()=>onAssetDetail(c)} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
               <div className="asset-left" style={{display:'flex', alignItems:'center', gap:'12px'}}>
                 <div className="coin-icon" style={{width:'40px', height:'40px', borderRadius:'20px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', color:'#6b7280'}}>{c.name[0]}</div>
