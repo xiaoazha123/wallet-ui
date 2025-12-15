@@ -69,23 +69,58 @@ function App() {
   const [currentWallet, setCurrentWallet] = useState({ name:'My Wallet', addr: address })
 
   const allCoins = [
-    { name:'BTC', price:'¥680,000', chg:'+2.38%', code:'BTC', network: 'btc' },
-    { name:'ETH', price:'¥23,000', chg:'-1.12%', code:'ETH', network: 'main' },
-    { name:'SOL', price:'¥1,050', chg:'+5.67%', code:'SOL', network: 'sol' },
-    { name:'BNB', price:'¥4,200', chg:'+0.45%', code:'BNB', network: 'bsc' },
-    { name:'XRP', price:'¥4.50', chg:'-0.89%', code:'XRP', network: 'main' },
-    { name:'ADA', price:'¥3.20', chg:'+1.20%', code:'ADA', network: 'main' },
-    { name:'DOGE', price:'¥1.10', chg:'+8.90%', code:'DOGE', network: 'main' },
-    { name:'DOT', price:'¥50.00', chg:'-2.30%', code:'DOT', network: 'polkadot' },
-    { name:'AVAX', price:'¥250.00', chg:'+3.40%', code:'AVAX', network: 'avalanche' },
-    { name:'LINK', price:'¥120.00', chg:'+0.10%', code:'LINK', network: 'main' },
-    { name:'MATIC', price:'¥6.80', chg:'-1.50%', code:'MATIC', network: 'polygon' },
-    { name:'UNI', price:'¥45.00', chg:'+2.10%', code:'UNI', network: 'main' },
+    { name:'BTC', price: 680000, balance: 0.05, chg:'+2.38%', code:'BTC', network: 'btc' },
+    { name:'ETH', price: 23000, balance: 1.25, chg:'-1.12%', code:'ETH', network: 'main' },
+    { name:'SOL', price: 1050, balance: 50.0, chg:'+5.67%', code:'SOL', network: 'sol' },
+    { name:'BNB', price: 4200, balance: 10.5, chg:'+0.45%', code:'BNB', network: 'bsc' },
+    { name:'USDT', price: 7.2, balance: 500.0, chg:'+0.01%', code:'USDT', network: 'main' }, // ETH USDT
+    { name:'USDT', price: 7.2, balance: 200.0, chg:'+0.01%', code:'USDT', network: 'bsc' }, // BSC USDT
+    { name:'H', price: 2.34, balance: 1200.0, chg:'+12.5%', code:'H', network: 'main' },
+    { name:'XRP', price: 4.50, balance: 0, chg:'-0.89%', code:'XRP', network: 'main' },
+    { name:'ADA', price: 3.20, balance: 0, chg:'+1.20%', code:'ADA', network: 'main' },
+    { name:'DOGE', price: 1.10, balance: 0, chg:'+8.90%', code:'DOGE', network: 'main' },
+    { name:'DOT', price: 50.00, balance: 0, chg:'-2.30%', code:'DOT', network: 'polkadot' },
+    { name:'AVAX', price: 250.00, balance: 0, chg:'+3.40%', code:'AVAX', network: 'avalanche' },
+    { name:'LINK', price: 120.00, balance: 0, chg:'+0.10%', code:'LINK', network: 'main' },
+    { name:'MATIC', price: 6.80, balance: 0, chg:'-1.50%', code:'MATIC', network: 'polygon' },
+    { name:'UNI', price: 45.00, balance: 0, chg:'+2.10%', code:'UNI', network: 'main' },
   ]
   
+  // Dynamic Calculation of Total Asset Value
+  const totalAssetValue = useMemo(() => {
+      let coinsToCalc = allCoins;
+      if (currentNet !== 'all') {
+          coinsToCalc = allCoins.filter(c => c.network === currentNet);
+      }
+      const total = coinsToCalc.reduce((acc, c) => acc + (c.price * (c.balance || 0)), 0);
+      return total;
+  }, [currentNet, allCoins]);
+
+  // Aggregated Coin List for Display
   const displayCoins = useMemo(() => {
-    if (currentNet === 'all') return allCoins;
-    return allCoins.filter(c => c.network === currentNet);
+    if (currentNet !== 'all') {
+        // Single chain mode: Format price string and return filtered list
+        return allCoins.filter(c => c.network === currentNet).map(c => ({
+            ...c,
+            priceStr: `¥${c.price.toLocaleString()}`
+        }));
+    }
+
+    // All Networks mode: Aggregate same-name tokens
+    const aggregated = {};
+    allCoins.forEach(c => {
+        if (!aggregated[c.code]) {
+            aggregated[c.code] = { ...c, balance: 0, networks: [] };
+        }
+        aggregated[c.code].balance += c.balance || 0;
+        aggregated[c.code].networks.push(c.network);
+    });
+
+    return Object.values(aggregated).map(c => ({
+        ...c,
+        priceStr: `¥${c.price.toLocaleString()}`,
+        isAggregated: c.networks.length > 1
+    }));
   }, [currentNet, allCoins]);
 
   const [favorites, setFavorites] = useState(['BTC','ETH','SOL'])
@@ -316,6 +351,7 @@ function App() {
           {view==='assets' && (
             <WalletOverview 
               currentWallet={currentWallet}
+              totalValue={totalAssetValue}
               onReceive={()=>push('receive')} 
               onSend={()=>push('send')} 
               onSwap={()=>push('trade')} 
@@ -323,6 +359,7 @@ function App() {
               onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
               onWallets={()=>push('wallets')} 
               onToast={setToast} 
+              displayCoins={displayCoins}
             />
           )}
         </div>

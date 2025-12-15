@@ -1,14 +1,11 @@
-function WalletOverview({ currentWallet, onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets, onToast }) {
+function WalletOverview({ currentWallet, totalValue, onReceive, onSend, onSwap, onStake, onAssetDetail, onWallets, onToast, displayCoins }) {
   const [tab, setTab] = useState('assets')
-  const coins = [
-    { name:'BTC', balance:'0.05', value:'¥ 18,500.00', chg:'+1.2%', icon:'' },
-    { name:'ETH', balance:'1.25', value:'¥ 22,100.00', chg:'-0.5%', icon:'' },
-    { name:'USDT', balance:'1,200.50', value:'¥ 8,500.00', chg:'0.0%', icon:'' },
-    { name:'BNB', balance:'10.5', value:'¥ 24,500.00', chg:'+2.1%', icon:'' },
-  ]
-  // Triple the list to ensure scrolling
-  const longCoins = [...coins, ...coins, ...coins]
-
+  
+  // Use displayCoins passed from App.js if available, otherwise fallback (or empty)
+  // The 'longCoins' logic was just for scrolling demo, we can adapt it.
+  const coinsToList = displayCoins || []
+  const longCoins = [...coinsToList, ...coinsToList] // Still mocking long list for scroll effect if needed
+  
   const txs = [
     { type: '转账', amount: '-0.2 BTC', time: '今天 12:32', status: '成功' },
     { type: '收款', amount: '+0.05 ETH', time: '昨天 19:10', status: '成功' },
@@ -43,7 +40,9 @@ function WalletOverview({ currentWallet, onReceive, onSend, onSwap, onStake, onA
                <Icon name="copy" size={16} />
              </div>
           </div>
-          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>¥ 73,600.00</div>
+          <div style={{fontSize:'24px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'0.5px'}}>
+             ¥ {totalValue ? totalValue.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}) : '0.00'}
+          </div>
         </div>
       </div>
 
@@ -84,16 +83,19 @@ function WalletOverview({ currentWallet, onReceive, onSend, onSwap, onStake, onA
 
         <div className="scroll-list no-scrollbar" style={{padding:'0 20px'}}>
           {tab === 'assets' && longCoins.map((c,i) => (
-            <div key={i} className="asset-item" onClick={()=>onAssetDetail({code:c.name})} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
+            <div key={i} className="asset-item" onClick={()=>onAssetDetail(c)} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
               <div className="asset-left" style={{display:'flex', alignItems:'center', gap:'12px'}}>
                 <div className="coin-icon" style={{width:'40px', height:'40px', borderRadius:'20px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', color:'#6b7280'}}>{c.name[0]}</div>
                 <div className="asset-info">
-                  <div className="a-name" style={{fontWeight:'bold', fontSize:'16px'}}>{c.name}</div>
+                  <div className="a-name" style={{fontWeight:'bold', fontSize:'16px'}}>
+                    {c.name}
+                    {c.isAggregated && <span style={{fontSize:'10px', background:'#f3f4f6', color:'#6b7280', padding:'2px 6px', borderRadius:'4px', marginLeft:'6px'}}>ALL</span>}
+                  </div>
                   <div className="a-amt" style={{fontSize:'13px', color:'var(--muted)'}}>{c.balance} {c.name}</div>
                 </div>
               </div>
               <div className="asset-right" style={{textAlign:'right'}}>
-                <div className="a-val" style={{fontWeight:'bold', fontSize:'16px'}}>{c.value}</div>
+                <div className="a-val" style={{fontWeight:'bold', fontSize:'16px'}}>¥ {(c.price * c.balance).toLocaleString('en-US', {maximumFractionDigits:2})}</div>
                 <div className={`a-chg ${c.chg.startsWith('+')?'up':'down'}`} style={{fontSize:'13px', color:c.chg.startsWith('+')?'#10b981':(c.chg.startsWith('-')?'#ef4444':'#6b7280')}}>{c.chg}</div>
               </div>
             </div>
