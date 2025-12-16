@@ -57,9 +57,6 @@ function WalletsManage({ onBack, onAddWallet }) {
       </div>
 
       <div style={{padding:'0 20px', marginBottom:'24px', flexShrink:0}}>
-         <div style={{display:'flex', alignItems:'center', gap:'4px', fontSize:'14px', color:'var(--text-muted)', marginBottom:'4px'}}>
-           <Icon name="chart" size={14} /> 投资组合 <Icon name="right" size={12} />
-         </div>
          <div style={{fontSize:'32px', fontWeight:'800'}}>¥0</div>
       </div>
 
