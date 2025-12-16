@@ -71,14 +71,13 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail, allCoins, favorit
                 <span style={{flex:1, textAlign:'right'}}>最新价 / 24h涨跌</span>
              </div>
 
-             <div className="scroll-list" style={{ overflowY:'auto', padding:'0 20px'}}>
               {displayCoins.length === 0 && (
                  <div style={{padding:'20px', textAlign:'center', color:'var(--text-muted)'}}>
                    暂无数据
                  </div>
               )}
               {displayCoins.map((c,i)=> (
-                <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
+                <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
                   <div className="coin-left" style={{flex:1, display:'flex', alignItems:'center', gap:'12px'}}>
                     <div className="coin-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', fontSize:'12px', color:'#6b7280'}}>{c.name[0]}</div>
                     <div>
@@ -102,7 +101,6 @@ function MarketPage({ onAssetDetail, initialTab, onNewsDetail, allCoins, favorit
                   </div>
                 </div>
               ))}
-            </div>
           </div>
         </>
       )}

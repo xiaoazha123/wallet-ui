@@ -29,6 +29,8 @@ function App() {
     if(view==='asset') return '资产详情'
     if(view==='send') return '发送'
     if(view==='receive') return '收款'
+    if(view==='me') return '我的'
+    if(view==='general-settings') return '通用设置'
     if(view==='settings') return '设置'
     if(view==='security') return '安全设置'
     if(view==='network') return '多链设置'
@@ -228,17 +230,17 @@ function App() {
       <div className="app-screen">
         <StatusBar className={view==='launch' ? 'overlay' : ''} />
         {view === 'home' && (
-          <Header 
-            title={title} 
-            view={view}
-            showBack={showBack} 
-            onBack={back} 
-            onSettings={()=>push('settings')} 
-            onNetwork={()=>setShowNetModal(true)} 
-            onService={()=>{ setFeatureTitle('客服功能开发中'); setShowFeatureModal(true); }}
-            right={null} 
-          />
-        )}
+            <Header 
+              title={title} 
+              view={view}
+              showBack={showBack} 
+              onBack={back} 
+              onSettings={()=>push('me')} 
+              onNetwork={()=>setShowNetModal(true)} 
+              onScan={()=>push('scan')}
+              right={null} 
+            />
+          )}
 
         <div className="scroll-content">
           {showNetModal && <NetworkModal current={currentNet} onClose={()=>setShowNetModal(false)} onSelect={(id)=>{ setCurrentNet(id); setShowNetModal(false); setToast('已切换网络'); }} />}
@@ -264,7 +266,6 @@ function App() {
             <HomePage 
               address={address} 
               currentWallet={currentWallet}
-              totalValue={totalAssetValue}
               onWallets={()=>push('wallets')} 
               onReceive={()=>push('receive')} 
               onStake={()=>push('earn')} 
@@ -276,6 +277,7 @@ function App() {
               allCoins={displayCoins}
               favorites={favorites}
               onSearch={()=>push('search')}
+              onSettings={()=>push('me')}
             />
           )}
 
@@ -342,7 +344,7 @@ function App() {
             <SearchPage 
               onBack={back}
               allCoins={displayCoins}
-              onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
+              onAssetDetail={(t)=>{ setCurrentToken({...t, readOnly:true}); push('asset') }} 
             />
           )}
 
@@ -374,6 +376,7 @@ function App() {
               onBack={back} 
               isFavorite={favorites.includes(currentToken.code)}
               onToggleFavorite={()=>toggleFavorite(currentToken.code)}
+              readOnly={currentToken.readOnly}
               onSend={()=>push('send')} 
               onReceive={()=>{
                 // Directly go to receive detail with current token and network
@@ -399,6 +402,35 @@ function App() {
           {view==='receive-detail' && (<ReceiveView token={currentReceiveToken} address={address} onBack={back} />)}
           {view==='wallet-select' && (<WalletSelect onBack={back} onSelect={()=>{ back() }} />)}
           {view==='network-select' && (<NetworkSelect current={currentNetSelect} onBack={back} onSelect={(n)=>{ setCurrentNetSelect(n.id); back() }} />)}
+
+          {view==='me' && (
+            <MePage 
+              onBack={back}
+              onGeneralSettings={()=>push('general-settings')}
+              onWallets={()=>push('wallets')}
+              onSecurity={()=>push('security')}
+              onNetwork={()=>push('network')}
+              onDAppBrowser={()=>{ setFeatureTitle('DApp 浏览器 功能开发中'); setShowFeatureModal(true); }}
+              onWalletConnect={()=>{ setFeatureTitle('WalletConnect 功能开发中'); setShowFeatureModal(true); }}
+              onAddressBook={()=>{ setFeatureTitle('地址簿 功能开发中'); setShowFeatureModal(true); }}
+              onWeb3Academy={()=>push('academy')}
+              onNotifications={()=>{ setFeatureTitle('通知设置 功能开发中'); setShowFeatureModal(true); }}
+              onHelp={()=>{ setFeatureTitle('帮助中心 功能开发中'); setShowFeatureModal(true); }}
+              onService={()=>{ setFeatureTitle('客服功能开发中'); setShowFeatureModal(true); }}
+              onInvite={()=>push('invite')}
+              onLogout={()=>{ setView('launch'); setStack([]); }}
+            />
+          )}
+
+          {view==='scan' && (<ScanPage onBack={back} />)}
+
+          {view==='general-settings' && (
+            <GeneralSettingsPage 
+              onLang={()=>push('language')} 
+              onBack={back}
+              onFeature={(title)=>{ setFeatureTitle(title); setShowFeatureModal(true); }}
+            />
+          )}
 
           {view==='settings' && (
             <SettingsPage 

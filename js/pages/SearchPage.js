@@ -16,7 +16,7 @@ function SearchPage({ onBack, allCoins, onAssetDetail }) {
   }
 
   return (
-    <div className="content-padded" style={{paddingTop:'12px', height:'100%', display:'flex', flexDirection:'column', overflow:'hidden'}}>
+    <div className="content-padded" style={{paddingTop:'12px', margin:'0 20px', height:'100%', display:'flex', flexDirection:'column', overflow:'hidden'}}>
       <div style={{flexShrink: 0}}>
         <div style={{display:'flex', alignItems:'center', gap:'12px', padding:'0 8px 12px'}}>
            <div style={{
@@ -52,10 +52,10 @@ function SearchPage({ onBack, allCoins, onAssetDetail }) {
           {q ? '搜索结果' : '热门搜索'}
         </div>
       </div>
-
-      <div className="scroll-list" style={{ overflowY:'auto', padding:'0 20px', flex: 1}}>
+      
+      <div style={{flex: 1, overflowY: 'auto'}} className="no-scrollbar">
         {displayCoins.map((c,i)=> (
-          <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 0', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
+          <div key={i} className="coin-row" onClick={()=>onAssetDetail(c)} style={{padding:'16px 20px', borderBottom:'1px solid var(--border)', display:'flex', alignItems:'center', justifyContent:'space-between', cursor:'pointer'}}>
             <div className="coin-left" style={{flex:1, display:'flex', alignItems:'center', gap:'12px'}}>
               <div className="coin-icon" style={{width:'32px', height:'32px', borderRadius:'16px', background:'#f3f4f6', display:'flex', alignItems:'center', justifyContent:'center', fontWeight:'bold', fontSize:'12px', color:'#6b7280'}}>{c.name[0]}</div>
               <div>

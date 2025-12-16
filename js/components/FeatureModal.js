@@ -8,38 +8,44 @@ function FeatureModal({ title, onClose }) {
     }}>
       <div className="modal-box" style={{
         background: '#fff', width: '80%', maxWidth: '320px',
-        borderRadius: '24px', padding: '32px 24px',
-        textAlign: 'center',
+        borderRadius: '16px', padding: '24px',
+        textAlign: 'left',
         animation: 'slideUp 0.3s ease',
         boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
       }}>
-        <div style={{
-          width: '72px', height: '72px', margin: '0 auto 20px',
-          background: '#f3f4f6', borderRadius: '36px',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          color: 'var(--primary)', 
-          boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.05)'
-        }}>
-          <Icon name="time" size={36} />
+        <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'16px'}}>
+          <Icon name="info" size={24} style={{color:'#3b82f6'}} />
+          <div style={{fontSize:'18px', fontWeight:'700', color:'#1f2937'}}>提示</div>
         </div>
-        <div style={{fontSize: '20px', fontWeight: '800', color: 'var(--text-main)', marginBottom: '12px'}}>
+        
+        <div style={{fontSize: '15px', color: '#4b5563', lineHeight: '1.5', marginBottom: '24px', paddingLeft: '4px'}}>
           {title || '功能开发中'}
         </div>
-        <div style={{fontSize: '15px', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '32px'}}>
-          该功能正在紧锣密鼓开发中<br/>敬请期待...
+
+        <div style={{display:'flex', gap:'12px'}}>
+          <button onClick={onClose} style={{
+            flex: 1,
+            borderRadius: '8px', 
+            padding: '10px', 
+            background: '#fff', 
+            color: '#6b7280', 
+            border: '1px solid #e5e7eb', 
+            fontSize: '15px', 
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}>取消</button>
+          <button onClick={onClose} style={{
+            flex: 1,
+            borderRadius: '8px', 
+            padding: '10px', 
+            background: '#3b82f6', 
+            color: '#fff', 
+            border: 'none', 
+            fontSize: '15px', 
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}>确认</button>
         </div>
-        <button onClick={onClose} style={{
-          width: '100%', 
-          borderRadius: '30px', 
-          padding: '14px', 
-          background: 'var(--primary)', 
-          color: '#fff', 
-          border: 'none', 
-          fontSize: '16px', 
-          fontWeight: '600',
-          cursor: 'pointer',
-          boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
-        }}>我知道了</button>
       </div>
     </div>
   )

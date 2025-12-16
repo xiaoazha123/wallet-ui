@@ -1,4 +1,4 @@
-function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFavorite }) {
+function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFavorite, readOnly = false }) {
   const [range, setRange] = useState('1D')
   const ranges = ['1天','1周','1月','全部']
   const txs = [
@@ -41,7 +41,7 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
              </svg>
           </div>
 
-          <div className="range-selector" style={{display:'flex', gap:'8px', marginBottom:'24px'}}>
+          <div className="range-selector" style={{display:'flex', gap:'8px', marginBottom: readOnly ? '0' : '24px'}}>
              {ranges.map(r=>(
                <button key={r} onClick={()=>setRange(r)} style={{
                  padding:'4px 12px', 
@@ -56,6 +56,7 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
              ))}
           </div>
 
+          {!readOnly && (
           <div className="action-buttons" style={{display:'flex', gap:'16px'}}>
              <button onClick={onReceive} style={{
                flex:1, 
@@ -79,9 +80,11 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
                fontSize:'16px'
              }}>发送</button>
           </div>
+          )}
         </div>
       </Card>
 
+      {!readOnly && (
       <Card>
         <div className="list-head" style={{marginBottom:'16px'}}>交易记录</div>
         <div className="txs-list">
@@ -99,6 +102,7 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
           ))}
         </div>
       </Card>
+      )}
     </div>
   )
 }

@@ -52,22 +52,111 @@ function InvestHome({ onBuy, onBack }) {
         </div>
       </div>
 
-      <div className="invest-grid" style={{display:'grid', gridTemplateColumns:'repeat(4, 1fr)', gap:'12px', marginBottom:'24px', margin:'0 20px 24px'}}>
-        <div onClick={()=>{ setDevFeature('定投'); setShowDevModal(true); }} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
-          <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#0ea5e9', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="chart" /></div>
-          <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>定投</div>
+      <div className="invest-grid" style={{
+        display:'grid', 
+        gridTemplateColumns:'repeat(4, 1fr)', 
+        gap:'12px', 
+        marginBottom:'24px', 
+        margin:'0 20px 24px'
+      }}>
+        <div onClick={()=>{ setDevFeature('定投'); setShowDevModal(true); }} style={{
+          background: '#fff',
+          borderRadius: '16px',
+          padding: '12px 4px',
+          display:'flex', 
+          flexDirection:'column', 
+          alignItems:'center', 
+          gap:'8px', 
+          cursor:'pointer',
+          boxShadow: 'var(--shadow-sm)',
+          border: '1px solid var(--border)'
+        }}>
+          <div style={{
+            width:'40px', 
+            height:'40px', 
+            borderRadius:'50%', 
+            background:'#f0f9ff', 
+            display:'flex', 
+            alignItems:'center', 
+            justifyContent:'center', 
+            color:'#0ea5e9'
+          }}><Icon name="chart" size={20} /></div>
+          <div style={{fontSize:'13px', fontWeight:'600', color:'var(--text-main)'}}>定投</div>
         </div>
-        <div onClick={()=>setTab('earn')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
-          <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#8b5cf6', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="earn" /></div>
-          <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>理财</div>
+
+        <div onClick={()=>setTab('earn')} style={{
+          background: '#fff',
+          borderRadius: '16px',
+          padding: '12px 4px',
+          display:'flex', 
+          flexDirection:'column', 
+          alignItems:'center', 
+          gap:'8px', 
+          cursor:'pointer',
+          boxShadow: 'var(--shadow-sm)',
+          border: '1px solid var(--border)'
+        }}>
+          <div style={{
+            width:'40px', 
+            height:'40px', 
+            borderRadius:'50%', 
+            background:'#f5f3ff', 
+            display:'flex', 
+            alignItems:'center', 
+            justifyContent:'center', 
+            color:'#8b5cf6'
+          }}><Icon name="star" size={20} /></div>
+          <div style={{fontSize:'13px', fontWeight:'600', color:'var(--text-main)'}}>理财</div>
         </div>
-        <div onClick={()=>setTab('rwa')} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
-          <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#f59e0b', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="invest" /></div>
-          <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>RWA</div>
+
+        <div onClick={()=>setTab('rwa')} style={{
+          background: '#fff',
+          borderRadius: '16px',
+          padding: '12px 4px',
+          display:'flex', 
+          flexDirection:'column', 
+          alignItems:'center', 
+          gap:'8px', 
+          cursor:'pointer',
+          boxShadow: 'var(--shadow-sm)',
+          border: '1px solid var(--border)'
+        }}>
+          <div style={{
+            width:'40px', 
+            height:'40px', 
+            borderRadius:'50%', 
+            background:'#fffbeb', 
+            display:'flex', 
+            alignItems:'center', 
+            justifyContent:'center', 
+            color:'#f59e0b'
+          }}><Icon name="chart" size={20} /></div>
+          <div style={{fontSize:'13px', fontWeight:'600', color:'var(--text-main)'}}>RWA</div>
         </div>
-        <div onClick={onBuy} style={{display:'flex', flexDirection:'column', alignItems:'center', gap:'8px', cursor:'pointer'}}>
-          <div style={{width:'48px', height:'48px', borderRadius:'16px', background:'#fff', display:'flex', alignItems:'center', justifyContent:'center', color:'#10b981', boxShadow:'var(--shadow-sm)', border:'1px solid var(--border)'}}><Icon name="plus" /></div>
-          <div style={{fontSize:'12px', fontWeight:'600', color:'var(--text-main)'}}>买币</div>
+
+        <div onClick={onBuy} style={{
+          background: '#fff',
+          borderRadius: '16px',
+          padding: '12px 4px',
+          display:'flex', 
+          flexDirection:'column', 
+          alignItems:'center', 
+          gap:'8px', 
+          cursor:'pointer',
+          boxShadow: 'var(--shadow-sm)',
+          border: '1px solid var(--border)'
+        }}>
+          <div style={{
+            width:'40px', 
+            height:'40px', 
+            borderRadius:'50%', 
+            background:'#f3f4f6', 
+            display:'flex', 
+            alignItems:'center', 
+            justifyContent:'center', 
+            color:'#6b7280'
+          }}><Icon name="plus" size={20} /></div>
+          <div style={{fontSize:'13px', fontWeight:'600', color:'var(--text-main)'}}>买币</div>
         </div>
       </div>
       

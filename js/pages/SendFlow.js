@@ -112,7 +112,7 @@ function SendFlow({ onConfirm, onCancel }) {
                 <div className="input-actions" style={{position:'absolute', right:'8px', top:'50%', transform:'translateY(-50%)', display:'flex', gap:'4px'}}>
                    <button onClick={handlePaste} style={{background:'none', border:'none', cursor:'pointer', color:'var(--primary)', padding:'4px'}}><Icon name="copy" /></button>
                    <button onClick={()=>setShowContacts(true)} style={{background:'none', border:'none', cursor:'pointer', color:'var(--primary)', padding:'4px'}}><Icon name="user" /></button>
-                   <button onClick={()=>setShowScanner(true)} style={{background:'none', border:'none', cursor:'pointer', color:'var(--primary)', padding:'4px'}}><Icon name="qr" /></button>
+                   <button onClick={()=>setShowScanner(true)} style={{background:'none', border:'none', cursor:'pointer', color:'var(--primary)', padding:'4px'}}><Icon name="scan" /></button>
                 </div>
              </div>
           </div>

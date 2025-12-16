@@ -182,30 +182,6 @@ function PaymentPage({ onBack }) {
         </div>
       </div>
 
-      {/* 链上记录 */}
-      <Card>
-         <div className="list-head" style={{marginBottom:'16px'}}>链上记录</div>
-         <div className="pay-history">
-           {txs.map(t=>(
-             <div key={t.id} style={{display:'flex', alignItems:'center', padding:'12px 0', borderBottom:'1px solid var(--border)'}}>
-               <div style={{
-                 width:'40px', height:'40px', borderRadius:'20px', 
-                 background: t.type==='send'?'#fef2f2':(t.type==='receive'?'#ecfdf5':'#eff6ff'), 
-                 color: t.type==='send'?'#ef4444':(t.type==='receive'?'#10b981':'#3b82f6'),
-                 display:'flex', alignItems:'center', justifyContent:'center', fontSize:'18px', marginRight:'12px'
-               }}>
-                 <Icon name={t.type==='send'?'send':(t.type==='receive'?'down':'swap')} size={20} />
-               </div>
-               <div style={{flex:1}}>
-                 <div style={{fontSize:'14px', fontWeight:'600', marginBottom:'4px', color:'var(--text-main)'}}>{t.title}</div>
-                 <div style={{fontSize:'12px', color:'var(--text-muted)'}}>{t.time} · {t.status}</div>
-               </div>
-               <div style={{fontSize:'15px', fontWeight:'700', color:t.amt.startsWith('+')?'#10b981':'var(--text-main)'}}>{t.amt}</div>
-             </div>
-           ))}
-         </div>
-      </Card>
-
       {/* 新增联系人弹窗 */}
       {showAddContact && (
         <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setShowAddContact(false)}}>
