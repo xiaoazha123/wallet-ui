@@ -31,23 +31,31 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
          <div className="token-change" style={{fontSize:'14px', color:'#10b981', marginTop:'4px'}}>24h +3.42%</div>
       </div>
 
-      <Card>
+      <div style={{
+          background:'#fff', 
+          borderRadius:'20px', 
+          padding:'20px 20px 0 20px', 
+          boxShadow:'var(--shadow-sm)',
+          border: '1px solid var(--border)',
+          margin:'0 20px',
+          marginBottom:'10px'
+      }}>
         <div className="asset-header" style={{padding:'10px 0'}}>
           
-          <div className="chart-area" style={{height:'120px', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'24px', position:'relative'}}>
+          <div className="chart-area" style={{height:'180px', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:'24px', position:'relative', width: '100%'}}>
              {/* Mock Chart Line */}
-             <svg viewBox="0 0 300 100" style={{width:'100%', height:'100%', overflow:'visible'}}>
-                <path d="M0,80 C50,80 50,40 100,40 C150,40 150,60 200,60 C250,60 250,20 300,20" fill="none" stroke="#000" strokeWidth="4" strokeLinecap="round" />
+             <svg viewBox="0 0 300 120" style={{width:'100%', height:'100%', overflow:'visible'}} preserveAspectRatio="none">
+                <path d="M0,90 C40,90 40,30 80,30 C120,30 120,70 160,70 C200,70 200,20 240,20 C280,20 300,50 300,50" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
              </svg>
           </div>
 
-          <div className="range-selector" style={{display:'flex', gap:'8px', marginBottom: readOnly ? '0' : '24px'}}>
+          <div className="range-selector" style={{display:'flex', gap:'8px', marginBottom:'20px'}}>
              {ranges.map(r=>(
                <button key={r} onClick={()=>setRange(r)} style={{
-                 padding:'4px 12px', 
-                 borderRadius:'4px', 
-                 border:'1px solid var(--text-main)', 
-                 background: range===r ? 'none' : 'none',
+                 padding:'6px 16px', 
+                 borderRadius:'8px', 
+                 border: range===r ? '1px solid var(--text-main)' : '1px solid transparent', 
+                 background: 'none',
                  color: 'var(--text-main)',
                  fontSize:'13px',
                  fontWeight: range===r ? '600' : '400',
@@ -57,7 +65,7 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
           </div>
 
           {!readOnly && (
-          <div className="action-buttons" style={{display:'flex', gap:'16px'}}>
+          <div className="action-buttons" style={{display:'flex', gap:'16px', paddingBottom:'20px'}}>
              <button onClick={onReceive} style={{
                flex:1, 
                background:'var(--primary)', 
@@ -82,8 +90,83 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
           </div>
           )}
         </div>
-      </Card>
+      </div>
 
+      {readOnly && (
+      <>
+        <div style={{
+            background:'#fff', 
+            borderRadius:'20px', 
+            padding:'20px', 
+            boxShadow:'var(--shadow-sm)', 
+            // marginBottom:'16px',
+            border: '1px solid var(--border)',
+            margin:'0px 20px 10px'
+        }}>
+          <div style={{marginBottom:'24px'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'20px'}}>
+               <Icon name="chart" size={20} style={{color:'var(--primary)'}} />
+               <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>市场数据</div>
+            </div>
+            
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px 16px'}}>
+              <div>
+                <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px'}}>市值</div>
+                <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'-0.5px'}}>$820.00B</div>
+              </div>
+              <div>
+                <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px'}}>24h 成交量</div>
+                <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'-0.5px'}}>$32.00B</div>
+              </div>
+              <div>
+                <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px'}}>流通供应量</div>
+                <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'-0.5px'}}>19.50M</div>
+              </div>
+              <div>
+                <div style={{fontSize:'13px', color:'var(--text-muted)', marginBottom:'6px'}}>最大供应量</div>
+                <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)', letterSpacing:'-0.5px'}}>21.00M</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style={{
+            background:'#fff', 
+            borderRadius:'20px', 
+            padding:'20px', 
+            boxShadow:'var(--shadow-sm)',
+            border: '1px solid var(--border)',
+            margin:'0px 20px 10px'
+        }}>
+          <div style={{marginBottom:'24px'}}>
+            <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'16px'}}>
+               <Icon name="info" size={20} style={{color:'var(--primary)'}} />
+               <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>简介</div>
+            </div>
+            <div style={{fontSize:'14px', color:'var(--text-muted)', lineHeight:'1.7', textAlign:'justify'}}>
+              {token.name} 是一种去中心化的数字货币，不依赖任何中央机构或银行。它采用点对点技术，让网络上的每个节点都能验证交易。作为区块链技术的开创者，它为数字资产领域奠定了基础。
+            </div>
+          </div>
+          
+          <div>
+            <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'16px'}}>
+               <Icon name="network" size={20} style={{color:'var(--primary)'}} />
+               <div style={{fontSize:'16px', fontWeight:'700', color:'var(--text-main)'}}>相关链接</div>
+            </div>
+            <div style={{display:'flex', flexDirection:'column', gap:'10px'}}>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'16px', background:'#f8fafc', borderRadius:'16px', cursor:'pointer'}}>
+                 <div style={{fontSize:'15px', fontWeight:'600', color:'var(--text-main)'}}>官方网站</div>
+                 <Icon name="right" size={16} style={{color:'var(--text-muted)'}} />
+              </div>
+              <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'16px', background:'#f8fafc', borderRadius:'16px', cursor:'pointer'}}>
+                 <div style={{fontSize:'15px', fontWeight:'600', color:'var(--text-main)'}}>区块浏览器</div>
+                 <Icon name="right" size={16} style={{color:'var(--text-muted)'}} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+      )}
       {!readOnly && (
       <Card>
         <div className="list-head" style={{marginBottom:'16px'}}>交易记录</div>
@@ -103,6 +186,7 @@ function AssetDetail({ token, onBack, onSend, onReceive, isFavorite, onToggleFav
         </div>
       </Card>
       )}
+
     </div>
   )
 }

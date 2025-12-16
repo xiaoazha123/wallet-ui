@@ -12,6 +12,7 @@ function App() {
   const [featureTitle, setFeatureTitle] = useState('') // Title for the feature modal
   const [currentNet, setCurrentNet] = useState('main')
   const [importTab, setImportTab] = useState('助记词')
+  const [afterVerify, setAfterVerify] = useState(null) // Added for verification callback
   function push(v){ setStack(s=>[...s,view]); setView(v) }
   function back(){ setView(stack[stack.length-1] || (tab==='home'?'home':tab)); setStack(s=>s.slice(0,-1)) }
   function gotoTab(t){ setTab(t); setView(t); setStack([]) }
@@ -266,11 +267,12 @@ function App() {
             <HomePage 
               address={address} 
               currentWallet={currentWallet}
+              totalValue={totalAssetValue}
               onWallets={()=>push('wallets')} 
               onReceive={()=>push('receive')} 
               onStake={()=>push('earn')} 
               onInvest={()=>push('invest')} 
-              onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
+              onAssetDetail={(t)=>{ setCurrentToken({...t, readOnly:true}); push('asset') }} 
               onMore={(which)=>{ setCurrentMarketTab(which); gotoTab('market') }} 
               onCopy={()=>{ setToast('已复制地址') }} 
               onMini={(v)=>push(v)}
@@ -293,7 +295,7 @@ function App() {
           {view==='market' && (
             <MarketPage 
               initialTab={currentMarketTab} 
-              onAssetDetail={(t)=>{ setCurrentToken(t); push('asset') }} 
+              onAssetDetail={(t)=>{ setCurrentToken({...t, readOnly:true}); push('asset') }} 
               onNewsDetail={(n)=>{ setCurrentNews(n); push('news-detail') }}
               allCoins={displayCoins}
               favorites={favorites}
