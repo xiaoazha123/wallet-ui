@@ -414,7 +414,7 @@ function App() {
               onNetwork={()=>push('network')}
               onDAppBrowser={()=>{ setFeatureTitle('DApp 浏览器 功能开发中'); setShowFeatureModal(true); }}
               onWalletConnect={()=>{ setFeatureTitle('WalletConnect 功能开发中'); setShowFeatureModal(true); }}
-              onAddressBook={()=>{ setFeatureTitle('地址簿 功能开发中'); setShowFeatureModal(true); }}
+              onAddressBook={()=>push('address-book')}
               onWeb3Academy={()=>push('academy')}
               onNotifications={()=>{ setFeatureTitle('通知设置 功能开发中'); setShowFeatureModal(true); }}
               onHelp={()=>{ setFeatureTitle('帮助中心 功能开发中'); setShowFeatureModal(true); }}
@@ -423,6 +423,8 @@ function App() {
               onLogout={()=>{ setView('launch'); setStack([]); }}
             />
           )}
+
+          {view==='address-book' && (<AddressBookPage onBack={back} />)}
 
           {view==='scan' && (<ScanPage onBack={back} />)}
 

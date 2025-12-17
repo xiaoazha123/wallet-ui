@@ -37,7 +37,9 @@ function Icon({ name, size = 24 }) {
     image: "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z",
     scan: "M3 5v4h2V5h4V3H3zm2 14h4v2H3v-6h2v4zm14 4h-4v-2h4v-4h2v6zm0-16h-4v2h4v4h2V3z",
     lightning: "M7 2v11h3v9l7-12h-4l4-8z",
-    c2c: "M4 15h13v7l4-3.5L17 15v2H4v-2zm16-4H7V4L3 7.5 7 11V9h13v2z"
+      edit: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z",
+      import: "M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z",
+      c2c: "M4 15h13v7l4-3.5L17 15v2H4v-2zm16-4H7V4L3 7.5 7 11V9h13v2z"
   }
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{display:'block'}}>
