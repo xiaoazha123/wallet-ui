@@ -56,6 +56,8 @@ function App() {
     if(view==='game') return '游戏中心'
     if(view==='academy') return 'Web3 学院'
     if(view==='c2c') return 'C2C 交易'
+    if(view==='lottery') return 'ChainLotto 链上夺宝'
+    if(view==='prediction') return '行情预测'
     return map[tab]
   },[tab,view])
 
@@ -319,8 +321,13 @@ function App() {
               onGameDetail={(g)=>{ setCurrentGame(g); push('game-detail') }} 
               onCourseDetail={(c)=>{ setCurrentCourse(c); push('course') }} 
               onToast={setToast}
+              onLottery={()=>push('lottery')}
+              onPrediction={()=>push('prediction')}
             />
           )}
+
+          {view==='lottery' && (<LotteryPage onBack={back} onToast={setToast} />)}
+          {view==='prediction' && (<PredictionPage onBack={back} onToast={setToast} />)}
 
           {view==='password-verify' && (
             <PasswordVerify 
