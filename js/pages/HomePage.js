@@ -15,8 +15,65 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
       }
   }
 
+  const [alertInfo, setAlertInfo] = useState(null)
+
+  const handleDevFeature = (title) => {
+    setAlertInfo({ title: '提示', msg: `${title} 功能开发中`, onConfirm: ()=>setAlertInfo(null) })
+  }
+
   return (
     <div className="content-padded">
+      {alertInfo && (
+        <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setAlertInfo(null)}} style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.5)', zIndex: 999,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          animation: 'fadeIn 0.2s ease'
+        }}>
+          <div className="modal-box" style={{
+            background: '#fff', width: '80%', maxWidth: '320px',
+            borderRadius: '16px', padding: '24px',
+            textAlign: 'left',
+            animation: 'slideUp 0.3s ease',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+          }}>
+            <div style={{display:'flex', alignItems:'center', gap:'12px', marginBottom:'16px'}}>
+              <Icon name="info" size={24} style={{color:'#3b82f6'}} />
+              <div style={{fontSize:'18px', fontWeight:'700', color:'#1f2937'}}>{alertInfo.title}</div>
+            </div>
+            
+            <div style={{fontSize: '15px', color: '#4b5563', lineHeight: '1.5', marginBottom: '24px', paddingLeft: '4px'}}>
+              {alertInfo.msg}
+            </div>
+
+            <div style={{display:'flex', gap:'12px'}}>
+              <button onClick={()=>setAlertInfo(null)} style={{
+                flex: 1,
+                borderRadius: '8px', 
+                padding: '10px', 
+                background: '#fff', 
+                color: '#6b7280', 
+                border: '1px solid #e5e7eb', 
+                fontSize: '15px', 
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}>取消</button>
+              <button onClick={alertInfo.onConfirm} style={{
+                flex: 1,
+                borderRadius: '8px', 
+                padding: '10px', 
+                background: '#3b82f6', 
+                color: '#fff', 
+                border: 'none', 
+                fontSize: '15px', 
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}>确认</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="search-box" onClick={onSearch}>
          <Icon name="search" size={18} />
          <div style={{color:'#9ca3af', fontSize:'14px'}}>搜索代币</div>
@@ -73,13 +130,13 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
                 <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="calendar" /></div>
                 <div className="grid-label">签到</div>
               </button>
-              <button className="grid-btn" onClick={()=>onMini('invite')}>
-                <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="invite" /></div>
-                <div className="grid-label">邀请</div>
+              <button className="grid-btn" onClick={()=>handleDevFeature('挖矿')}>
+                <div className="grid-icon" style={{background:'#fffbeb', color:'#f59e0b'}}><Icon name="lightning" /></div>
+                <div className="grid-label">挖矿</div>
               </button>
-              <button className="grid-btn" onClick={()=>onMini('c2c')}>
-                <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="c2c" /></div>
-                <div className="grid-label">C2C</div>
+              <button className="grid-btn" onClick={()=>handleDevFeature('建设')}>
+                <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="service" /></div>
+                <div className="grid-label">建设</div>
               </button>
               <button className="grid-btn" onClick={()=>onMini('governance')}>
                 <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="vote" /></div>
@@ -159,7 +216,15 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
       {showMoreSheet && (
         <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setShowMoreSheet(false)}}>
           <div className="modal-box">
-            <div className="grid-menu-row" style={{marginBottom:'0', justifyContent:'flex-start', gap:'15px'}}>
+            <div className="grid-menu-row" style={{marginBottom:'0', justifyContent:'flex-start', gap:'15px', flexWrap:'wrap'}}>
+               <button className="grid-btn" onClick={()=>{ onMini('invite'); setShowMoreSheet(false) }}>
+                 <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="invite" /></div>
+                 <div className="grid-label">邀请</div>
+               </button>
+               <button className="grid-btn" onClick={()=>{ onMini('c2c'); setShowMoreSheet(false) }}>
+                 <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="c2c" /></div>
+                 <div className="grid-label">C2C</div>
+               </button>
                <button className="grid-btn" onClick={()=>{ onMini('tasks'); setShowMoreSheet(false) }}>
                  <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="copy" /></div>
                  <div className="grid-label">任务中心</div>
