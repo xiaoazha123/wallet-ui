@@ -23,10 +23,10 @@ function PredictionPage({ onBack, onToast }) {
 
   return (
     <div className="content-padded" style={{paddingTop:0, minHeight:'100vh', background:'#f5f5f5'}}>
-      <TopNavBar title="行情预测" onBack={onBack} />
+      <TopNavBar title={<span style={{marginLeft:'30px'}}>行情预测</span>} onBack={onBack} />
 
       {/* Price Header */}
-      <div style={{background:'#fff', padding:'20px', borderRadius:'0 0 24px 24px', boxShadow:'var(--shadow-sm)', marginBottom:'16px'}}>
+      <div style={{background:'#fff', padding:'20px', borderRadius:'24px 24px 24px 24px', boxShadow:'var(--shadow-sm)', margin:'10px 20px 10px'}}>
         <div style={{display:'flex', alignItems:'center', gap:'8px', marginBottom:'8px'}}>
           <div style={{background:'#F7931A', width:'24px', height:'24px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:'bold', fontSize:'14px'}}>₿</div>
           <span style={{fontSize:'16px', fontWeight:'700'}}>BTC/USDT</span>

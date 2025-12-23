@@ -27,17 +27,6 @@ function FeatureModal({ title, onClose }) {
             flex: 1,
             borderRadius: '8px', 
             padding: '10px', 
-            background: '#fff', 
-            color: '#6b7280', 
-            border: '1px solid #e5e7eb', 
-            fontSize: '15px', 
-            fontWeight: '600',
-            cursor: 'pointer'
-          }}>取消</button>
-          <button onClick={onClose} style={{
-            flex: 1,
-            borderRadius: '8px', 
-            padding: '10px', 
             background: '#3b82f6', 
             color: '#fff', 
             border: 'none', 
@@ -45,6 +34,17 @@ function FeatureModal({ title, onClose }) {
             fontWeight: '600',
             cursor: 'pointer'
           }}>确认</button>
+          <button onClick={onClose} style={{
+            flex: 1,
+            borderRadius: '8px', 
+            padding: '10px', 
+            background: '#fff', 
+            color: '#6b7280', 
+            border: '1px solid #e5e7eb', 
+            fontSize: '15px', 
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}>取消</button>
         </div>
       </div>
     </div>

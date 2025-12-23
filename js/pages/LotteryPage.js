@@ -1,4 +1,3 @@
-
 function LotteryPage({ onBack, onToast }) {
   const [jackpot, setJackpot] = useState(2849366)
   const [timeLeft, setTimeLeft] = useState(600)
@@ -30,7 +29,7 @@ function LotteryPage({ onBack, onToast }) {
 
   return (
     <div className="content-padded" style={{paddingTop:0, minHeight:'100vh', background:'#FFF8F0', color:'#333'}}>
-      <TopNavBar title="ChainLotto 链上夺宝" onBack={onBack} style={{background:'#FFF8F0', color:'#000'}} />
+      <TopNavBar title={<span style={{marginLeft:'30px'}}>ChainLotto 链上夺宝</span>} onBack={onBack} style={{background:'#FFF8F0', color:'#000'}} />
       
       {/* Hero Section - Golden Wealth Style */}
       <div style={{

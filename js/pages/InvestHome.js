@@ -27,6 +27,9 @@ function InvestHome({ onBuy, onBack }) {
          <div style={{fontSize:'18px', fontWeight:'700'}}>投资</div>
          <div style={{width:'40px'}}></div>
       </div>
+      {showDevModal && (
+        <FeatureModal title={devFeature} onClose={()=>setShowDevModal(false)} />
+      )}
 
       <div className="invest-overview" style={{
         background:'#fff', 

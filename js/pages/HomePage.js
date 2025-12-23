@@ -47,17 +47,6 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
             </div>
 
             <div style={{display:'flex', gap:'12px'}}>
-              <button onClick={()=>setAlertInfo(null)} style={{
-                flex: 1,
-                borderRadius: '8px', 
-                padding: '10px', 
-                background: '#fff', 
-                color: '#6b7280', 
-                border: '1px solid #e5e7eb', 
-                fontSize: '15px', 
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}>取消</button>
               <button onClick={alertInfo.onConfirm} style={{
                 flex: 1,
                 borderRadius: '8px', 
@@ -69,6 +58,17 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
                 fontWeight: '600',
                 cursor: 'pointer'
               }}>确认</button>
+              <button onClick={()=>setAlertInfo(null)} style={{
+                flex: 1,
+                borderRadius: '8px', 
+                padding: '10px', 
+                background: '#fff', 
+                color: '#6b7280', 
+                border: '1px solid #e5e7eb', 
+                fontSize: '15px', 
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}>取消</button>
             </div>
           </div>
         </div>
