@@ -152,8 +152,8 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail, onToast
             <div style={{position:'relative', zIndex:1}}>
               <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:'16px'}}>
                 <div>
-                  <div style={{fontSize:'20px', fontWeight:'800', marginBottom:'4px'}}>🏆 ChainLotto 链上夺宝</div>
-                  <div style={{fontSize:'13px', opacity:0.9}}>每10分钟开奖一次</div>
+                  <div style={{fontSize:'20px', fontWeight:'800', marginBottom:'4px', marginLeft:'20px'}}>哈希夺宝</div>
+                  <div style={{fontSize:'13px', opacity:0.9, marginLeft:'20px'}}>每天开奖一次</div>
                 </div>
                 <div style={{background:'rgba(255,255,255,0.25)', padding:'4px 12px', borderRadius:'12px', fontSize:'12px', fontWeight:'700'}}>
                   进行中
@@ -200,8 +200,8 @@ function DiscoverPage({ onGame, onAcademy, onGameDetail, onCourseDetail, onToast
                <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
                  <div style={{background:'#F7931A', width:'40px', height:'40px', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'#fff', fontWeight:'bold', fontSize:'20px', boxShadow:'0 4px 10px rgba(247, 147, 26, 0.3)'}}>₿</div>
                  <div>
-                   <div style={{fontWeight:'800', fontSize:'16px', color:'var(--text-main)'}}>行情预测</div>
-                   <div style={{fontSize:'12px', color:'var(--text-muted)'}}>BTC/USDT</div>
+                   <div style={{fontWeight:'800', fontSize:'16px', color:'var(--text-main)', marginLeft:'20px'}}>行情预测</div>
+                   <div style={{fontSize:'12px', color:'var(--text-muted)', marginLeft:'20px'}}>BTC/USDT</div>
                  </div>
                </div>
                <div style={{textAlign:'right'}}>

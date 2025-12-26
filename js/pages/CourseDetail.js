@@ -1,4 +1,4 @@
-function CourseDetail({ course, onComplete, onBack }) {
+function CourseDetail({ course, onComplete, onBack, onPlay }) {
   const chapters = [
     { title:'1. 什么是区块链', time:'05:00', status:'completed' },
     { title:'2. 去中心化的意义', time:'03:20', status:'current' },
@@ -40,14 +40,19 @@ function CourseDetail({ course, onComplete, onBack }) {
         <div className="list-head" style={{marginBottom:'16px'}}>课程目录</div>
         <div className="chapter-list" style={{display:'flex', flexDirection:'column', gap:'4px'}}>
           {chapters.map((c,i)=>(
-            <div key={i} className={`chapter-item ${c.status}`} style={{
-              padding:'16px', 
-              borderRadius:'12px', 
-              display:'flex', 
-              alignItems:'center', 
-              gap:'16px',
-              background: c.status==='current' ? '#f0f9ff' : 'transparent',
-              border: c.status==='current' ? '1px solid #bae6fd' : '1px solid transparent'
+            <div key={i} 
+              onClick={() => c.status !== 'locked' && onPlay && onPlay(c)}
+              className={`chapter-item ${c.status}`} 
+              style={{
+                padding:'16px', 
+                borderRadius:'12px', 
+                display:'flex', 
+                alignItems:'center', 
+                gap:'16px',
+                background: c.status==='current' ? '#f0f9ff' : 'transparent',
+                border: c.status==='current' ? '1px solid #bae6fd' : '1px solid transparent',
+                cursor: c.status !== 'locked' ? 'pointer' : 'default',
+                opacity: c.status === 'locked' ? 0.7 : 1
             }}>
               <div className="chap-icon" style={{
                 width:'24px', 

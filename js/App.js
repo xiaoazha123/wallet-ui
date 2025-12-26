@@ -18,7 +18,7 @@ function App() {
   function gotoTab(t){ setTab(t); setView(t); setStack([]) }
   const showBack = stack.length>0 && view!=='onboard'
   const title = useMemo(()=>{
-    const map={home:'首页', market:'市场', trade:'交易', discover:'发现', assets:'资产'}
+    const map={home:'首页', market:'行情', trade:'交易', discover:'发现', assets:'资产'}
     if(view==='launch') return '欢迎'
     if(view==='init') return '初始化'
     if(view==='create-pass') return '设置密码'
@@ -56,7 +56,7 @@ function App() {
     if(view==='game') return '游戏中心'
     if(view==='academy') return 'Web3 学院'
     if(view==='c2c') return 'C2C 交易'
-    if(view==='lottery') return 'ChainLotto 链上夺宝'
+    if(view==='lottery') return '链上夺宝'
     if(view==='prediction') return '行情预测'
     return map[tab]
   },[tab,view])
@@ -65,6 +65,7 @@ function App() {
   const [currentProduct,setCurrentProduct] = useState(null)
   const [currentGame,setCurrentGame] = useState(null)
   const [currentCourse,setCurrentCourse] = useState(null)
+  const [currentLesson, setCurrentLesson] = useState(null)
   const [currentNews,setCurrentNews] = useState(null)
   const [currentMarketTab,setCurrentMarketTab] = useState('自选')
 
@@ -481,7 +482,22 @@ function App() {
           {view==='game-detail' && currentGame && (<GameDetail game={currentGame} onTx={(m)=>setToast(m)} onBack={back} />)}
 
           {view==='academy' && (<AcademyList onOpen={(c)=>{ setCurrentCourse(c); push('course') }} onBack={back} />)}
-          {view==='course' && currentCourse && (<CourseDetail course={currentCourse} onComplete={()=>setToast('学习进度已记录')} onBack={back} />)}
+          {view==='course' && currentCourse && (
+            <CourseDetail 
+              course={currentCourse} 
+              onComplete={()=>setToast('学习进度已记录')} 
+              onBack={back} 
+              onPlay={(lesson)=>{ setCurrentLesson(lesson); push('course-player') }} 
+            />
+          )}
+          {view==='course-player' && currentCourse && currentLesson && (
+            <CoursePlayerPage 
+              course={currentCourse} 
+              lesson={currentLesson} 
+              onBack={back}
+              onNext={()=>{ setToast('恭喜完成本节课程！'); back() }} 
+            />
+          )}
 
           {view==='assets' && (
             <WalletOverview 

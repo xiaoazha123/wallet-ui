@@ -1,15 +1,17 @@
-function TopNavBar({ title, onBack }) {
+function TopNavBar({ title, onBack, right, style }) {
   return (
     <div className="header" style={{
       height: '60px',
       display: 'flex',
       alignItems: 'center',
-      padding: '0 30px',
+      justifyContent: onBack ? 'center' : 'flex-start', // Center if back button exists, otherwise left align (for main tabs)
+      padding: '0 20px',
       position: 'sticky',
       top: 0,
       zIndex: 100,
       borderBottom: '1px solid var(--border)',
-      background: 'var(--bg)'
+      background: 'var(--bg)',
+      ...style
     }}>
       {onBack && (
         <button onClick={onBack} style={{
@@ -34,6 +36,16 @@ function TopNavBar({ title, onBack }) {
       }}>
         {title}
       </div>
+      {right && (
+        <div style={{
+          position: 'absolute',
+          right: '20px',
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          {right}
+        </div>
+      )}
     </div>
   )
 }
