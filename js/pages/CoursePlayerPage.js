@@ -1,8 +1,12 @@
 // CoursePlayerPage.js
-function CoursePlayerPage({ course, lesson, onBack, onNext }) {
+function CoursePlayerPage({ course, lesson, onBack, onNext, onToast }) {
   // Mock video player interface
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [progress, setProgress] = React.useState(30); // 30% progress
+  
+  // Menu and Modals State
+  const [showMenu, setShowMenu] = React.useState(false);
+  const [activeModal, setActiveModal] = React.useState(null); // 'feedback'
 
   React.useEffect(() => {
     const style = document.createElement('style');
@@ -12,23 +16,114 @@ function CoursePlayerPage({ course, lesson, onBack, onNext }) {
         50% { opacity: 1; transform: scale(1); }
         100% { opacity: 0.6; transform: scale(0.98); }
       }
+      .cp-modal-overlay {
+        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.5); z-index: 200;
+        display: flex; align-items: center; justifyContent: center;
+        padding: 20px;
+      }
+      .cp-modal {
+        background: #fff; width: 100%; max-width: 320px;
+        border-radius: 16px; padding: 20px;
+        animation: slideUp 0.3s ease;
+      }
+      .cp-option {
+        padding: 12px; border-bottom: 1px solid #f3f4f6;
+        text-align: center; font-size: 16px; color: var(--text-main);
+        cursor: pointer;
+      }
+      .cp-option:last-child { border-bottom: none; }
+      .cp-option:active { background: #f9fafb; }
     `;
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
   }, []);
 
+  const handleMenuAction = (action) => {
+    setShowMenu(false);
+    if (action === 'feedback') setActiveModal('feedback');
+  };
+
+  const closeModal = () => setActiveModal(null);
+
+  const FeedbackModal = () => (
+    <div className="cp-modal-overlay" onClick={closeModal}>
+      <div className="cp-modal" onClick={e=>e.stopPropagation()}>
+        <div style={{textAlign:'center', fontWeight:'700', fontSize:'18px', marginBottom:'16px'}}>课程反馈</div>
+        <textarea 
+          placeholder="请描述您遇到的问题或建议..." 
+          style={{width:'100%', height:'100px', padding:'12px', borderRadius:'12px', border:'1px solid #e5e7eb', marginBottom:'16px', resize:'none', fontFamily:'inherit'}}
+        />
+        <div style={{display:'flex', gap:'12px'}}>
+          <button onClick={closeModal} style={{flex:1, padding:'10px', borderRadius:'20px', border:'1px solid #e5e7eb', background:'#fff'}}>取消</button>
+          <button onClick={()=>{
+            if(onToast) onToast('感谢您的反馈！');
+            closeModal();
+          }} style={{flex:1, padding:'10px', borderRadius:'20px', border:'none', background:'var(--primary)', color:'#fff'}}>提交</button>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="content-padded" style={{paddingTop:'0', height:'100vh', display:'flex', flexDirection:'column', background:'#fff'}}>
+    <div className="content-padded" style={{paddingTop:'0', height:'100vh', display:'flex', flexDirection:'column', background:'#fff', position:'relative'}}>
+      {/* Modals */}
+      {activeModal === 'feedback' && <FeedbackModal />}
+
       {/* Custom Header for Player */}
       <div style={{display:'flex', alignItems:'center', padding:'12px 16px', borderBottom:'1px solid #f3f4f6'}}>
          <button onClick={onBack} style={{background:'none', border:'none', padding:'4px', cursor:'pointer', color:'var(--text-main)', marginRight:'12px'}}>
            <Icon name="back" size={24} />
          </button>
          <div style={{flex:1}}>
-           <div style={{fontSize:'14px', color:'var(--text-muted)'}}>{course.title}</div>
            <div style={{fontSize:'16px', fontWeight:'700', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis'}}>{lesson.title}</div>
          </div>
-         <button style={{background:'none', border:'none', padding:'8px'}}><Icon name="more" size={24} /></button>
+         <div style={{position:'relative'}}>
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowMenu(!showMenu);
+              }} 
+              style={{background:'none', border:'none', padding:'8px', cursor:'pointer'}}
+            >
+              <Icon name="more" size={24} />
+            </button>
+            {showMenu && (
+              <>
+                <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, zIndex:99}} onClick={()=>setShowMenu(false)}></div>
+                <div style={{
+                  position:'absolute',
+                  top:'100%',
+                  right:0,
+                  background:'#fff',
+                  borderRadius:'12px',
+                  boxShadow:'0 4px 20px rgba(0,0,0,0.15)',
+                  padding:'8px',
+                  minWidth:'140px',
+                  zIndex:100,
+                  border:'1px solid #f3f4f6'
+                }}>
+                  {[
+                    { label: '课程反馈', action: 'feedback' }
+                  ].map(item => (
+                    <div key={item.action} onClick={() => handleMenuAction(item.action)} style={{
+                      padding:'10px 12px',
+                      fontSize:'14px',
+                      color:'var(--text-main)',
+                      cursor:'pointer',
+                      borderRadius:'8px',
+                      transition:'background 0.2s'
+                    }}
+                    onMouseEnter={e => e.target.style.background = '#f9fafb'}
+                    onMouseLeave={e => e.target.style.background = 'transparent'}
+                    >
+                      {item.label}
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+         </div>
       </div>
 
       {/* Video Player Area */}
@@ -85,7 +180,7 @@ function CoursePlayerPage({ course, lesson, onBack, onNext }) {
         </div>
 
         {/* Action Buttons */}
-        <div style={{display:'flex', gap:'12px', marginTop:'auto'}}>
+        <div style={{display:'flex', gap:'12px', marginTop:'60px'}}>
            <button style={{
              flex:1, padding:'14px', borderRadius:'12px', border:'1px solid var(--border)', 
              background:'#fff', color:'var(--text-main)', fontWeight:'600'
@@ -99,25 +194,6 @@ function CoursePlayerPage({ course, lesson, onBack, onNext }) {
            }}>
              完成并继续
            </button>
-        </div>
-
-        {/* Discussion Area */}
-        <div style={{marginTop:'40px'}}>
-           <div style={{fontSize:'16px', fontWeight:'700', marginBottom:'16px'}}>课程讨论 (128)</div>
-           {[1,2].map(i => (
-             <div key={i} style={{display:'flex', gap:'12px', marginBottom:'20px'}}>
-               <div style={{width:'40px', height:'40px', borderRadius:'20px', background:'#f3f4f6'}}></div>
-               <div style={{flex:1}}>
-                 <div style={{display:'flex', justifyContent:'space-between', marginBottom:'4px'}}>
-                   <div style={{fontWeight:'600', fontSize:'14px'}}>User_{9527+i}</div>
-                   <div style={{fontSize:'12px', color:'var(--text-muted)'}}>2小时前</div>
-                 </div>
-                 <div style={{fontSize:'14px', color:'var(--text-secondary)', lineHeight:'1.4'}}>
-                   这节课讲得非常透彻，终于明白了去中心化的真正含义！
-                 </div>
-               </div>
-             </div>
-           ))}
         </div>
       </div>
     </div>

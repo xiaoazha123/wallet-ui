@@ -496,6 +496,7 @@ function App() {
               lesson={currentLesson} 
               onBack={back}
               onNext={()=>{ setToast('恭喜完成本节课程！'); back() }} 
+              onToast={setToast}
             />
           )}
 
