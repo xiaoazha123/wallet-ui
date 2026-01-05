@@ -21,11 +21,21 @@ function C2CPage({ onBack }) {
   const [activeOrder, setActiveOrder] = useState(null)
   const [chatMessages, setChatMessages] = useState([])
   const [inputMsg, setInputMsg] = useState('')
+  const [isAppealOpen, setIsAppealOpen] = useState(false)
+  const [appealReason, setAppealReason] = useState('我已付款但卖家未放币')
+  const [appealDesc, setAppealDesc] = useState('')
 
   // Handle Buy/Sell Action
   const handleTrade = () => {
     if (!payAmt || parseFloat(payAmt) <= 0) return
     
+    // Check for existing active orders
+    const hasActiveOrder = orders.some(o => o.status === 'pending' || o.status === 'paid')
+    if (hasActiveOrder) {
+      alert('您有未完成的订单，请先完成或取消当前订单')
+      return
+    }
+
     const newOrder = {
       id: new Date().getTime().toString(),
       type: action,
@@ -152,6 +162,92 @@ function C2CPage({ onBack }) {
     
     setOrders(prev => prev.map(o => o.id === activeOrder.id ? { ...o, status: 'completed' } : o))
     setActiveOrder(prev => ({ ...prev, status: 'completed' }))
+  }
+
+  const handleAppealSubmit = () => {
+      setChatMessages(prev => [...prev, { id: Date.now(), sender: 'system', text: `您已提交申诉：${appealReason}`, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) }])
+      setIsAppealOpen(false)
+      alert('申诉已提交，客服将尽快介入处理')
+  }
+
+  const handleCancelOrder = () => {
+    if (!activeOrder) return
+    if (confirm('确定要取消订单吗？')) {
+      setChatMessages(prev => [...prev, { id: Date.now(), sender: 'system', text: '买家已取消订单', time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) }])
+      setOrders(prev => prev.map(o => o.id === activeOrder.id ? { ...o, status: 'cancelled' } : o))
+      setActiveOrder(prev => ({ ...prev, status: 'cancelled' }))
+    }
+  }
+
+  if (isAppealOpen) {
+    return (
+        <div className="content-padded" style={{position: 'relative', display: 'flex', flexDirection: 'column', height: '100vh', padding:0, background:'#fff'}}>
+             <div style={{display:'flex', alignItems:'center', padding:'12px 16px', borderBottom:'1px solid #f3f4f6'}}>
+                <button onClick={()=>setIsAppealOpen(false)} style={{background:'none', border:'none', padding:'8px', cursor:'pointer', color:'var(--text-main)', marginLeft:'-8px'}}>
+                    <Icon name="back" size={24} />
+                </button>
+                <div style={{flex:1, textAlign:'center', fontSize:'18px', fontWeight:'700', marginRight:'24px'}}>订单申诉</div>
+             </div>
+             
+             <div style={{padding:'20px', flex:1, overflowY:'auto'}}>
+                 <div style={{marginBottom:'24px'}}>
+                     <div style={{fontSize:'14px', fontWeight:'600', marginBottom:'8px', color:'var(--text-main)'}}>申诉原因</div>
+                     <div style={{position:'relative'}}>
+                         <select 
+                            value={appealReason} 
+                            onChange={e=>setAppealReason(e.target.value)}
+                            style={{
+                                width:'100%', padding:'12px', borderRadius:'12px', border:'1px solid #e5e7eb',
+                                appearance:'none', background:'#fff', fontSize:'14px', color:'var(--text-main)'
+                            }}
+                         >
+                             <option>我已付款但卖家未放币</option>
+                             <option>卖家收款方式无效</option>
+                             <option>付款金额与订单不符</option>
+                             <option>其他原因</option>
+                         </select>
+                         <div style={{position:'absolute', right:'12px', top:'50%', transform:'translateY(-50%)', pointerEvents:'none'}}>
+                             <Icon name="down" size={14} style={{color:'#9ca3af'}} />
+                         </div>
+                     </div>
+                 </div>
+
+                 <div style={{marginBottom:'24px'}}>
+                     <div style={{fontSize:'14px', fontWeight:'600', marginBottom:'8px', color:'var(--text-main)'}}>详细描述</div>
+                     <textarea 
+                        value={appealDesc}
+                        onChange={e=>setAppealDesc(e.target.value)}
+                        placeholder="请详细描述您遇到的问题..."
+                        style={{
+                            width:'100%', height:'120px', padding:'12px', borderRadius:'12px', border:'1px solid #e5e7eb',
+                            fontSize:'14px', color:'var(--text-main)', resize:'none', outline:'none'
+                        }}
+                     />
+                 </div>
+
+                 <div style={{marginBottom:'24px'}}>
+                     <div style={{fontSize:'14px', fontWeight:'600', marginBottom:'8px', color:'var(--text-main)'}}>上传凭证 (可选)</div>
+                     <div style={{
+                         width:'100%', height:'120px', border:'2px dashed #e5e7eb', borderRadius:'12px',
+                         display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+                         color:'#9ca3af', cursor:'pointer', background:'#f9fafb'
+                     }}>
+                         <Icon name="plus" size={24} style={{marginBottom:'4px'}} />
+                         <div style={{fontSize:'12px'}}>点击上传图片</div>
+                     </div>
+                 </div>
+             </div>
+
+             <div style={{padding:'16px', borderTop:'1px solid #f3f4f6'}}>
+                 <button onClick={handleAppealSubmit} style={{
+                     width:'100%', padding:'14px', background:'#3b82f6', color:'#fff', 
+                     borderRadius:'24px', border:'none', fontWeight:'700', fontSize:'16px'
+                 }}>
+                     提交申诉
+                 </button>
+             </div>
+        </div>
+    )
   }
 
   return (
@@ -355,8 +451,8 @@ function C2CPage({ onBack }) {
                     </div>
                     <div style={{fontSize:'12px', color:'var(--text-muted)'}}>¥ {activeOrder.fiatAmount}</div>
                  </div>
-                 <button style={{padding:'6px 12px', borderRadius:'16px', background:'#eff6ff', color:'#3b82f6', border:'none', fontSize:'12px', fontWeight:'600'}}>
-                    查看详情
+                 <button onClick={()=>setIsAppealOpen(true)} style={{padding:'6px 12px', borderRadius:'16px', background:'#eff6ff', color:'#3b82f6', border:'none', fontSize:'12px', fontWeight:'600'}}>
+                    申诉
                  </button>
               </div>
 
@@ -393,6 +489,9 @@ function C2CPage({ onBack }) {
                     <div style={{padding:'12px 16px', background:'#fff', borderTop:'1px solid #e5e7eb'}}>
                        {activeOrder.type === 'buy' && activeOrder.status === 'pending' && (
                          <div style={{display:'flex', gap:'10px'}}>
+                            <button onClick={handleCancelOrder} style={{flex:0.6, padding:'14px', background:'#f3f4f6', color:'#374151', borderRadius:'24px', border:'none', fontWeight:'700', fontSize:'16px'}}>
+                               取消
+                            </button>
                             <button onClick={handleUploadVoucher} style={{flex:1, padding:'14px', background:'#f3f4f6', color:'#374151', borderRadius:'24px', border:'none', fontWeight:'700', fontSize:'16px'}}>
                                上传凭证
                             </button>
