@@ -130,17 +130,17 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
                 <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="calendar" /></div>
                 <div className="grid-label">签到</div>
               </button>
-              <button className="grid-btn" onClick={()=>handleDevFeature('挖矿')}>
+              <button className="grid-btn" onClick={()=>onMini('c2c')}>
+                <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="c2c" /></div>
+                <div className="grid-label">C2C</div>
+              </button>
+              <button className="grid-btn" onClick={()=>onMini('mining')}>
                 <div className="grid-icon" style={{background:'#fffbeb', color:'#f59e0b'}}><Icon name="lightning" /></div>
                 <div className="grid-label">挖矿</div>
               </button>
-              <button className="grid-btn" onClick={()=>handleDevFeature('建设')}>
-                <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="service" /></div>
-                <div className="grid-label">建设</div>
-              </button>
-              <button className="grid-btn" onClick={()=>onMini('governance')}>
-                <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="vote" /></div>
-                <div className="grid-label">治理</div>
+              <button className="grid-btn" onClick={()=>onMini('invite')}>
+                <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="invite" /></div>
+                <div className="grid-label">邀请</div>
               </button>
               <button className="grid-btn" onClick={()=>setShowMoreSheet(true)}>
                 <div className="grid-icon" style={{background:'#f3f4f6', color:'#6b7280'}}><Icon name="more" /></div>
@@ -217,14 +217,6 @@ function HomePage({ address, currentWallet, totalValue, onWallets, onReceive, on
         <div className="modal-overlay" onClick={(e)=>{if(e.target.className==='modal-overlay') setShowMoreSheet(false)}}>
           <div className="modal-box">
             <div className="grid-menu-row" style={{marginBottom:'0', justifyContent:'flex-start', gap:'15px', flexWrap:'wrap'}}>
-               <button className="grid-btn" onClick={()=>{ onMini('invite'); setShowMoreSheet(false) }}>
-                 <div className="grid-icon" style={{background:'#eff6ff', color:'#3b82f6'}}><Icon name="invite" /></div>
-                 <div className="grid-label">邀请</div>
-               </button>
-               <button className="grid-btn" onClick={()=>{ onMini('c2c'); setShowMoreSheet(false) }}>
-                 <div className="grid-icon" style={{background:'#f3e8ff', color:'#a855f7'}}><Icon name="c2c" /></div>
-                 <div className="grid-label">C2C</div>
-               </button>
                <button className="grid-btn" onClick={()=>{ onMini('tasks'); setShowMoreSheet(false) }}>
                  <div className="grid-icon" style={{background:'#ecfdf5', color:'#10b981'}}><Icon name="copy" /></div>
                  <div className="grid-label">任务中心</div>

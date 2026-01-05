@@ -1,0 +1,106 @@
+API 文档 - C2C 交易系统 (Draft)
+
+1. 市场行情 (Market)
+--------------------------------------------------
+GET /api/v1/c2c/market/price
+  描述: 获取当前数字货币兑法币的汇率。
+  参数:
+    - crypto: 币种 (e.g., USDT)
+    - fiat: 法币 (e.g., CNY)
+  响应: { price: "6.95", update_time: 1710480000 }
+
+GET /api/v1/c2c/market/config
+  描述: 获取交易配置信息，如最小/最大交易限额、手续费率、支持的支付方式等。
+  响应: { min_amount: 100, max_amount: 50000, fee_rate: 0 }
+
+
+2. 订单管理 (Order Management)
+--------------------------------------------------
+POST /api/v1/c2c/order/create
+  描述: 创建新的 C2C 订单 (买入或卖出)。
+  参数:
+    - type: 订单类型 (buy / sell)
+    - amount: 法币金额
+    - price: 下单时的单价
+    - currency: 法币类型 (CNY)
+  响应: { order_id: "20240315001", status: "pending", created_at: ... }
+
+GET /api/v1/c2c/order/list
+  描述: 获取用户的订单历史列表。
+  参数:
+    - status: (可选) 筛选订单状态 (pending, paid, completed, cancelled, appealing)
+    - page: 页码
+    - limit: 每页数量
+  响应: { list: [ ... ], total: 10 }
+
+GET /api/v1/c2c/order/{order_id}
+  描述: 获取单个订单的详细信息。
+  响应: { id, type, fiat_amount, crypto_amount, status, merchant_info, ... }
+
+POST /api/v1/c2c/order/{order_id}/cancel
+  描述: 取消当前订单 (仅限待付款状态)。
+  参数: 无
+  响应: { success: true }
+
+POST /api/v1/c2c/order/{order_id}/confirm-pay
+  描述: 买家确认已付款。
+  参数:
+    - voucher_image_url: (可选) 支付凭证图片地址 (若强制要求则必填)
+  响应: { success: true, new_status: "paid" }
+
+POST /api/v1/c2c/order/{order_id}/release
+  描述: 卖家确认收款并放币。
+  参数:
+    - password: (可选) 资金密码或验证码
+  响应: { success: true, new_status: "completed" }
+
+
+3. 聊天系统 (Chat System)
+--------------------------------------------------
+GET /api/v1/chat/session/{order_id}/history
+  描述: 获取指定订单的聊天历史记录。
+  参数:
+    - last_msg_id: (可选) 用于分页加载
+  响应: { messages: [ { id, sender, type, content, time }, ... ] }
+
+POST /api/v1/chat/send
+  描述: 发送聊天消息。
+  参数:
+    - order_id: 关联的订单ID
+    - type: 消息类型 (text, image, system)
+    - content: 消息内容 (文本或图片URL)
+  响应: { msg_id: "..." }
+
+WS /ws/v1/chat
+  描述: WebSocket 长连接，用于实时接收新消息通知和订单状态变更通知。
+  Payload 示例:
+    - { type: "new_msg", order_id: "...", content: "..." }
+    - { type: "order_status_change", order_id: "...", old_status: "pending", new_status: "paid" }
+
+
+4. 申诉 (Appeal)
+--------------------------------------------------
+POST /api/v1/c2c/appeal/create
+  描述: 提交订单申诉。
+  参数:
+    - order_id: 订单ID
+    - reason: 申诉原因
+    - description: 详细描述
+    - evidence_images: [url1, url2] (证据图片列表)
+  响应: { appeal_id: "..." }
+
+GET /api/v1/c2c/appeal/{order_id}
+  描述: 获取当前订单的申诉状态和进度。
+  响应: { status: "processing", reply: "..." }
+
+
+5. 公共/其他 (Common)
+--------------------------------------------------
+POST /api/v1/file/upload
+  描述: 通用文件上传接口 (用于聊天图片、支付凭证、申诉证据)。
+  参数: file (Multipart)
+  响应: { url: "https://..." }
+
+GET /api/v1/user/payment-methods
+  描述: 获取用户绑定的收付款方式 (银行卡/支付宝/微信)。
+  响应: { methods: [ { type: "alipay", account: "..." }, ... ] }

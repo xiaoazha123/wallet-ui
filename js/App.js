@@ -55,6 +55,7 @@ function App() {
     if(view==='invest') return '投资'
     if(view==='game') return '游戏中心'
     if(view==='academy') return 'Web3 学院'
+    if(view==='mining') return '挖矿'
     if(view==='c2c') return 'C2C 交易'
     if(view==='lottery') return '链上夺宝'
     if(view==='prediction') return '行情预测'
@@ -293,6 +294,7 @@ function App() {
           {view==='more' && (<MorePage onTask={()=>push('tasks')} onPoints={()=>push('points')} onInvite={()=>push('invite')} onBack={back} />)}
           {view==='tasks' && (<TasksPage onBack={back} />)}
           {view==='points' && (<PointsPage onBack={back} />)}
+          {view==='mining' && (<MiningPage onBack={back} />)}
           {view==='c2c' && (<C2CPage onBack={back} />)}
 
           {view==='market' && (
